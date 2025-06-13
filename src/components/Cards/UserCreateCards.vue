@@ -1,12 +1,5 @@
 <script setup>
 import { ref, computed } from "vue";
-import {
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-  TransitionChild,
-  TransitionRoot,
-} from "@headlessui/vue";
 
 // Props 정의
 const props = defineProps({

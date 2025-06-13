@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
-import IcArrowLeft from "./ElementIcons/IcArrowLeft.vue";
-import IcArrowRight from "./ElementIcons/IcArrowRight.vue";
+import IcArrowLeft from "../ElementIcons/IcArrowLeft.vue";
+import IcArrowRight from "../ElementIcons/IcArrowRight.vue";
 
 // Props 정의
 const props = defineProps({

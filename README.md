@@ -17,7 +17,13 @@ npm install file:../moremore-component
 ## 사용법
 
 ```javascript
-import { ShopListbox, ShopGallery } from "moremore-component";
+import {
+  ShopListbox,
+  ShopGallery,
+  ShopDetailCard,
+  ShopCardGrid,
+  TabGroup,
+} from "moremore-component";
 import "moremore-component/style.css";
 
 // Vue 앱에서 사용
@@ -26,6 +32,9 @@ app.use(MoremoreComponent);
 // 또는 개별 컴포넌트 등록
 app.component("ShopListbox", ShopListbox);
 app.component("ShopGallery", ShopGallery);
+app.component("ShopDetailCard", ShopDetailCard);
+app.component("ShopCardGrid", ShopCardGrid);
+app.component("TabGroup", TabGroup);
 ```
 
 ## 컴포넌트
@@ -125,7 +134,156 @@ const handleMoreClick = () => {
 </script>
 ```
 
-## Shop 데이터 구조
+### ShopDetailCard
+
+Shop의 상세 정보를 카드 형태로 표시하는 컴포넌트입니다.
+
+#### Props
+
+- `shop` (Object): Shop 상세 데이터 (participants 포함)
+
+#### Events
+
+- `shop-click`: Shop 카드 클릭 시 발생 (shop 객체 전달)
+- `participant-click`: 참여작가 클릭 시 발생 (participant 객체 전달)
+
+#### 사용 예시
+
+```vue
+<template>
+  <ShopDetailCard
+    :shop="detailShop"
+    @shop-click="handleShopClick"
+    @participant-click="handleParticipantClick"
+  />
+</template>
+
+<script setup>
+import { ShopDetailCard } from "moremore-component";
+
+const detailShop = {
+  id: 1,
+  title: "아 너무 열심히 걸음",
+  badge: "마켓종료",
+  badgeColor: "gray",
+  period: "마켓기간: 2025.06.11~2025.07.01",
+  image: null,
+  participants: [
+    { id: 1, name: "나초", avatar: null },
+    { id: 2, name: "치즈", avatar: null },
+  ],
+};
+
+const handleShopClick = (shop) => {
+  console.log("Shop clicked:", shop);
+};
+
+const handleParticipantClick = (participant) => {
+  console.log("Participant clicked:", participant);
+};
+</script>
+```
+
+### ShopCardGrid
+
+Shop들을 카드 그리드 형태로 표시하는 컴포넌트입니다. Headless UI 모달을 사용하여 상세 정보를 표시합니다.
+
+#### Props
+
+- `shops` (Array): Shop 목록 데이터
+- `itemsPerRow` (Number): 한 줄에 표시할 아이템 수 (기본값: 3)
+- `maxItems` (Number): 최대 표시 아이템 수 (기본값: 6)
+
+#### Events
+
+- `shop-click`: Shop 카드 클릭 시 발생 (shop 객체 전달, 모달도 자동으로 열림)
+- `participant-click`: 참여작가 클릭 시 발생 (participant 객체 전달)
+
+#### 사용 예시
+
+```vue
+<template>
+  <ShopCardGrid
+    :shops="cardGridShops"
+    @shop-click="handleShopClick"
+    @participant-click="handleParticipantClick"
+  />
+</template>
+
+<script setup>
+import { ShopCardGrid } from "moremore-component";
+
+const cardGridShops = [
+  {
+    id: 1,
+    title: "여름이었당께",
+    subtitle: "부제목 (선택사항)",
+    badge: "마켓오픈",
+    badgeColor: "yellow",
+    period: "마켓기간: 2025.06.11~2025.07.01",
+    image: "https://example.com/image.jpg",
+    participants: [
+      { id: 1, name: "하찌네(방장)", avatar: null },
+      { id: 2, name: "대나무너는너무나대", avatar: null },
+    ],
+  },
+  // ... 더 많은 shop 데이터
+];
+
+const handleShopClick = (shop) => {
+  console.log("Shop clicked:", shop);
+};
+
+const handleParticipantClick = (participant) => {
+  console.log("Participant clicked:", participant);
+};
+</script>
+```
+
+### TabGroup
+
+탭 형태의 네비게이션 컴포넌트입니다.
+
+#### Props
+
+- `tabs` (Array): 탭 목록 데이터 (기본값: 전체, 인물, 동물 등)
+- `modelValue` (String|Number): 선택된 탭 ID (v-model 지원)
+- `variant` (String): 탭 스타일 변형 (기본값: "default")
+
+#### Events
+
+- `update:modelValue`: 선택된 탭이 변경될 때 발생
+- `tab-change`: 탭 클릭 시 발생 (클릭된 tab 객체 전달)
+
+#### 사용 예시
+
+```vue
+<template>
+  <TabGroup v-model="activeTab" :tabs="tabs" @tab-change="handleTabChange" />
+</template>
+
+<script setup>
+import { ref } from "vue";
+import { TabGroup } from "moremore-component";
+
+const activeTab = ref("all");
+const tabs = [
+  { id: "all", label: "전체" },
+  { id: "person", label: "인물" },
+  { id: "animal", label: "동물" },
+  { id: "object", label: "사물" },
+  // ... 더 많은 탭 데이터
+];
+
+const handleTabChange = (tab) => {
+  console.log("Tab changed:", tab);
+};
+</script>
+```
+
+## 데이터 구조
+
+### Shop 데이터 구조
 
 ```javascript
 {
@@ -135,6 +293,56 @@ const handleMoreClick = () => {
   badgeColor: "gray",                 // 배지 색상 ("gray" | "yellow")
   period: "마켓기간: 2025.06.11~2025.07.01", // 기간 정보
   image: "https://example.com/image.jpg" // 이미지 URL (null이면 기본 아이콘 표시)
+}
+```
+
+### ShopDetailCard 데이터 구조
+
+```javascript
+{
+  id: 1,
+  title: "아 너무 열심히 걸음",
+  badge: "마켓종료",
+  badgeColor: "gray",
+  period: "마켓기간: 2025.06.11~2025.07.01",
+  image: null,
+  participants: [                     // 참여작가 배열
+    {
+      id: 1,
+      name: "나초",                   // 작가 이름
+      avatar: null                    // 작가 아바타 URL (null이면 기본 아이콘)
+    }
+  ]
+}
+```
+
+### ShopCardGrid 데이터 구조
+
+```javascript
+{
+  id: 1,
+  title: "여름이었당께",
+  subtitle: "부제목 (선택사항)",        // 2줄까지 표시, 말줄임표 처리
+  badge: "마켓오픈",
+  badgeColor: "yellow",
+  period: "마켓기간: 2025.06.11~2025.07.01",
+  image: "https://example.com/image.jpg", // 4:3 비율 이미지
+  participants: [                     // 참여작가 배열 (최대 4개까지 표시, 나머지는 +N)
+    {
+      id: 1,
+      name: "하찌네(방장)",
+      avatar: null
+    }
+  ]
+}
+```
+
+### Tab 데이터 구조
+
+```javascript
+{
+  id: "all",        // 고유 ID (String 또는 Number)
+  label: "전체"     // 탭에 표시될 텍스트
 }
 ```
 

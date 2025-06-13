@@ -1,17 +1,153 @@
 <script setup>
 import { ref } from "vue";
-import ShopListbox from "./components/ShopListbox.vue";
-import ShopGallery from "./components/ShopGallery.vue";
+import ShopDetailCard from "./components/ShopDetailCard.vue";
+import ShopCardGrid from "./components/ShopCardGrid.vue";
+import TabGroup from "./components/TabGroup.vue";
 
-// Shop List 데이터
-const shops = [
+// 카드 그리드용 데이터
+const cardGridShops = [
   {
     id: 1,
-    title: "여름이었당께",
+    title: "서랍배 v.20 스팸프투어 하심 분",
+    description:
+      "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
+    badge: "모집중",
+    badgeColor: "blue",
+    period: "모집기간: 2025.06.11~2025.07.01",
+    hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
+    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    participants: [
+      { id: 1, name: "하찌네(방장)", avatar: null },
+      { id: 2, name: "잠여자 (5/10)", avatar: null },
+    ],
+  },
+  {
+    id: 2,
+    title: "서랍배 v.20 스팸프투어 하심 분",
+    description:
+      "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
+    badge: "모집마감",
+    badgeColor: "gray",
+    period: "모집기간: 2025.06.11~2025.07.01",
+    hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
+    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    participants: [
+      { id: 1, name: "하찌네(방장)", avatar: null },
+      { id: 2, name: "잠여자 (1/10)", avatar: null },
+    ],
+  },
+  {
+    id: 3,
+    title: "서랍배 v.20 스팸프투어 하심 분",
+    description:
+      "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
+    badge: "마켓오픈",
+    badgeColor: "yellow",
+    period: "모집기간: 2025.06.11~2025.07.01",
+    hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
+    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    participants: [
+      { id: 1, name: "하찌네(방장)", avatar: null },
+      { id: 2, name: "잠여자 (9/10)", avatar: null },
+    ],
+  },
+  {
+    id: 4,
+    title: "서랍배 v.20 스팸프투어 하심 분",
+    description:
+      "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
+    badge: "마켓오픈",
+    badgeColor: "yellow",
+    period: "모집기간: 2025.06.11~2025.07.01",
+    hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
+    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    participants: [
+      { id: 1, name: "하찌네(방장)", avatar: null },
+      { id: 2, name: "잠여자 (3/10)", avatar: null },
+    ],
+  },
+  {
+    id: 5,
+    title: "여름 시즌 특가",
+    description:
+      "시원한 여름을 위한 특별한 콜라보레이션입니다. 다양한 작가들과 함께해요!",
+    badge: "모집중",
+    badgeColor: "blue",
+    period: "모집기간: 2025.06.01~2025.06.30",
+    hashtags: "#여름 #시원함 #콜라보 #특가 #이벤트",
+    image: null,
+    participants: [
+      { id: 1, name: "여름작가", avatar: null },
+      { id: 2, name: "시원한작가", avatar: null },
+    ],
+  },
+  {
+    id: 6,
+    title: "추석 한정 이벤트",
+    description:
+      "추석을 맞이하여 특별한 한정 이벤트를 진행합니다. 많은 참여 부탁드려요!",
+    badge: "마켓오픈",
+    badgeColor: "yellow",
+    period: "모집기간: 2025.09.01~2025.09.30",
+    hashtags: "#추석 #한정 #이벤트 #특별",
+    image: "https://via.placeholder.com/280x200/f5f5f5/888?text=추석이벤트",
+    participants: [
+      { id: 1, name: "추석작가", avatar: null },
+      { id: 2, name: "이벤트작가", avatar: null },
+    ],
+  },
+  {
+    id: 7,
+    title: "겨울 컬렉션 준비",
+    description:
+      "따뜻한 겨울을 위한 컬렉션을 준비하고 있습니다. 함께 만들어가요!",
+    badge: "모집마감",
+    badgeColor: "gray",
+    period: "모집기간: 2025.11.01~2025.11.30",
+    hashtags: "#겨울 #따뜻함 #컬렉션 #준비",
+    image: null,
+    participants: [
+      { id: 1, name: "겨울작가", avatar: null },
+      { id: 2, name: "따뜻한작가", avatar: null },
+    ],
+  },
+  {
+    id: 8,
+    title: "봄맞이 신상품",
+    description: "새로운 봄을 맞이하여 신상품을 준비했습니다. 기대해주세요!",
+    badge: "모집중",
+    badgeColor: "blue",
+    period: "모집기간: 2025.03.01~2025.03.31",
+    hashtags: "#봄 #신상품 #새로움 #기대",
+    image: "https://via.placeholder.com/280x200/e8f5e8/4a90e2?text=봄신상",
+    participants: [
+      { id: 1, name: "봄작가", avatar: null },
+      { id: 2, name: "신상작가", avatar: null },
+    ],
+  },
+];
+
+// 상세 카드용 데이터
+const detailShop = [
+  {
+    id: 1,
+    title: "아 너무 열심히 걸음",
     badge: "마켓종료",
     badgeColor: "gray",
     period: "마켓기간: 2025.06.11~2025.07.01",
-    image: null, // 이미지가 없는 경우
+    image: null,
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
   },
   {
     id: 2,
@@ -19,7 +155,19 @@ const shops = [
     badge: "마켓오픈",
     badgeColor: "yellow",
     period: "마켓기간: 2025.07.01~2025.07.31",
-    image: "https://via.placeholder.com/98x98/f9f9f9/666?text=Shop2",
+    image: null,
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
   },
   {
     id: 3,
@@ -27,20 +175,39 @@ const shops = [
     badge: "마켓준비중",
     badgeColor: "gray",
     period: "마켓기간: 2025.12.01~2025.12.31",
-    image: "https://via.placeholder.com/98x98/e0e0e0/999?text=Shop3",
+    image: null,
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
   },
-];
-
-// 갤러리용 더 많은 데이터
-const galleryShops = [
-  ...shops,
   {
     id: 4,
     title: "봄 신상 컬렉션",
     badge: "마켓오픈",
     badgeColor: "yellow",
     period: "마켓기간: 2025.03.01~2025.03.31",
-    image: "https://via.placeholder.com/98x98/f0f0f0/777?text=Shop4",
+    image: null,
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
   },
   {
     id: 5,
@@ -49,18 +216,36 @@ const galleryShops = [
     badgeColor: "gray",
     period: "마켓기간: 2025.06.01~2025.06.30",
     image: null,
-  },
-  {
-    id: 6,
-    title: "추석 한정 이벤트",
-    badge: "마켓오픈",
-    badgeColor: "yellow",
-    period: "마켓기간: 2025.09.01~2025.09.30",
-    image: "https://via.placeholder.com/98x98/f5f5f5/888?text=Shop6",
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
   },
 ];
 
-const selectedShop = ref(shops[0]);
+// 탭 데이터
+const tabs = [
+  { id: "all", label: "전체" },
+  { id: "person", label: "인물" },
+  { id: "animal", label: "동물" },
+  { id: "object", label: "사물" },
+  { id: "plant", label: "식물" },
+  { id: "food", label: "음식" },
+  { id: "background", label: "배경 모조지" },
+  { id: "cute", label: "귀여운" },
+  { id: "kitsch", label: "키치" },
+  { id: "emotional", label: "감성" },
+];
+
+const activeTab = ref("all");
 
 // 이벤트 핸들러
 const handleShopClick = (shop) => {
@@ -68,9 +253,14 @@ const handleShopClick = (shop) => {
   alert(`${shop.title} 클릭됨!`);
 };
 
-const handleMoreClick = () => {
-  console.log("More button clicked");
-  alert("더보기 버튼 클릭됨!");
+const handleTabChange = (tab) => {
+  console.log("Tab changed:", tab);
+  alert(`${tab.label} 탭 선택됨!`);
+};
+
+const handleParticipantClick = (participant) => {
+  console.log("Participant clicked:", participant);
+  alert(`${participant.name} 작가 클릭됨!`);
 };
 </script>
 
@@ -78,51 +268,49 @@ const handleMoreClick = () => {
   <div class="min-h-screen bg-gray-50 py-8">
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-8">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://vuejs.org/" target="_blank">
-          <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
         <h1 class="text-3xl font-bold text-gray-900 mt-4">
           Moremore Component
         </h1>
         <p class="text-gray-600 mt-2">Vue 3 + Headless UI + Tailwind CSS</p>
       </div>
 
-      <!-- ShopGallery 컴포넌트 테스트 -->
+      <!-- ShopDetailCard 컴포넌트 테스트 -->
       <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-        <h2 class="text-xl font-bold mb-4">ShopGallery 컴포넌트</h2>
+        <h2 class="text-xl font-bold mb-4">ShopDetailCard 컴포넌트</h2>
 
-        <ShopGallery
-          :shops="galleryShops"
-          title="모아모아 합동 콜라보 마켓"
-          :show-more-button="true"
-          more-button-text="더보기"
+        <ShopDetailCard
+          :shops="detailShop"
           @shop-click="handleShopClick"
-          @more-click="handleMoreClick"
+          @participant-click="handleParticipantClick"
         />
       </div>
-
-      <!-- ShopListbox 컴포넌트 테스트 -->
+      <!-- TabGroup 컴포넌트 테스트 -->
       <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-        <h2 class="text-xl font-bold mb-4">ShopListbox 컴포넌트</h2>
+        <h2 class="text-xl font-bold mb-4">TabGroup 컴포넌트</h2>
 
-        <div class="max-w-md">
-          <ShopListbox
-            v-model="selectedShop"
-            :shops="shops"
-            label="Shop 선택하기"
-            placeholder="원하는 Shop을 선택해주세요"
-          />
-        </div>
+        <TabGroup
+          v-model="activeTab"
+          :tabs="tabs"
+          @tab-change="handleTabChange"
+        />
 
         <div class="mt-6 p-4 bg-gray-100 rounded-lg">
-          <h3 class="font-bold mb-2">선택된 Shop:</h3>
-          <pre class="text-sm text-gray-700 whitespace-pre-wrap">{{
-            JSON.stringify(selectedShop, null, 2)
-          }}</pre>
+          <h3 class="font-bold mb-2">선택된 탭:</h3>
+          <pre class="text-sm text-gray-700">{{ activeTab }}</pre>
         </div>
+      </div>
+
+      <!-- ShopCardGrid 컴포넌트 테스트 -->
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <h2 class="text-xl font-bold mb-4">
+          ShopCardGrid 컴포넌트 (Headless UI 모달 포함)
+        </h2>
+
+        <ShopCardGrid
+          :shops="cardGridShops"
+          @shop-click="handleShopClick"
+          @participant-click="handleParticipantClick"
+        />
       </div>
 
       <!-- 사용법 안내 -->
@@ -136,7 +324,7 @@ yarn add file:../moremore-component</code></pre>
           <h3>사용</h3>
           <pre
             class="bg-gray-100 p-3 rounded text-sm"
-          ><code>import { ShopListbox, ShopGallery } from 'moremore-component'
+          ><code>import { ShopListbox, ShopGallery, ShopDetailCard, ShopCardGrid, TabGroup } from 'moremore-component'
 import 'moremore-component/style.css'</code></pre>
         </div>
       </div>

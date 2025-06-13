@@ -1,0 +1,42 @@
+# 개발 관련 파일들
+src/
+public/
+.vscode/
+node_modules/
+
+# 설정 파일들
+vite.config.js
+tailwind.config.js
+postcss.config.js
+.gitignore
+yarn.lock
+package-lock.json
+
+# 문서 파일들 (README.md는 포함)
+*.md
+!README.md
+
+# 빌드 관련
+.env*
+.DS_Store
+Thumbs.db
+
+# 개발 도구
+.eslintrc*
+.prettierrc*
+.editorconfig
+
+# Git 관련
+.git/
+.github/
+
+# 테스트 파일들
+**/*.test.js
+**/*.spec.js
+tests/
+__tests__/
+
+# 임시 파일들
+*.tmp
+*.temp
+*.log 

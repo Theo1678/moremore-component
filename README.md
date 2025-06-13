@@ -1,233 +1,108 @@
-# Moremore Component
+# Moremore Component Library 📦
 
-Vue 3 + Headless UI + Tailwind CSS로 구현된 컴포넌트 라이브러리입니다.
+Vue 3 + Headless UI + Tailwind CSS로 구축된 재사용 가능한 컴포넌트 라이브러리입니다.
 
-## 설치
+## 🚀 특징
+
+- **Vue 3 Composition API** 기반
+- **Headless UI** 통합으로 접근성 최적화
+- **Tailwind CSS** 스타일링
+- **TypeScript** 지원 준비
+- **반응형 디자인** 지원
+- **다크 모드** 지원
+
+## 📦 설치
+
+### Local Package로 설치
 
 ```bash
-# 로컬 패키지로 설치
+# 라이브러리 빌드
 yarn build:lib
-yarn add file:../moremore-component
 
-# 또는 npm
-npm run build:lib
-npm install file:../moremore-component
+# 다른 프로젝트에서 설치
+yarn add file:../moremore-component
 ```
 
-## 사용법
+### NPM 패키지로 설치 (준비 중)
+
+```bash
+yarn add moremore-component
+# or
+npm install moremore-component
+```
+
+## 🛠️ 사용법
+
+### 1. 전체 라이브러리 설치
 
 ```javascript
+// main.js
+import { createApp } from "vue";
+import App from "./App.vue";
+import MoremoreComponent from "moremore-component";
+import "moremore-component/style.css";
+
+const app = createApp(App);
+app.use(MoremoreComponent);
+app.mount("#app");
+```
+
+### 2. 개별 컴포넌트 import
+
+```vue
+<script setup>
 import {
-  ShopListbox,
-  ShopGallery,
-  ShopDetailCard,
-  ShopCardGrid,
+  AdminCreateCards,
+  UserCreateCards,
   TabGroup,
 } from "moremore-component";
 import "moremore-component/style.css";
 
-// Vue 앱에서 사용
-app.use(MoremoreComponent);
-
-// 또는 개별 컴포넌트 등록
-app.component("ShopListbox", ShopListbox);
-app.component("ShopGallery", ShopGallery);
-app.component("ShopDetailCard", ShopDetailCard);
-app.component("ShopCardGrid", ShopCardGrid);
-app.component("TabGroup", TabGroup);
-```
-
-## 컴포넌트
-
-### ShopListbox
-
-Shop을 선택할 수 있는 드롭다운 리스트박스 컴포넌트입니다.
-
-#### Props
-
-- `shops` (Array): Shop 목록 데이터
-- `modelValue` (Object): 선택된 Shop (v-model 지원)
-- `label` (String): 라벨 텍스트 (기본값: "Shop 선택")
-- `placeholder` (String): 플레이스홀더 텍스트 (기본값: "Shop을 선택해주세요")
-
-#### Events
-
-- `update:modelValue`: 선택된 값이 변경될 때 발생
-
-#### 사용 예시
-
-```vue
-<template>
-  <ShopListbox
-    v-model="selectedShop"
-    :shops="shops"
-    label="Shop 선택하기"
-    placeholder="원하는 Shop을 선택해주세요"
-  />
-</template>
-
-<script setup>
-import { ref } from "vue";
-import { ShopListbox } from "moremore-component";
-
-const selectedShop = ref(null);
-const shops = [
-  {
-    id: 1,
-    title: "여름이었당께",
-    badge: "마켓종료",
-    badgeColor: "gray",
-    period: "마켓기간: 2025.06.11~2025.07.01",
-    image: null,
-  },
-  // ... 더 많은 shop 데이터
-];
+// 컴포넌트 사용
 </script>
 ```
 
-### ShopGallery
+### 3. 프리픽스와 함께 사용
 
-Shop들을 그리드 형태로 표시하는 갤러리 컴포넌트입니다.
+```javascript
+// main.js
+import MoremoreComponent from "moremore-component";
 
-#### Props
-
-- `title` (String): 갤러리 제목 (기본값: "모아모아 합동 콜라보 마켓")
-- `shops` (Array): Shop 목록 데이터
-- `showMoreButton` (Boolean): 더보기 버튼 표시 여부 (기본값: true)
-- `moreButtonText` (String): 더보기 버튼 텍스트 (기본값: "더보기")
-- `itemsPerRow` (Number): 한 줄에 표시할 아이템 수 (기본값: 3)
-- `maxItems` (Number): 최대 표시 아이템 수 (기본값: 6)
-
-#### Events
-
-- `shop-click`: Shop 카드 클릭 시 발생 (클릭된 shop 객체 전달)
-- `more-click`: 더보기 버튼 클릭 시 발생
-
-#### 사용 예시
-
-```vue
-<template>
-  <ShopGallery
-    :shops="shops"
-    title="모아모아 합동 콜라보 마켓"
-    :show-more-button="true"
-    more-button-text="더보기"
-    @shop-click="handleShopClick"
-    @more-click="handleMoreClick"
-  />
-</template>
-
-<script setup>
-import { ShopGallery } from "moremore-component";
-
-const shops = [
-  // ... shop 데이터
-];
-
-const handleShopClick = (shop) => {
-  console.log("Shop clicked:", shop);
-};
-
-const handleMoreClick = () => {
-  console.log("More button clicked");
-};
-</script>
+app.use(MoremoreComponent, {
+  prefix: "Mm", // MmAdminCreateCards, MmUserCreateCards 등으로 등록됨
+});
 ```
 
-### ShopDetailCard
+## 📋 컴포넌트
 
-Shop의 상세 정보를 카드 형태로 표시하는 컴포넌트입니다.
+### AdminCreateCards
 
-#### Props
-
-- `shop` (Object): Shop 상세 데이터 (participants 포함)
-
-#### Events
-
-- `shop-click`: Shop 카드 클릭 시 발생 (shop 객체 전달)
-- `participant-click`: 참여작가 클릭 시 발생 (participant 객체 전달)
-
-#### 사용 예시
+관리자용 카드 컴포넌트 - 높이 자동 맞춤 및 스크롤 네비게이션 지원
 
 ```vue
 <template>
-  <ShopDetailCard
-    :shop="detailShop"
+  <AdminCreateCards
+    :shops="adminData"
     @shop-click="handleShopClick"
     @participant-click="handleParticipantClick"
   />
 </template>
 
 <script setup>
-import { ShopDetailCard } from "moremore-component";
-
-const detailShop = {
-  id: 1,
-  title: "아 너무 열심히 걸음",
-  badge: "마켓종료",
-  badgeColor: "gray",
-  period: "마켓기간: 2025.06.11~2025.07.01",
-  image: null,
-  participants: [
-    { id: 1, name: "나초", avatar: null },
-    { id: 2, name: "치즈", avatar: null },
-  ],
-};
-
-const handleShopClick = (shop) => {
-  console.log("Shop clicked:", shop);
-};
-
-const handleParticipantClick = (participant) => {
-  console.log("Participant clicked:", participant);
-};
-</script>
-```
-
-### ShopCardGrid
-
-Shop들을 카드 그리드 형태로 표시하는 컴포넌트입니다. Headless UI 모달을 사용하여 상세 정보를 표시합니다.
-
-#### Props
-
-- `shops` (Array): Shop 목록 데이터
-- `itemsPerRow` (Number): 한 줄에 표시할 아이템 수 (기본값: 3)
-- `maxItems` (Number): 최대 표시 아이템 수 (기본값: 6)
-
-#### Events
-
-- `shop-click`: Shop 카드 클릭 시 발생 (shop 객체 전달, 모달도 자동으로 열림)
-- `participant-click`: 참여작가 클릭 시 발생 (participant 객체 전달)
-
-#### 사용 예시
-
-```vue
-<template>
-  <ShopCardGrid
-    :shops="cardGridShops"
-    @shop-click="handleShopClick"
-    @participant-click="handleParticipantClick"
-  />
-</template>
-
-<script setup>
-import { ShopCardGrid } from "moremore-component";
-
-const cardGridShops = [
+const adminData = [
   {
     id: 1,
-    title: "여름이었당께",
-    subtitle: "부제목 (선택사항)",
+    title: "카드 제목",
     badge: "마켓오픈",
     badgeColor: "yellow",
-    period: "마켓기간: 2025.06.11~2025.07.01",
+    description: "카드 설명",
+    period: "모집기간: 2025.01.01~2025.01.31",
     image: "https://example.com/image.jpg",
     participants: [
-      { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "대나무너는너무나대", avatar: null },
+      { id: 1, name: "참여자1", avatar: null },
+      { id: 2, name: "참여자2", avatar: null },
     ],
   },
-  // ... 더 많은 shop 데이터
 ];
 
 const handleShopClick = (shop) => {
@@ -239,40 +114,70 @@ const handleParticipantClick = (participant) => {
 };
 </script>
 ```
+
+#### Props
+
+| Prop    | Type  | Default | Description      |
+| ------- | ----- | ------- | ---------------- |
+| `shops` | Array | `[]`    | 카드 데이터 배열 |
+
+#### Events
+
+| Event                | Payload            | Description           |
+| -------------------- | ------------------ | --------------------- |
+| `@shop-click`        | shop object        | 카드 클릭 시 발생     |
+| `@participant-click` | participant object | 참여작가 클릭 시 발생 |
+
+### UserCreateCards
+
+사용자용 카드 컴포넌트 - Headless UI 모달 포함 및 동적 그리드 지원
+
+```vue
+<template>
+  <UserCreateCards
+    :shops="userData"
+    :itemsPerRow="4"
+    @shop-click="handleShopClick"
+    @participant-click="handleParticipantClick"
+  />
+</template>
+```
+
+#### Props
+
+| Prop          | Type   | Default | Description                  |
+| ------------- | ------ | ------- | ---------------------------- |
+| `shops`       | Array  | `[]`    | 카드 데이터 배열             |
+| `itemsPerRow` | Number | `4`     | 한 행에 표시할 카드 수 (1-6) |
+
+#### Events
+
+| Event                | Payload            | Description           |
+| -------------------- | ------------------ | --------------------- |
+| `@shop-click`        | shop object        | 카드 클릭 시 발생     |
+| `@participant-click` | participant object | 참여작가 클릭 시 발생 |
 
 ### TabGroup
 
-탭 형태의 네비게이션 컴포넌트입니다.
-
-#### Props
-
-- `tabs` (Array): 탭 목록 데이터 (기본값: 전체, 인물, 동물 등)
-- `modelValue` (String|Number): 선택된 탭 ID (v-model 지원)
-- `variant` (String): 탭 스타일 변형 (기본값: "default")
-
-#### Events
-
-- `update:modelValue`: 선택된 탭이 변경될 때 발생
-- `tab-change`: 탭 클릭 시 발생 (클릭된 tab 객체 전달)
-
-#### 사용 예시
+반응형 탭 네비게이션 - 자동 줄바꿈 및 v-model 지원
 
 ```vue
 <template>
-  <TabGroup v-model="activeTab" :tabs="tabs" @tab-change="handleTabChange" />
+  <TabGroup
+    v-model="activeTab"
+    :tabs="tabsData"
+    @tab-change="handleTabChange"
+  />
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { TabGroup } from "moremore-component";
 
 const activeTab = ref("all");
-const tabs = [
+const tabsData = [
   { id: "all", label: "전체" },
   { id: "person", label: "인물" },
   { id: "animal", label: "동물" },
-  { id: "object", label: "사물" },
-  // ... 더 많은 탭 데이터
 ];
 
 const handleTabChange = (tab) => {
@@ -281,113 +186,112 @@ const handleTabChange = (tab) => {
 </script>
 ```
 
-## 데이터 구조
+#### Props
 
-### Shop 데이터 구조
+| Prop         | Type   | Default | Description                          |
+| ------------ | ------ | ------- | ------------------------------------ |
+| `tabs`       | Array  | `[]`    | 탭 데이터 배열                       |
+| `modelValue` | String | `''`    | v-model로 바인딩할 현재 선택된 탭 ID |
 
-```javascript
-{
-  id: 1,                              // 고유 ID
-  title: "여름이었당께",               // Shop 제목
-  badge: "마켓종료",                   // 배지 텍스트
-  badgeColor: "gray",                 // 배지 색상 ("gray" | "yellow")
-  period: "마켓기간: 2025.06.11~2025.07.01", // 기간 정보
-  image: "https://example.com/image.jpg" // 이미지 URL (null이면 기본 아이콘 표시)
+#### Events
+
+| Event                | Payload    | Description              |
+| -------------------- | ---------- | ------------------------ |
+| `@tab-change`        | tab object | 탭 변경 시 발생          |
+| `@update:modelValue` | tab id     | v-model 업데이트 시 발생 |
+
+## 🎨 스타일링
+
+### CSS 변수 커스터마이징
+
+```css
+:root {
+  --moremore-primary: #3b82f6;
+  --moremore-primary-dark: #1d4ed8;
+  --moremore-secondary: #6b7280;
+  --moremore-success: #10b981;
+  --moremore-warning: #f59e0b;
+  --moremore-error: #ef4444;
+  --moremore-surface: #ffffff;
+  --moremore-background: #f9fafb;
+  --moremore-border: #e5e7eb;
 }
 ```
 
-### ShopDetailCard 데이터 구조
+### Tailwind CSS 통합
+
+이 라이브러리는 Tailwind CSS를 사용합니다. 프로젝트에서 Tailwind CSS가 설정되어 있다면 더 나은 통합을 위해 다음 설정을 추가하세요:
 
 ```javascript
-{
-  id: 1,
-  title: "아 너무 열심히 걸음",
-  badge: "마켓종료",
-  badgeColor: "gray",
-  period: "마켓기간: 2025.06.11~2025.07.01",
-  image: null,
-  participants: [                     // 참여작가 배열
-    {
-      id: 1,
-      name: "나초",                   // 작가 이름
-      avatar: null                    // 작가 아바타 URL (null이면 기본 아이콘)
-    }
-  ]
-}
+// tailwind.config.js
+module.exports = {
+  content: [
+    "./src/**/*.{vue,js,ts}",
+    "./node_modules/moremore-component/**/*.{vue,js,ts}",
+  ],
+  // ... 기타 설정
+};
 ```
 
-### ShopCardGrid 데이터 구조
+## 🔧 개발
 
-```javascript
-{
-  id: 1,
-  title: "여름이었당께",
-  subtitle: "부제목 (선택사항)",        // 2줄까지 표시, 말줄임표 처리
-  badge: "마켓오픈",
-  badgeColor: "yellow",
-  period: "마켓기간: 2025.06.11~2025.07.01",
-  image: "https://example.com/image.jpg", // 4:3 비율 이미지
-  participants: [                     // 참여작가 배열 (최대 4개까지 표시, 나머지는 +N)
-    {
-      id: 1,
-      name: "하찌네(방장)",
-      avatar: null
-    }
-  ]
-}
-```
-
-### Tab 데이터 구조
-
-```javascript
-{
-  id: "all",        // 고유 ID (String 또는 Number)
-  label: "전체"     // 탭에 표시될 텍스트
-}
-```
-
-## 개발
+### 개발 환경 실행
 
 ```bash
-# 의존성 설치
 yarn install
-
-# 개발 서버 실행
 yarn dev
-
-# 라이브러리 빌드
-yarn build:lib
-
-# 프로덕션 빌드
-yarn build
 ```
 
-## 기술 스택
-
-- Vue 3
-- Headless UI
-- Tailwind CSS
-- Vite
-
-## 개발
+### 라이브러리 빌드
 
 ```bash
-# 개발 서버 실행
-yarn dev
-
-# 라이브러리 빌드
 yarn build:lib
-
-# 일반 빌드
-yarn build
 ```
 
-## 의존성
+### 프리뷰
 
-- Vue 3.0+
-- @headlessui/vue 1.7+
-- Tailwind CSS (스타일링)
+```bash
+yarn preview
+```
 
-## 라이선스
+## 📁 프로젝트 구조
 
-MIT
+```
+src/
+├── components/
+│   ├── Cards/
+│   │   ├── AdminCreateCards.vue
+│   │   └── UserCreateCards.vue
+│   └── Tabs/
+│       └── TabGroup.vue
+├── views/
+│   ├── MainLayout.vue
+│   ├── cards/
+│   │   ├── CardsSection.vue
+│   │   └── cardsData.js
+│   └── tabs/
+│       ├── TabsSection.vue
+│       └── tabsData.js
+├── index.js         # 라이브러리 진입점
+└── style.css        # 통합 스타일
+```
+
+## 📄 라이선스
+
+MIT License
+
+## 🤝 기여
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📞 지원
+
+문제가 있거나 기능 요청이 있으시면 이슈를 생성해 주세요.
+
+---
+
+**Moremore Component Library** - Vue 3 생태계를 위한 현대적이고 접근 가능한 컴포넌트 라이브러리 ✨

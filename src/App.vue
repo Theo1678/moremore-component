@@ -36,6 +36,11 @@ const detailShop = [
         name: "루비 테스트 테스트",
         avatar: null,
       },
+      {
+        id: 5,
+        name: "치즈",
+        avatar: null,
+      },
     ],
   },
   {
@@ -154,7 +159,7 @@ const cardGridShops = [
     image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     participants: [
       { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "잠여자 (5/10)", avatar: null },
+      { id: 2, name: "참여자 (5/10)", avatar: null },
     ],
   },
   {
@@ -169,7 +174,7 @@ const cardGridShops = [
     image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     participants: [
       { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "잠여자 (1/10)", avatar: null },
+      { id: 2, name: "참여자 (1/10)", avatar: null },
     ],
   },
   {
@@ -184,7 +189,7 @@ const cardGridShops = [
     image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     participants: [
       { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "잠여자 (9/10)", avatar: null },
+      { id: 2, name: "참여자 (9/10)", avatar: null },
     ],
   },
   {
@@ -199,7 +204,7 @@ const cardGridShops = [
     image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     participants: [
       { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "잠여자 (3/10)", avatar: null },
+      { id: 2, name: "참여자 (3/10)", avatar: null },
     ],
   },
   {

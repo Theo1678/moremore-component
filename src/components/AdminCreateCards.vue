@@ -45,11 +45,15 @@ const getBadgeClasses = (badgeColor) => {
   const baseClasses = "flex items-center gap-2 px-2 py-1 rounded-md";
 
   switch (badgeColor) {
+    case "blue":
+      return `${baseClasses}`;
+    case "green":
+      return `${baseClasses}`;
     case "yellow":
-      return `${baseClasses} bg-yellow-100`;
+      return `${baseClasses}`;
     case "gray":
     default:
-      return `${baseClasses} bg-gray-100`;
+      return `${baseClasses}`;
   }
 };
 
@@ -178,11 +182,11 @@ const shouldShowImage = (shop) => {
             참여작가
           </h3>
 
-          <div class="flex items-center justify-center gap-6">
+          <div class="flex items-center justify-center gap-auto">
             <div
               v-for="participant in shop.participants"
               :key="participant.id"
-              class="flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+              class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
               @click="handleParticipantClick(participant)"
             >
               <!-- 작가 아바타 -->
@@ -215,9 +219,10 @@ const shouldShowImage = (shop) => {
               </div>
 
               <!-- 작가 이름 -->
-              <span class="text-sm font-medium text-blue-500">{{
-                participant.name
-              }}</span>
+              <span
+                class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1"
+                >{{ participant.name }}</span
+              >
             </div>
           </div>
         </div>

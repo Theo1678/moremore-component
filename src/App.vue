@@ -26,6 +26,16 @@ const detailShop = [
         name: "치즈",
         avatar: null,
       },
+      {
+        id: 3,
+        name: "글로리아 테스트",
+        avatar: null,
+      },
+      {
+        id: 4,
+        name: "루비 테스트 테스트",
+        avatar: null,
+      },
     ],
   },
   {

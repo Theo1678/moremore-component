@@ -1,14 +1,27 @@
 {
   "name": "moremore-component",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist/moremore-component.umd.cjs",
+  "module": "./dist/moremore-component.js",
+  "exports": {
+    ".": {
+      "import": "./dist/moremore-component.js",
+      "require": "./dist/moremore-component.umd.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:lib": "vite build --mode lib",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.23",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -17,5 +30,9 @@
     "postcss": "^8.5.5",
     "tailwindcss": "3",
     "vite": "^6.3.5"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0",
+    "@headlessui/vue": "^1.7.0"
   }
 }

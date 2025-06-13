@@ -1,8 +1,134 @@
 <script setup>
 import { ref } from "vue";
-import ShopDetailCard from "./components/ShopDetailCard.vue";
-import ShopCardGrid from "./components/ShopCardGrid.vue";
+import AdminCreateCards from "./components/AdminCreateCards.vue";
+import UserCreateCards from "./components/UserCreateCards.vue";
 import TabGroup from "./components/TabGroup.vue";
+
+// 상세 카드용 데이터
+const detailShop = [
+  {
+    id: 1,
+    title: "여름이었다 콜라보방은 두줄까지만보이게해.",
+    badge: "마켓종료",
+    badgeColor: "gray",
+    description:
+      "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다 그렇습니다.",
+    period: "모집기간: 2025.06.11~2025.07.01",
+    image: null,
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "가을 컬렉션 특별전",
+    badge: "마켓오픈",
+    badgeColor: "yellow",
+    description:
+      "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다 그렇습니다.",
+    period: "모집기간:2025.07.01~2025.07.31",
+    image: null,
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "겨울 한정 컬렉션",
+    badge: "마켓준비중",
+    badgeColor: "gray",
+    description: "썸머팩을 준비할 예정입니다",
+    period: "모집기간: 2025.12.01~2025.12.31",
+    image: null,
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "봄 신상 컬렉션",
+    badge: "마켓오픈",
+    badgeColor: "yellow",
+    description: "예정입니다",
+    period: "모집기간: 2025.03.01~2025.03.31",
+    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "여름 시즌 특가",
+    badge: "마켓종료",
+    badgeColor: "gray",
+    description:
+      "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다",
+    period: "모집기간: 2025.06.01~2025.06.30",
+    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    participants: [
+      {
+        id: 1,
+        name: "나초",
+        avatar: null,
+      },
+      {
+        id: 2,
+        name: "치즈",
+        avatar: null,
+      },
+    ],
+  },
+];
+
+// 탭 데이터
+const tabs = [
+  { id: "all", label: "전체" },
+  { id: "person", label: "인물" },
+  { id: "animal", label: "동물" },
+  { id: "object", label: "사물" },
+  { id: "plant", label: "식물" },
+  { id: "food", label: "음식" },
+  { id: "background", label: "배경 모조지" },
+  { id: "cute", label: "귀여운" },
+  { id: "kitsch", label: "키치" },
+  { id: "emotional", label: "감성" },
+];
 
 // 카드 그리드용 데이터
 const cardGridShops = [
@@ -90,7 +216,7 @@ const cardGridShops = [
     badgeColor: "yellow",
     period: "모집기간: 2025.09.01~2025.09.30",
     hashtags: "#추석 #한정 #이벤트 #특별",
-    image: "https://via.placeholder.com/280x200/f5f5f5/888?text=추석이벤트",
+    image: null,
     participants: [
       { id: 1, name: "추석작가", avatar: null },
       { id: 2, name: "이벤트작가", avatar: null },
@@ -119,130 +245,12 @@ const cardGridShops = [
     badgeColor: "blue",
     period: "모집기간: 2025.03.01~2025.03.31",
     hashtags: "#봄 #신상품 #새로움 #기대",
-    image: "https://via.placeholder.com/280x200/e8f5e8/4a90e2?text=봄신상",
+    image: null,
     participants: [
       { id: 1, name: "봄작가", avatar: null },
       { id: 2, name: "신상작가", avatar: null },
     ],
   },
-];
-
-// 상세 카드용 데이터
-const detailShop = [
-  {
-    id: 1,
-    title: "아 너무 열심히 걸음",
-    badge: "마켓종료",
-    badgeColor: "gray",
-    period: "마켓기간: 2025.06.11~2025.07.01",
-    image: null,
-    participants: [
-      {
-        id: 1,
-        name: "나초",
-        avatar: null,
-      },
-      {
-        id: 2,
-        name: "치즈",
-        avatar: null,
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "가을 컬렉션 특별전",
-    badge: "마켓오픈",
-    badgeColor: "yellow",
-    period: "마켓기간: 2025.07.01~2025.07.31",
-    image: null,
-    participants: [
-      {
-        id: 1,
-        name: "나초",
-        avatar: null,
-      },
-      {
-        id: 2,
-        name: "치즈",
-        avatar: null,
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "겨울 한정 컬렉션",
-    badge: "마켓준비중",
-    badgeColor: "gray",
-    period: "마켓기간: 2025.12.01~2025.12.31",
-    image: null,
-    participants: [
-      {
-        id: 1,
-        name: "나초",
-        avatar: null,
-      },
-      {
-        id: 2,
-        name: "치즈",
-        avatar: null,
-      },
-    ],
-  },
-  {
-    id: 4,
-    title: "봄 신상 컬렉션",
-    badge: "마켓오픈",
-    badgeColor: "yellow",
-    period: "마켓기간: 2025.03.01~2025.03.31",
-    image: null,
-    participants: [
-      {
-        id: 1,
-        name: "나초",
-        avatar: null,
-      },
-      {
-        id: 2,
-        name: "치즈",
-        avatar: null,
-      },
-    ],
-  },
-  {
-    id: 5,
-    title: "여름 시즌 특가",
-    badge: "마켓종료",
-    badgeColor: "gray",
-    period: "마켓기간: 2025.06.01~2025.06.30",
-    image: null,
-    participants: [
-      {
-        id: 1,
-        name: "나초",
-        avatar: null,
-      },
-      {
-        id: 2,
-        name: "치즈",
-        avatar: null,
-      },
-    ],
-  },
-];
-
-// 탭 데이터
-const tabs = [
-  { id: "all", label: "전체" },
-  { id: "person", label: "인물" },
-  { id: "animal", label: "동물" },
-  { id: "object", label: "사물" },
-  { id: "plant", label: "식물" },
-  { id: "food", label: "음식" },
-  { id: "background", label: "배경 모조지" },
-  { id: "cute", label: "귀여운" },
-  { id: "kitsch", label: "키치" },
-  { id: "emotional", label: "감성" },
 ];
 
 const activeTab = ref("all");
@@ -274,11 +282,11 @@ const handleParticipantClick = (participant) => {
         <p class="text-gray-600 mt-2">Vue 3 + Headless UI + Tailwind CSS</p>
       </div>
 
-      <!-- ShopDetailCard 컴포넌트 테스트 -->
+      <!-- AdminCreateCards 컴포넌트 테스트 -->
       <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-        <h2 class="text-xl font-bold mb-4">ShopDetailCard 컴포넌트</h2>
+        <h2 class="text-xl font-bold mb-4">AdminCreateCards 컴포넌트</h2>
 
-        <ShopDetailCard
+        <AdminCreateCards
           :shops="detailShop"
           @shop-click="handleShopClick"
           @participant-click="handleParticipantClick"
@@ -300,13 +308,13 @@ const handleParticipantClick = (participant) => {
         </div>
       </div>
 
-      <!-- ShopCardGrid 컴포넌트 테스트 -->
+      <!-- UserCreateCards 컴포넌트 테스트 -->
       <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
         <h2 class="text-xl font-bold mb-4">
-          ShopCardGrid 컴포넌트 (Headless UI 모달 포함)
+          UserCreateCards 컴포넌트 (Headless UI 모달 포함)
         </h2>
 
-        <ShopCardGrid
+        <UserCreateCards
           :shops="cardGridShops"
           @shop-click="handleShopClick"
           @participant-click="handleParticipantClick"
@@ -318,14 +326,18 @@ const handleParticipantClick = (participant) => {
         <h2 class="text-xl font-bold mb-4">사용법</h2>
         <div class="prose prose-sm max-w-none">
           <h3>설치</h3>
-          <pre class="bg-gray-100 p-3 rounded text-sm"><code>yarn build:lib
-yarn add file:../moremore-component</code></pre>
+          <p class="bg-gray-100 p-3 rounded text-sm">
+            <code>yarn build:lib yarn add file:../moremore-component</code>
+          </p>
 
           <h3>사용</h3>
-          <pre
-            class="bg-gray-100 p-3 rounded text-sm"
-          ><code>import { ShopListbox, ShopGallery, ShopDetailCard, ShopCardGrid, TabGroup } from 'moremore-component'
-import 'moremore-component/style.css'</code></pre>
+          <p class="bg-gray-100 p-3 rounded text-sm">
+            <code
+              >import { ShopListbox, ShopGallery, AdminCreateCards,
+              UserCreateCards, TabGroup } from 'moremore-component' import
+              'moremore-component/style.css'</code
+            >
+          </p>
         </div>
       </div>
     </div>

@@ -20,6 +20,9 @@ const props = defineProps({
 // Emits 정의
 const emit = defineEmits(["shop-click", "participant-click"]);
 
+// 이미지 에러 상태 관리
+const imageErrors = ref(new Set());
+
 // 표시할 아이템 수 관리
 const displayedItems = ref(props.maxItems);
 
@@ -27,9 +30,10 @@ const displayedItems = ref(props.maxItems);
 const displayedShops = computed(() => {
   return props.shops.slice(0, displayedItems.value);
 });
+
 // 클릭 핸들러
-const handleShopClick = () => {
-  emit("shop-click", props.shop);
+const handleShopClick = (shop) => {
+  emit("shop-click", shop);
 };
 
 const handleParticipantClick = (participant) => {
@@ -62,9 +66,14 @@ const getBadgeDotClasses = (badgeColor) => {
   }
 };
 
-const handleImageError = (event) => {
-  event.target.src =
-    "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판";
+// 이미지 에러 핸들러
+const handleImageError = (shopId) => {
+  imageErrors.value.add(shopId);
+};
+
+// 이미지 표시 여부 확인
+const shouldShowImage = (shop) => {
+  return shop.image && !imageErrors.value.has(shop.id);
 };
 </script>
 
@@ -80,17 +89,17 @@ const handleImageError = (event) => {
         class="w-full max-w-2xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden"
       >
         <!-- 상단 섹션 -->
-        <div class="p-6 cursor-pointer" @click="handleShopClick">
+        <div class="p-3 cursor-pointer" @click="handleShopClick">
           <div class="flex items-center gap-4">
             <!-- 원형 이미지 -->
             <div
               class="w-24 h-24 rounded-full border border-gray-300 bg-gray-50 flex-shrink-0 overflow-hidden"
             >
-              <template v-if="shop.image">
+              <template v-if="shouldShowImage(shop)">
                 <img
                   :src="shop.image"
                   :alt="shop.title"
-                  @error="handleImageError"
+                  @error="handleImageError(shop.id)"
                   class="w-full h-full object-cover"
                 />
               </template>
@@ -122,9 +131,11 @@ const handleImageError = (event) => {
             </div>
 
             <!-- 제목과 배지 -->
-            <div class="flex-1 min-w-0">
+            <div class="flex-1 min-w-0 text-left">
               <div class="flex items-center justify-between gap-3 mb-2">
-                <h2 class="text-xl font-bold text-gray-900 truncate">
+                <h2
+                  class="font-pretendard text-[17px] font-bold leading-[22px] line-clamp-2"
+                >
                   {{ shop.title }}
                 </h2>
                 <div
@@ -138,7 +149,16 @@ const handleImageError = (event) => {
                   }}</span>
                 </div>
               </div>
-              <p v-if="shop.period" class="text-sm text-blue-500">
+              <p
+                v-if="shop.description"
+                class="font-pretendard text-[15px] font-normal leading-[22px] text-gray-500 my-2 line-clamp-2"
+              >
+                {{ shop.description }}
+              </p>
+              <p
+                v-if="shop.period"
+                class="font-pretendard text-[13px] font-normal leading-[20px] text-blue-500"
+              >
                 {{ shop.period }}
               </p>
             </div>
@@ -150,9 +170,13 @@ const handleImageError = (event) => {
 
         <!-- 참여작가 섹션 -->
         <div class="p-6">
-          <h3 class="text-lg font-bold text-gray-900 mb-4">참여작가</h3>
+          <h3
+            class="text-left font-pretendard text-[15px] font-bold leading-[22px] mb-2"
+          >
+            참여작가
+          </h3>
 
-          <div class="flex items-center gap-6">
+          <div class="flex items-center justify-center gap-6">
             <div
               v-for="participant in shop.participants"
               :key="participant.id"
@@ -161,7 +185,7 @@ const handleImageError = (event) => {
             >
               <!-- 작가 아바타 -->
               <div
-                class="w-16 h-16 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
+                class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
               >
                 <template v-if="participant.avatar">
                   <img

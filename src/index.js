@@ -1,7 +1,7 @@
 import ShopListbox from "./components/ShopListbox.vue";
 import ShopGallery from "./components/ShopGallery.vue";
-import ShopDetailCard from "./components/ShopDetailCard.vue";
-import ShopCardGrid from "./components/ShopCardGrid.vue";
+import ShopDetailCard from "./components/AdminCreateCards.vue";
+import ShopCardGrid from "./components/UserCreateCards.vue";
 import TabGroup from "./components/TabGroup.vue";
 
 // 컴포넌트들을 export

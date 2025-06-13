@@ -78,7 +78,7 @@ watch(
 
 <template>
   <div class="w-full">
-    <div class="flex items-stretch gap-4 px-5 overflow-x-auto scrollbar-hide">
+    <div class="flex items-stretch gap-4 px-5 flex-wrap">
       <button
         v-for="tab in tabs"
         :key="tab.id"
@@ -95,13 +95,5 @@ watch(
 </template>
 
 <style scoped>
-/* 스크롤바 숨기기 */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
+/* 기존 스크롤바 숨기기 스타일은 더 이상 필요하지 않으므로 제거 */
 </style>

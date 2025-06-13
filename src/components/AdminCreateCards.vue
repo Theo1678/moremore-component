@@ -78,19 +78,21 @@ const shouldShowImage = (shop) => {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 items-start"
+  >
     <div
       v-for="shop in displayedShops"
       :key="shop.id"
-      class="cursor-pointer transition-transform hover:scale-105"
+      class="cursor-pointer transition-transform hover:scale-105 h-full"
       @click="handleShopClick(shop)"
     >
       <div
-        class="w-full max-w-2xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden"
+        class="w-full max-w-2xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden h-full flex flex-col"
       >
         <!-- 상단 섹션 -->
-        <div class="p-3 cursor-pointer" @click="handleShopClick">
-          <div class="flex items-center gap-4">
+        <div class="p-3 cursor-pointer flex-grow" @click="handleShopClick">
+          <div class="flex items-center gap-4 h-full">
             <!-- 원형 이미지 -->
             <div
               class="w-24 h-24 rounded-full border border-gray-300 bg-gray-50 flex-shrink-0 overflow-hidden"
@@ -131,7 +133,7 @@ const shouldShowImage = (shop) => {
             </div>
 
             <!-- 제목과 배지 -->
-            <div class="flex-1 min-w-0 text-left">
+            <div class="flex-1 min-w-0 text-left flex flex-col justify-center">
               <div class="flex items-center justify-between gap-3 mb-2">
                 <h2
                   class="font-pretendard text-[17px] font-bold leading-[22px] line-clamp-2"
@@ -169,7 +171,7 @@ const shouldShowImage = (shop) => {
         <div class="border-t border-gray-200"></div>
 
         <!-- 참여작가 섹션 -->
-        <div class="p-6">
+        <div class="p-6 mt-auto">
           <h3
             class="text-left font-pretendard text-[15px] font-bold leading-[22px] mb-2"
           >

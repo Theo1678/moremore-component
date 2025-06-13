@@ -1,5 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
+import IcArrowLeft from "./ElementIcons/IcArrowLeft.vue";
+import IcArrowRight from "./ElementIcons/IcArrowRight.vue";
 
 // Props 정의
 const props = defineProps({
@@ -79,6 +81,43 @@ const handleImageError = (shopId) => {
 const shouldShowImage = (shop) => {
   return shop.image && !imageErrors.value.has(shop.id);
 };
+
+// 참여작가 스크롤 관리
+const participantRefs = ref({});
+const setParticipantRef = (shopId, el) => {
+  if (el) {
+    participantRefs.value[shopId] = el;
+  }
+};
+
+// 좌우 스크롤 함수
+const scrollParticipants = (shopId, direction) => {
+  const container = participantRefs.value[shopId];
+  if (container) {
+    const scrollAmount = 80; // 한 번에 스크롤할 픽셀
+    const newScrollLeft =
+      container.scrollLeft +
+      (direction === "left" ? -scrollAmount : scrollAmount);
+    container.scrollTo({
+      left: newScrollLeft,
+      behavior: "smooth",
+    });
+  }
+};
+
+// 스크롤 위치 확인
+const canScrollLeft = (shopId) => {
+  const container = participantRefs.value[shopId];
+  return container && container.scrollLeft > 0;
+};
+
+const canScrollRight = (shopId) => {
+  const container = participantRefs.value[shopId];
+  return (
+    container &&
+    container.scrollLeft < container.scrollWidth - container.clientWidth
+  );
+};
 </script>
 
 <template>
@@ -89,13 +128,15 @@ const shouldShowImage = (shop) => {
       v-for="shop in displayedShops"
       :key="shop.id"
       class="cursor-pointer transition-transform hover:scale-105 h-full"
-      @click="handleShopClick(shop)"
     >
       <div
         class="w-full max-w-2xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden h-full flex flex-col"
       >
         <!-- 상단 섹션 -->
-        <div class="p-3 cursor-pointer flex-grow" @click="handleShopClick">
+        <div
+          class="p-3 cursor-pointer flex-grow"
+          @click="handleShopClick(shop)"
+        >
           <div class="flex items-center gap-4 h-full">
             <!-- 원형 이미지 -->
             <div
@@ -182,47 +223,85 @@ const shouldShowImage = (shop) => {
             참여작가
           </h3>
 
-          <div class="flex items-center justify-center gap-auto">
-            <div
-              v-for="participant in shop.participants"
-              :key="participant.id"
-              class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-              @click="handleParticipantClick(participant)"
+          <!-- 참여작가 컨테이너 (5명 이상일 때 스크롤) -->
+          <div class="relative">
+            <!-- 좌측 스크롤 버튼 -->
+            <button
+              v-if="
+                shop.participants &&
+                shop.participants.length >= 5 &&
+                canScrollLeft(shop.id)
+              "
+              @click.stop="scrollParticipants(shop.id, 'left')"
+              class="absolute no-background left-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center p-0 -left-4"
             >
-              <!-- 작가 아바타 -->
-              <div
-                class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
-              >
-                <template v-if="participant.avatar">
-                  <img
-                    :src="participant.avatar"
-                    :alt="participant.name"
-                    class="w-full h-full object-cover"
-                  />
-                </template>
-                <template v-else>
-                  <div class="w-full h-full flex items-center justify-center">
-                    <!-- 기본 아바타 아이콘 -->
-                    <svg
-                      class="w-8 h-8 text-gray-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </template>
-              </div>
+              <IcArrowLeft />
+            </button>
 
-              <!-- 작가 이름 -->
-              <span
-                class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1"
-                >{{ participant.name }}</span
+            <!-- 우측 스크롤 버튼 -->
+            <button
+              v-if="
+                shop.participants &&
+                shop.participants.length >= 5 &&
+                canScrollRight(shop.id)
+              "
+              @click.stop="scrollParticipants(shop.id, 'right')"
+              class="absolute no-background right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center p-0 -right-4"
+            >
+              <IcArrowRight />
+            </button>
+
+            <!-- 참여작가 목록 -->
+            <div
+              :ref="(el) => setParticipantRef(shop.id, el)"
+              :class="
+                shop.participants && shop.participants.length >= 5
+                  ? 'flex items-center gap-2 overflow-x-auto scrollbar-hide px-0'
+                  : 'flex items-center justify-center gap-auto'
+              "
+              @scroll="$forceUpdate()"
+            >
+              <div
+                v-for="participant in shop.participants"
+                :key="participant.id"
+                class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0"
+                @click.stop="handleParticipantClick(participant)"
               >
+                <!-- 작가 아바타 -->
+                <div
+                  class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
+                >
+                  <template v-if="participant.avatar">
+                    <img
+                      :src="participant.avatar"
+                      :alt="participant.name"
+                      class="w-full h-full object-cover"
+                    />
+                  </template>
+                  <template v-else>
+                    <div class="w-full h-full flex items-center justify-center">
+                      <!-- 기본 아바타 아이콘 -->
+                      <svg
+                        class="w-8 h-8 text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </template>
+                </div>
+
+                <!-- 작가 이름 -->
+                <span
+                  class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center"
+                  >{{ participant.name }}</span
+                >
+              </div>
             </div>
           </div>
         </div>
@@ -230,3 +309,19 @@ const shouldShowImage = (shop) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* 스크롤바 숨기기 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.no-background {
+  background: none;
+}
+</style>

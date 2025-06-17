@@ -2,23 +2,24 @@
   "name": "moremore-component",
   "version": "1.0.0",
   "type": "module",
-  "main": "./dist/moremore-component.umd.cjs",
-  "module": "./dist/moremore-component.js",
+  "main": "./lib/moremore-component.umd.cjs",
+  "module": "./lib/moremore-component.js",
   "exports": {
     ".": {
-      "import": "./dist/moremore-component.js",
-      "require": "./dist/moremore-component.umd.cjs"
+      "import": "./lib/moremore-component.js",
+      "require": "./lib/moremore-component.umd.cjs"
     },
-    "./style.css": "./dist/moremore-component.css"
+    "./style.css": "./lib/moremore-component.css"
   },
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:lib": "vite build --mode lib",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:all": "yarn build && yarn build:lib"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",

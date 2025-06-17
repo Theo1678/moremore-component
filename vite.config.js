@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => {
         },
       },
       build: {
+        outDir: "lib", // dist 대신 lib 폴더 사용
         lib: {
           entry: resolve(__dirname, "src/index.js"),
           name: "MoremoreComponent",

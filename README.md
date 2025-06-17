@@ -6,10 +6,12 @@ Vue 3 + Headless UI + Tailwind CSS로 구축된 재사용 가능한 컴포넌트
 
 - **Vue 3 Composition API** 기반
 - **Headless UI** 통합으로 접근성 최적화
-- **Tailwind CSS** 스타일링
+- **Tailwind CSS** 완전 컴파일 (외부 의존성 없음)
 - **TypeScript** 지원 준비
 - **반응형 디자인** 지원
 - **다크 모드** 지원
+- **Tree-shaking** 지원
+- **91.94 kB CSS** - 모든 스타일 포함
 
 ## 📦 설치
 
@@ -218,9 +220,23 @@ const handleTabChange = (tab) => {
 }
 ```
 
-### Tailwind CSS 통합
+### ✅ 외부 프로젝트 CSS 호환성
 
-이 라이브러리는 Tailwind CSS를 사용합니다. 프로젝트에서 Tailwind CSS가 설정되어 있다면 더 나은 통합을 위해 다음 설정을 추가하세요:
+이 라이브러리는 **Tailwind CSS가 완전히 컴파일되어** 외부 프로젝트에서 Tailwind CSS 설치 없이도 작동합니다:
+
+- **모든 클래스 컴파일**: Tailwind의 모든 필요한 클래스가 CSS 파일에 포함
+- **외부 의존성 없음**: 다른 프로젝트에서 Tailwind CSS 설치 불필요
+- **스타일 안정성**: 클래스 이름 충돌이나 누락 없음
+- **파일 크기**: 91.94 kB (gzip: 15.49 kB)
+
+```javascript
+// 다른 프로젝트에서 단순히 이것만 하면 끝!
+import "moremore-component/style.css";
+```
+
+### Tailwind CSS 통합 (선택사항)
+
+프로젝트에서 Tailwind CSS를 사용한다면 더 나은 통합을 위해:
 
 ```javascript
 // tailwind.config.js
@@ -247,6 +263,12 @@ yarn dev
 ```bash
 yarn build:lib
 ```
+
+빌드 결과:
+
+- `dist/moremore-component.js` (18.78 kB) - ES Module
+- `dist/moremore-component.umd.cjs` (14.86 kB) - UMD 형태
+- `dist/moremore-component.css` (91.94 kB) - 완전 컴파일된 CSS
 
 ### 프리뷰
 
@@ -275,6 +297,10 @@ src/
 ├── index.js         # 라이브러리 진입점
 └── style.css        # 통합 스타일
 ```
+
+## 🧪 테스트
+
+라이브러리 빌드 후 `example/index.html`을 브라우저에서 열어 외부 CSS 호환성을 테스트할 수 있습니다.
 
 ## 📄 라이선스
 

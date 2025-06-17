@@ -9,7 +9,7 @@
       "import": "./dist/moremore-component.js",
       "require": "./dist/moremore-component.umd.cjs"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/moremore-component.css"
   },
   "files": [
     "dist"

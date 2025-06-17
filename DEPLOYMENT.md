@@ -54,7 +54,7 @@ yarn add file:./moremore-component-1.0.0.tgz
 import { createApp } from "vue";
 import App from "./App.vue";
 import MoremoreComponent from "moremore-component";
-import "moremore-component/dist/moremore-component.css";
+import "moremore-component/style.css";
 
 const app = createApp(App);
 app.use(MoremoreComponent);
@@ -70,7 +70,7 @@ import {
   UserCreateCards,
   TabGroup,
 } from "moremore-component";
-import "moremore-component/dist/moremore-component.css";
+import "moremore-component/style.css";
 
 // 데이터 정의
 const shops = [
@@ -145,7 +145,7 @@ const handleParticipantClick = (participant) => {
 ```javascript
 // plugins/moremore-component.client.js
 import MoremoreComponent from "moremore-component";
-import "moremore-component/dist/moremore-component.css";
+import "moremore-component/style.css";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(MoremoreComponent);
@@ -187,7 +187,7 @@ yarn add file:../moremore-component
 
 ```javascript
 // CSS 파일을 명시적으로 import
-import "moremore-component/dist/moremore-component.css";
+import "moremore-component/style.css";
 ```
 
 ### Tailwind CSS 충돌 해결

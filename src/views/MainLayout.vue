@@ -80,20 +80,11 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
 
 <template>
   <div class="min-h-screen bg-gray-50 flex">
-    <!-- 모바일 오버레이 -->
-    <div
-      v-if="sidebarOpen"
-      @click="toggleSidebar"
-      class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
-    ></div>
-
-    <!-- 좌측 사이드바 네비게이션 -->
+    <!-- 좌측 사이드바 네비게이션 (모든 화면 크기에서 고정) -->
     <aside
       :class="[
-        'bg-white shadow-lg border-r border-gray-200 flex-shrink-0 transition-all duration-300 ease-in-out z-30 min-w-20',
-        sidebarOpen
-          ? 'w-64 translate-x-0'
-          : 'w-0 -translate-x-full lg:w-16 lg:translate-x-0',
+        'bg-white shadow-lg border-r border-gray-200 flex-shrink-0 transition-all duration-300 ease-in-out min-w-20',
+        sidebarOpen ? 'w-64' : 'w-16',
       ]"
     >
       <!-- 헤더 영역 -->
@@ -103,11 +94,11 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
           <div
             :class="[
               'transition-opacity duration-300',
-              sidebarOpen ? 'opacity-100' : 'opacity-0 lg:opacity-100',
+              sidebarOpen ? 'opacity-100' : 'opacity-0',
             ]"
           >
-            <div v-if="sidebarOpen || !sidebarOpen" class="lg:block">
-              <h1 v-if="sidebarOpen" class="text-xl font-bold text-gray-900">
+            <div v-if="sidebarOpen" class="block">
+              <h1 class="text-xl font-bold text-gray-900">
                 Vue 3 + Headless UI + Tailwind CSS
               </h1>
             </div>
@@ -143,13 +134,8 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
         </div>
       </div>
 
-      <!-- 네비게이션 메뉴 -->
-      <nav
-        :class="[
-          'p-4 space-y-2 overflow-hidden',
-          sidebarOpen ? 'opacity-100' : 'opacity-0 lg:opacity-100',
-        ]"
-      >
+      <!-- 네비게이션 메뉴 (펼쳐진 상태에서만 표시) -->
+      <nav v-if="sidebarOpen" class="p-4 space-y-2 overflow-hidden">
         <div v-for="item in navigationItems" :key="item.id" class="space-y-1">
           <!-- 메인 카테고리 -->
           <div
@@ -162,13 +148,12 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
             ]"
           >
             <!-- 아이콘 영역 -->
-
-            <span class="text-sm font-semibold text-gray-600">
+            <span class="text-sm font-semibold text-gray-600 flex-shrink-0">
               {{ item.label.charAt(0) }}
             </span>
 
             <!-- 텍스트 영역 -->
-            <div v-if="sidebarOpen" class="flex-1 min-w-0">
+            <div class="flex-1 min-w-0 ml-3">
               <div class="font-semibold truncate">{{ item.label }}</div>
               <div class="text-xs text-gray-500 truncate">
                 {{ item.description }}
@@ -176,10 +161,7 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
             </div>
 
             <!-- 드롭다운 화살표 -->
-            <div
-              v-if="item.hasSubItems && sidebarOpen"
-              class="ml-2 flex-shrink-0"
-            >
+            <div v-if="item.hasSubItems" class="ml-2 flex-shrink-0">
               <svg
                 :class="[
                   'w-4 h-4 transition-transform duration-200',
@@ -201,9 +183,7 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
 
           <!-- 하위 카테고리 드롭다운 -->
           <div
-            v-if="
-              item.hasSubItems && expandedCategory === item.id && sidebarOpen
-            "
+            v-if="item.hasSubItems && expandedCategory === item.id"
             class="ml-4 space-y-1 animate-in slide-in-from-top-2 duration-200"
           >
             <div
@@ -242,34 +222,7 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
     </aside>
 
     <!-- 메인 콘텐츠 영역 -->
-    <main class="flex-1 flex flex-col min-w-0">
-      <!-- 상단 헤더 (모바일용 햄버거 메뉴) -->
-      <header class="lg:hidden bg-white border-b border-gray-200 p-4">
-        <div class="flex items-center justify-between">
-          <h1 class="text-lg font-semibold text-gray-900">
-            Moremore Component
-          </h1>
-          <button
-            @click="toggleSidebar"
-            class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <svg
-              class="w-6 h-6 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </div>
-      </header>
-
+    <main class="flex-1 flex flex-col min-w-0 flex items-center">
       <!-- 콘텐츠 영역 -->
       <div class="flex-1 p-8 max-w-[1200px] w-full">
         <!-- Cards 섹션 -->
@@ -314,11 +267,9 @@ aside {
   left: 0;
 }
 
-@media (min-width: 1024px) {
-  aside {
-    position: relative;
-    height: auto;
-  }
+aside {
+  position: relative;
+  height: auto;
 }
 
 /* 스크롤바 커스터마이징 */

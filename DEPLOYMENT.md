@@ -102,25 +102,49 @@ yarn add file:/absolute/path/to/moremore-component
 
 ### 2. Firebase Hosting 배포 (데모 사이트)
 
-컴포넌트 라이브러리의 데모 사이트를 Firebase Hosting에 배포:
+**자동 배포**: main 브랜치에 merge되면 GitHub Actions를 통해 자동으로 배포됩니다.
 
 ```bash
-# 1. 데모 사이트 빌드
+# 수동 배포가 필요한 경우에만 (일반적으로 불필요)
 yarn build
-
-# 2. Firebase 배포
 firebase deploy
-
-# 또는 특정 프로젝트에 배포
-firebase use your-project-id
-firebase deploy --only hosting
 ```
 
-**Firebase Hosting 설정**:
+**Firebase Hosting 정보**:
 
-- **public 디렉토리**: `dist/` (firebase.json에서 설정)
+- **자동 배포**: main 브랜치 merge 시 자동 실행
 - **배포 URL**: https://your-project-id.web.app
-- **용도**: 라이브러리 데모, 문서화, 사용 예제 제공
+- **용도**: 라이브러리 데모, 사용 예제 제공
+
+### 3. GitHub Release 태그 생성
+
+main 브랜치에 merge되어 자동 배포가 완료되면 GitHub에서 릴리즈 태그를 생성합니다:
+
+#### 방법 1: GitHub 웹에서 릴리즈 생성
+
+1. **GitHub 리포지토리 → Releases → Create a new release**
+2. **Tag version**: `v1.0.0` (semantic versioning)
+3. **Release title**: `v1.0.0 - 컴포넌트 라이브러리 초기 릴리즈`
+4. **Description**: 변경사항, 새 기능, 버그 수정 내용 작성
+5. **Publish release** 클릭
+
+#### 방법 2: CLI에서 태그 생성
+
+```bash
+# 1. 태그 생성
+git tag v1.0.0
+
+# 2. 태그 푸시
+git push origin v1.0.0
+
+# 3. GitHub에서 해당 태그로 릴리즈 생성
+```
+
+#### 릴리즈 버전 가이드
+
+- **Patch** (v1.0.**1**): 버그 수정
+- **Minor** (v1.**1**.0): 새 기능 추가 (하위 호환)
+- **Major** (v**2**.0.0): 큰 변경사항 (하위 호환 불가)
 
 ## 🛠️ 다른 프로젝트에서 사용
 
@@ -282,8 +306,8 @@ yarn remove moremore-component
 yarn cache clean
 yarn add file:../moremore-component
 
-# NPM 패키지인 경우 (향후)
-yarn upgrade moremore-component
+# NPM 패키지를 사용하는 경우 (현재 미지원)
+# yarn upgrade moremore-component
 ```
 
 ## 📋 배포 전 체크리스트
@@ -427,7 +451,6 @@ module.exports = {
 
 ### 단기 계획
 
-- [ ] NPM 배포
 - [ ] TypeScript 타입 정의 파일 추가
 - [ ] 컴포넌트별 CSS 분리 옵션
 - [ ] Storybook 문서화

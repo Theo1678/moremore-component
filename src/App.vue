@@ -8,4 +8,5 @@ import MainLayout from "./views/MainLayout.vue";
 
 <style scoped>
 /* App.vue 기본 스타일 */
+/* 테스트 */
 </style>

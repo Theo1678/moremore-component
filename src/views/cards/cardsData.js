@@ -22,7 +22,7 @@ export const adminCardsData = [
       },
       {
         id: 3,
-        name: "글로리아 테스트",
+        name: "글로리아",
         avatar: null,
       },
       {
@@ -32,7 +32,37 @@ export const adminCardsData = [
       },
       {
         id: 5,
-        name: "치즈",
+        name: "테오",
+        avatar: null,
+      },
+      {
+        id: 6,
+        name: "오웬",
+        avatar: null,
+      },
+      {
+        id: 7,
+        name: "리아",
+        avatar: null,
+      },
+      {
+        id: 8,
+        name: "해리",
+        avatar: null,
+      },
+      {
+        id: 9,
+        name: "캐빈",
+        avatar: null,
+      },
+      {
+        id: 10,
+        name: "제이슨",
+        avatar: null,
+      },
+      {
+        id: 11,
+        name: "디오",
         avatar: null,
       },
     ],

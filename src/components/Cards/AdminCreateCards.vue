@@ -94,7 +94,7 @@ const setParticipantRef = (shopId, el) => {
 const scrollParticipants = (shopId, direction) => {
   const container = participantRefs.value[shopId];
   if (container) {
-    const scrollAmount = 80; // 한 번에 스크롤할 픽셀
+    const scrollAmount = 74; // 한 번에 스크롤할 픽셀
     const newScrollLeft =
       container.scrollLeft +
       (direction === "left" ? -scrollAmount : scrollAmount);
@@ -113,9 +113,13 @@ const canScrollLeft = (shopId) => {
 
 const canScrollRight = (shopId) => {
   const container = participantRefs.value[shopId];
+  if (!container) return false;
+
+  const epsilon = 1;
   return (
     container &&
-    container.scrollLeft < container.scrollWidth - container.clientWidth
+    container.scrollLeft <
+      container.scrollWidth - container.clientWidth - epsilon
   );
 };
 </script>
@@ -204,7 +208,7 @@ const canScrollRight = (shopId) => {
               </p>
               <p
                 v-if="shop.period"
-                class="font-pretendard text-[13px] font-normal leading-[20px] text-blue-500"
+                class="break-words whitespace-normal font-pretendard text-[13px] font-normal leading-[20px] text-blue-500"
               >
                 {{ shop.period }}
               </p>
@@ -233,7 +237,7 @@ const canScrollRight = (shopId) => {
                 canScrollLeft(shop.id)
               "
               @click.stop="scrollParticipants(shop.id, 'left')"
-              class="absolute no-background left-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center p-0 -left-4"
+              class="absolute no-background left-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center p-0 -left-5 focus:outline-none hover:border-none focus:ring-0"
             >
               <IcArrowLeft />
             </button>
@@ -246,61 +250,65 @@ const canScrollRight = (shopId) => {
                 canScrollRight(shop.id)
               "
               @click.stop="scrollParticipants(shop.id, 'right')"
-              class="absolute no-background right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center p-0 -right-4"
+              class="absolute no-background right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center p-0 -right-5 focus:outline-none hover:border-none focus:ring-0"
             >
               <IcArrowRight />
             </button>
 
             <!-- 참여작가 목록 -->
-            <div
-              :ref="(el) => setParticipantRef(shop.id, el)"
-              :class="
-                shop.participants && shop.participants.length >= 5
-                  ? 'flex items-center gap-2 overflow-x-auto scrollbar-hide px-0'
-                  : 'flex items-center justify-center gap-auto'
-              "
-              @scroll="$forceUpdate()"
-            >
+            <div class="flex items-center justify-center">
               <div
-                v-for="participant in shop.participants"
-                :key="participant.id"
-                class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0"
-                @click.stop="handleParticipantClick(participant)"
+                :ref="(el) => setParticipantRef(shop.id, el)"
+                :class="
+                  shop.participants && shop.participants.length >= 5
+                    ? 'max-w-[280px] flex items-center  gap-2 overflow-x-auto scrollbar-hide px-0'
+                    : 'flex items-center justify-center gap-auto'
+                "
+                @scroll="$forceUpdate()"
               >
-                <!-- 작가 아바타 -->
                 <div
-                  class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
+                  v-for="participant in shop.participants"
+                  :key="participant.id"
+                  class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0"
+                  @click.stop="handleParticipantClick(participant)"
                 >
-                  <template v-if="participant.avatar">
-                    <img
-                      :src="participant.avatar"
-                      :alt="participant.name"
-                      class="w-full h-full object-cover"
-                    />
-                  </template>
-                  <template v-else>
-                    <div class="w-full h-full flex items-center justify-center">
-                      <!-- 기본 아바타 아이콘 -->
-                      <svg
-                        class="w-8 h-8 text-gray-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
+                  <!-- 작가 아바타 -->
+                  <div
+                    class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
+                  >
+                    <template v-if="participant.avatar">
+                      <img
+                        :src="participant.avatar"
+                        :alt="participant.name"
+                        class="w-full h-full object-cover"
+                      />
+                    </template>
+                    <template v-else>
+                      <div
+                        class="w-full h-full flex items-center justify-center"
                       >
-                        <path
-                          fill-rule="evenodd"
-                          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                  </template>
-                </div>
+                        <!-- 기본 아바타 아이콘 -->
+                        <svg
+                          class="w-8 h-8 text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </template>
+                  </div>
 
-                <!-- 작가 이름 -->
-                <span
-                  class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center"
-                  >{{ participant.name }}</span
-                >
+                  <!-- 작가 이름 -->
+                  <span
+                    class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center"
+                    >{{ participant.name }}</span
+                  >
+                </div>
               </div>
             </div>
           </div>

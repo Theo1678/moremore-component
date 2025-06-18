@@ -86,18 +86,38 @@ du -h lib/*
 
 ### 1. 라이브러리 패키지 배포
 
-개발 중이거나 npm 배포 전 테스트할 때 사용:
+다른 프로젝트에서 GitHub 저장소를 직접 참조하여 사용:
+
+#### 방법 1: yarn/npm 명령어로 설치
+
+````bash
+# GitHub 저장소에서 직접 설치
+yarn add git+https://github.com/Theo1678/moremore-component.git
+
+#### 방법 2: package.json에 직접 추가
+
+```json
+{
+  "dependencies": {
+    "moremore-component": "git+https://github.com/Theo1678/moremore-component.git"
+  }
+}
+````
+
+그 후 설치:
+
+```bash
+yarn install
+```
+
+#### 로컬 테스트용 (개발 중에만)
 
 ```bash
 # 1. 라이브러리 빌드
 yarn build:lib
 
-# 2. 다른 프로젝트에서 설치
-cd ../your-project
+# 2. 로컬 파일로 테스트
 yarn add file:../moremore-component
-
-# 또는 절대 경로로
-yarn add file:/absolute/path/to/moremore-component
 ```
 
 ### 2. Firebase Hosting 배포 (데모 사이트)
@@ -301,13 +321,16 @@ npm version major  # 큰 변경사항
 ### 2. 사용하는 프로젝트에서 업데이트
 
 ```bash
-# 로컬 패키지인 경우
+
+# 또는 캐시 클리어 후 재설치
+yarn remove moremore-component
+yarn cache clean
+yarn add git+https://github.com/Theo1678/moremore-component.git
+
+# 로컬 테스트 파일인 경우
 yarn remove moremore-component
 yarn cache clean
 yarn add file:../moremore-component
-
-# NPM 패키지를 사용하는 경우 (현재 미지원)
-# yarn upgrade moremore-component
 ```
 
 ## 📋 배포 전 체크리스트

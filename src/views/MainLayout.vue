@@ -271,7 +271,7 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
       </header>
 
       <!-- 콘텐츠 영역 -->
-      <div class="flex-1 p-8 w-[1200px]">
+      <div class="flex-1 p-8 max-w-[1200px] w-full">
         <!-- Cards 섹션 -->
         <CardsSection
           v-if="selectedCategory === 'cards'"

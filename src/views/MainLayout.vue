@@ -1,13 +1,30 @@
 <script setup>
-import { ref } from "vue";
-import CardsSection from "./cards/CardsSection.vue";
-import TabsSection from "./tabs/TabsSection.vue";
+import { ref, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
+// 라우터 및 라우트 사용
+const router = useRouter();
+const route = useRoute();
 
 // 네비게이션 상태 관리
-const selectedCategory = ref("cards");
-const selectedSubCategory = ref("admin-cards"); // 하위 카테고리 추가
 const expandedCategory = ref(null); // 현재 확장된 카테고리
 const sidebarOpen = ref(true); // 사이드바 열림/닫힘 상태
+
+// 현재 라우트 기반으로 선택된 카테고리 계산
+const selectedCategory = computed(() => {
+  const path = route.path;
+  if (path.startsWith("/cards")) return "cards";
+  if (path.startsWith("/tabs")) return "tabs";
+  return "";
+});
+
+// 현재 하위 카테고리 계산
+const selectedSubCategory = computed(() => {
+  const path = route.path;
+  if (path === "/cards/admin-cards") return "admin-cards";
+  if (path === "/cards/user-cards") return "user-cards";
+  return null;
+});
 
 // 네비게이션 메뉴 구조 확장
 const navigationItems = [
@@ -20,11 +37,13 @@ const navigationItems = [
         id: "admin-cards",
         label: "AdminCreateCards",
         description: "관리자가 생성한 카드 컴포넌트",
+        route: "/cards/admin-cards",
       },
       {
         id: "user-cards",
         label: "UserCreateCards",
         description: "유저가 생성한 카드 컴포넌트",
+        route: "/cards/user-cards",
       },
     ],
   },
@@ -33,6 +52,7 @@ const navigationItems = [
     label: "Tabs",
     description: "탭 네비게이션 컴포넌트",
     hasSubItems: false,
+    route: "/tabs",
   },
 ];
 
@@ -49,24 +69,22 @@ const handleCategoryClick = (item) => {
       expandedCategory.value = null;
     } else {
       expandedCategory.value = item.id;
-      selectedCategory.value = item.id;
 
-      // 첫 번째 하위 아이템을 기본으로 선택
+      // 첫 번째 하위 아이템으로 네비게이션
       if (item.subItems && item.subItems.length > 0) {
-        selectedSubCategory.value = item.subItems[0].id;
+        router.push(item.subItems[0].route);
       }
     }
   } else {
-    // 드롭다운이 없는 경우 바로 선택
-    selectedCategory.value = item.id;
-    selectedSubCategory.value = null;
+    // 드롭다운이 없는 경우 바로 라우터로 이동
     expandedCategory.value = null;
+    router.push(item.route);
   }
 };
 
 // 하위 카테고리 클릭 핸들러
 const handleSubCategoryClick = (subItem) => {
-  selectedSubCategory.value = subItem.id;
+  router.push(subItem.route);
 };
 
 // 현재 선택된 하위 카테고리가 무엇인지 확인하는 computed
@@ -225,14 +243,8 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
     <main class="flex-1 flex flex-col min-w-0 flex items-center">
       <!-- 콘텐츠 영역 -->
       <div class="flex-1 p-8 max-w-[1200px] w-full">
-        <!-- Cards 섹션 -->
-        <CardsSection
-          v-if="selectedCategory === 'cards'"
-          :selectedSubCategory="selectedSubCategory"
-        />
-
-        <!-- Tabs 섹션 -->
-        <TabsSection v-if="selectedCategory === 'tabs'" />
+        <!-- 라우터 뷰 -->
+        <router-view />
       </div>
     </main>
   </div>

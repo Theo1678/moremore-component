@@ -7,6 +7,7 @@
       :disabled="currentIndex === 0"
       class="swiper-button-prev"
       :class="{
+        'type-multiple': multiple,
         'swiper-button-disabled': currentIndex === 0,
         'swiper-button-hidden': !showPrevButton,
       }"
@@ -49,6 +50,7 @@
       :disabled="currentIndex === maxIndex"
       class="swiper-button-next"
       :class="{
+        'type-multiple': multiple,
         'swiper-button-disabled': currentIndex === maxIndex,
         'swiper-button-hidden': !showNextButton,
       }"
@@ -97,7 +99,7 @@ const props = withDefaults(
   defineProps<{
     // 데이터
     items?: SwiperItem[];
-
+    multiple?: boolean;
     // 슬라이드 설정
     slidesPerView?: number;
     spaceBetween?: number;
@@ -524,6 +526,20 @@ defineExpose({
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: scale(1.1);
+}
+.type-multiple.swiper-button-prev {
+  left: -40px;
+  transform: translateY(-50%);
+  transition: none;
+  box-shadow: none;
+  background: none;
+}
+.type-multiple.swiper-button-next {
+  right: -40px;
+  transform: translateY(-50%);
+  transition: none;
+  box-shadow: none;
+  background: none;
 }
 
 .swiper-button-disabled {

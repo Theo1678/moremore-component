@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import IcArrowLeft from "../ElementIcons/IcArrowLeft.vue";
-import IcArrowRight from "../ElementIcons/IcArrowRight.vue";
+import Swiper from "../header/Swiper.vue";
 import type {
   Shop,
   Participant,
@@ -87,47 +86,6 @@ const handleImageError = (shopId) => {
 // 이미지 표시 여부 확인
 const shouldShowImage = (shop) => {
   return shop.image && !imageErrors.value.has(shop.id);
-};
-
-// 참여작가 스크롤 관리
-const participantRefs = ref({});
-const setParticipantRef = (shopId, el) => {
-  if (el) {
-    participantRefs.value[shopId] = el;
-  }
-};
-
-// 좌우 스크롤 함수
-const scrollParticipants = (shopId, direction) => {
-  const container = participantRefs.value[shopId];
-  if (container) {
-    const scrollAmount = 74; // 한 번에 스크롤할 픽셀
-    const newScrollLeft =
-      container.scrollLeft +
-      (direction === "left" ? -scrollAmount : scrollAmount);
-    container.scrollTo({
-      left: newScrollLeft,
-      behavior: "smooth",
-    });
-  }
-};
-
-// 스크롤 위치 확인
-const canScrollLeft = (shopId) => {
-  const container = participantRefs.value[shopId];
-  return container && container.scrollLeft > 0;
-};
-
-const canScrollRight = (shopId) => {
-  const container = participantRefs.value[shopId];
-  if (!container) return false;
-
-  const epsilon = 1;
-  return (
-    container &&
-    container.scrollLeft <
-      container.scrollWidth - container.clientWidth - epsilon
-  );
 };
 </script>
 
@@ -234,111 +192,66 @@ const canScrollRight = (shopId) => {
             참여작가
           </h3>
 
-          <!-- 참여작가 컨테이너 (5명 이상일 때 스크롤) -->
-          <div class="relative flex items-center justify-center">
-            <!-- 좌측 스크롤 버튼 -->
-            <button
-              v-if="
-                shop.participants &&
-                shop.participants.length >= 5 &&
-                canScrollLeft(shop.id)
-              "
-              @click.stop="scrollParticipants(shop.id, 'left')"
-              class="absolute no-background left-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center p-0 focus:outline-none hover:border-none focus:ring-0"
+          <!-- Swiper를 사용한 참여작가 목록 -->
+          <div
+            v-if="shop.participants && shop.participants.length > 0"
+            :class="shop.participants.length > 4 ? 'px-8' : ''"
+          >
+            <Swiper
+              :items="shop.participants"
+              :multiple="true"
+              :slidesPerView="4"
+              :spaceBetween="8"
+              :show-pagination="false"
+              :showNavigation="shop.participants.length > 4"
             >
-              <IcArrowLeft />
-            </button>
-
-            <div class="w-[calc(100%-52px)]">
-              <!-- 참여작가 목록 -->
-              <div class="flex items-center justify-center">
+              <template #default="{ item: participant }">
                 <div
-                  :ref="(el) => setParticipantRef(shop.id, el)"
-                  :class="
-                    shop.participants && shop.participants.length >= 5
-                      ? 'flex items-center  gap-2 overflow-x-auto scrollbar-hide px-0'
-                      : 'flex items-center justify-center gap-auto'
-                  "
-                  @scroll="$forceUpdate()"
+                  class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+                  @click.stop="handleParticipantClick(participant)"
                 >
+                  <!-- 작가 아바타 -->
                   <div
-                    v-for="participant in shop.participants"
-                    :key="participant.id"
-                    class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0"
-                    @click.stop="handleParticipantClick(participant)"
+                    class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
                   >
-                    <!-- 작가 아바타 -->
-                    <div
-                      class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
-                    >
-                      <template v-if="participant.avatar">
-                        <img
-                          :src="participant.avatar"
-                          :alt="participant.name"
-                          class="w-full h-full object-cover"
-                        />
-                      </template>
-                      <template v-else>
-                        <div
-                          class="w-full h-full flex items-center justify-center"
+                    <template v-if="participant.avatar">
+                      <img
+                        :src="participant.avatar"
+                        :alt="participant.name"
+                        class="w-full h-full object-cover"
+                      />
+                    </template>
+                    <template v-else>
+                      <div
+                        class="w-full h-full flex items-center justify-center"
+                      >
+                        <!-- 기본 아바타 아이콘 -->
+                        <svg
+                          class="w-8 h-8 text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
                         >
-                          <!-- 기본 아바타 아이콘 -->
-                          <svg
-                            class="w-8 h-8 text-gray-400"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      </template>
-                    </div>
-
-                    <!-- 작가 이름 -->
-                    <span
-                      class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center"
-                      >{{ participant.name }}</span
-                    >
+                          <path
+                            fill-rule="evenodd"
+                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </template>
                   </div>
-                </div>
-              </div>
-            </div>
 
-            <!-- 우측 스크롤 버튼 -->
-            <button
-              v-if="
-                shop.participants &&
-                shop.participants.length >= 5 &&
-                canScrollRight(shop.id)
-              "
-              @click.stop="scrollParticipants(shop.id, 'right')"
-              class="absolute no-background right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center p-0 -right-5 focus:outline-none hover:border-none focus:ring-0"
-            >
-              <IcArrowRight />
-            </button>
+                  <!-- 작가 이름 -->
+                  <span
+                    class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center"
+                    >{{ participant.name }}</span
+                  >
+                </div>
+              </template>
+            </Swiper>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-/* 스크롤바 숨기기 */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.no-background {
-  background: none;
-}
-</style>

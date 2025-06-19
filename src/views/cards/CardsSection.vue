@@ -84,10 +84,10 @@ const handleParticipantClick = (participant) => {
 
         <h3 class="text-lg font-semibold mb-2">사용 예시</h3>
         <div class="bg-gray-100 p-3 rounded text-sm font-mono">
-          &lt;AdminCreateCards<br />
-          &nbsp;&nbsp;:shops="adminCardsData"<br />
-          &nbsp;&nbsp;@shop-click="handleShopClick"<br />
-          &nbsp;&nbsp;@participant-click="handleParticipantClick"<br />
+          AdminCreateCards<br />
+          :shops="adminCardsData"<br />
+          @shop-click="handleShopClick"<br />
+          @participant-click="handleParticipantClick"<br />
           /&gt;
         </div>
       </div>
@@ -107,11 +107,11 @@ const handleParticipantClick = (participant) => {
 
         <h3 class="text-lg font-semibold mb-2">사용 예시</h3>
         <div class="bg-gray-100 p-3 rounded text-sm font-mono">
-          &lt;UserCreateCards<br />
-          &nbsp;&nbsp;:shops="userCardsData"<br />
-          &nbsp;&nbsp;:itemsPerRow="4"<br />
-          &nbsp;&nbsp;@shop-click="handleShopClick"<br />
-          &nbsp;&nbsp;@participant-click="handleParticipantClick"<br />
+          UserCreateCards<br />
+          :shops="userCardsData"<br />
+          :itemsPerRow="4"<br />
+          @shop-click="handleShopClick"<br />
+          @participant-click="handleParticipantClick"<br />
           /&gt;
         </div>
       </div>

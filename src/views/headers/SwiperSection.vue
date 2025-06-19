@@ -1,210 +1,347 @@
 <template>
-  <div class="swiper-examples">
-    <h1 class="text-3xl font-bold mb-8 text-gray-800">
-      Swiper Component Examples
-    </h1>
-
-    <!-- 기본 스와이퍼 -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-4 text-gray-700">기본 스와이퍼</h2>
-      <div class="h-64 bg-gray-100 rounded-lg overflow-hidden">
-        <Swiper
-          :items="basicItems"
-          :slides-per-view="1"
-          :space-between="20"
-          :show-navigation="true"
-          :show-pagination="true"
-          @slide-change="onSlideChange"
-        >
-          <template #default="{ item, index, isActive }">
-            <div
-              class="h-full flex items-center justify-center text-white text-2xl font-bold"
-              :style="{ backgroundColor: item.color }"
-            >
-              <div class="text-center">
-                <div>{{ item.title }}</div>
-                <div class="text-sm opacity-80 mt-2">{{ item.subtitle }}</div>
-              </div>
-            </div>
-          </template>
-        </Swiper>
-      </div>
-    </section>
-
-    <!-- 멀티플 슬라이드 -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-4 text-gray-700">
-        멀티플 슬라이드 (3개씩)
+  <div class="swiper-section max-w-6xl mx-auto px-6 py-8">
+    <!-- 실제 동작 예제 -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">
+        실제 동작 예제
       </h2>
-      <div class="h-48 bg-gray-100 rounded-lg overflow-hidden">
-        <Swiper
-          :items="cardItems"
-          :slides-per-view="3"
-          :space-between="16"
-          :show-navigation="true"
-          :show-pagination="true"
-        >
-          <template #default="{ item, index }">
-            <div
-              class="h-full bg-white rounded-lg shadow-md p-4 flex flex-col justify-between"
-            >
-              <div>
-                <h3 class="font-semibold text-gray-800 mb-2">
-                  {{ item.title }}
-                </h3>
-                <p class="text-gray-600 text-sm">{{ item.description }}</p>
-              </div>
-              <div class="flex items-center justify-between mt-4">
-                <span class="text-xs text-gray-500">#{{ item.id }}</span>
-                <div
-                  class="w-4 h-4 rounded-full"
-                  :style="{ backgroundColor: item.color }"
-                ></div>
-              </div>
-            </div>
-          </template>
-        </Swiper>
-      </div>
-    </section>
 
-    <!-- 자동재생 스와이퍼 -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-4 text-gray-700">
-        자동재생 스와이퍼
-      </h2>
-      <div class="h-56 bg-gray-100 rounded-lg overflow-hidden">
-        <Swiper
-          :items="autoplayItems"
-          :slides-per-view="2"
-          :space-between="24"
-          :autoplay="{ delay: 2000 }"
-          :show-navigation="true"
-          :show-pagination="true"
-          :show-scrollbar="true"
-        >
-          <template #default="{ item, index }">
-            <div
-              class="h-full rounded-lg p-6 text-white flex flex-col justify-center"
-              :style="{
-                background: `linear-gradient(135deg, ${item.color1}, ${item.color2})`,
-              }"
-            >
-              <div class="text-center">
-                <div class="text-xl font-bold mb-2">{{ item.title }}</div>
-                <div class="text-sm opacity-90">{{ item.description }}</div>
-                <div class="mt-4">
-                  <span
-                    class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs"
-                  >
-                    {{ item.tag }}
-                  </span>
+      <!-- 기본 스와이퍼 -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium text-gray-700 mb-4">기본 스와이퍼</h3>
+        <div class="h-64 bg-gray-100 rounded-lg overflow-hidden">
+          <Swiper
+            :items="basicItems"
+            :slides-per-view="1"
+            :space-between="20"
+            :show-navigation="true"
+            :show-pagination="true"
+            @slide-change="onSlideChange"
+          >
+            <template #default="{ item, index, isActive }">
+              <div
+                class="h-full flex items-center justify-center text-white text-2xl font-bold"
+                :style="{ backgroundColor: item.color }"
+              >
+                <div class="text-center">
+                  <div>{{ item.title }}</div>
+                  <div class="text-sm opacity-80 mt-2">{{ item.subtitle }}</div>
                 </div>
               </div>
-            </div>
-          </template>
-        </Swiper>
+            </template>
+          </Swiper>
+        </div>
       </div>
-    </section>
 
-    <!-- 루프 스와이퍼 -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-4 text-gray-700">
-        무한 루프 스와이퍼
-      </h2>
-      <div class="h-40 bg-gray-100 rounded-lg overflow-hidden">
-        <Swiper
-          :items="loopItems"
-          :slides-per-view="4"
-          :space-between="12"
-          :loop="true"
-          :show-navigation="true"
-          :show-pagination="false"
-        >
-          <template #default="{ item, index }">
-            <div
-              class="h-full bg-white rounded-lg shadow-sm flex items-center justify-center"
-            >
-              <div class="text-center">
-                <div
-                  class="w-12 h-12 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold"
-                  :style="{ backgroundColor: item.color }"
-                >
-                  {{ item.icon }}
+      <!-- 멀티플 슬라이드 -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium text-gray-700 mb-4">
+          멀티플 슬라이드 (3개씩)
+        </h3>
+        <div class="h-48 bg-gray-100 rounded-lg overflow-hidden">
+          <Swiper
+            :items="cardItems"
+            :slides-per-view="3"
+            :space-between="16"
+            :show-navigation="true"
+            :show-pagination="true"
+          >
+            <template #default="{ item, index }">
+              <div
+                class="h-full bg-white rounded-lg shadow-md p-4 flex flex-col justify-between"
+              >
+                <div>
+                  <h3 class="font-semibold text-gray-800 mb-2">
+                    {{ item.title }}
+                  </h3>
+                  <p class="text-gray-600 text-sm">{{ item.description }}</p>
                 </div>
-                <div class="text-sm font-medium text-gray-700">
-                  {{ item.label }}
+                <div class="flex items-center justify-between mt-4">
+                  <span class="text-xs text-gray-500">#{{ item.id }}</span>
+                  <div
+                    class="w-4 h-4 rounded-full"
+                    :style="{ backgroundColor: item.color }"
+                  ></div>
                 </div>
               </div>
-            </div>
-          </template>
-        </Swiper>
+            </template>
+          </Swiper>
+        </div>
       </div>
-    </section>
 
-    <!-- 커스텀 버튼 스와이퍼 -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-4 text-gray-700">
-        커스텀 네비게이션 버튼
-      </h2>
-      <div class="h-52 bg-gray-100 rounded-lg overflow-hidden">
-        <Swiper
-          :items="customItems"
-          :slides-per-view="1"
-          :space-between="0"
-          :show-navigation="true"
-          :show-pagination="true"
-        >
-          <template #default="{ item, index }">
-            <div
-              class="h-full flex items-center justify-center text-white relative"
-              :style="{ backgroundColor: item.bg }"
-            >
-              <div class="text-center z-10">
-                <h3 class="text-3xl font-bold mb-2">{{ item.title }}</h3>
-                <p class="text-lg opacity-90">{{ item.subtitle }}</p>
+      <!-- 자동재생 스와이퍼 -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium text-gray-700 mb-4">
+          자동재생 스와이퍼
+        </h3>
+        <div class="h-56 bg-gray-100 rounded-lg overflow-hidden">
+          <Swiper
+            :items="autoplayItems"
+            :slides-per-view="2"
+            :space-between="24"
+            :autoplay="{ delay: 2000 }"
+            :show-navigation="true"
+            :show-pagination="true"
+          >
+            <template #default="{ item, index }">
+              <div
+                class="h-full rounded-lg p-6 text-white flex flex-col justify-center"
+                :style="{
+                  background: `linear-gradient(135deg, ${item.color1}, ${item.color2})`,
+                }"
+              >
+                <div class="text-center">
+                  <div class="text-xl font-bold mb-2">{{ item.title }}</div>
+                  <div class="text-sm opacity-90">{{ item.description }}</div>
+                  <div class="mt-4">
+                    <span
+                      class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs"
+                    >
+                      {{ item.tag }}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <!-- 배경 패턴 -->
-              <div class="absolute inset-0 opacity-10 bg-dots"></div>
-            </div>
-          </template>
-
-          <!-- 커스텀 이전 버튼 -->
-          <template #prev-button>
-            <div
-              class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center"
-            >
-              ‹
-            </div>
-          </template>
-
-          <!-- 커스텀 다음 버튼 -->
-          <template #next-button>
-            <div
-              class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center"
-            >
-              ›
-            </div>
-          </template>
-
-          <!-- 커스텀 페이지네이션 -->
-          <template #pagination-bullet="{ index, isActive }">
-            <div
-              class="w-3 h-3 rounded-full transition-all duration-300"
-              :class="
-                isActive ? 'bg-blue-500 scale-125' : 'bg-white bg-opacity-50'
-              "
-            ></div>
-          </template>
-        </Swiper>
+            </template>
+          </Swiper>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 현재 슬라이드 정보 -->
-    <div class="mt-8 p-4 bg-gray-50 rounded-lg">
-      <h3 class="font-semibold mb-2">현재 슬라이드 정보:</h3>
-      <p class="text-sm text-gray-600">
-        마지막 변경된 슬라이드: {{ lastSlideIndex }}, 시간: {{ lastSlideTime }}
-      </p>
+    <!-- 컴포넌트 정보 헤더 -->
+    <div class="text-center mb-12 bg-white rounded-lg shadow-lg p-6">
+      <h1 class="text-3xl font-bold text-gray-800 mb-6">Swiper 정보</h1>
+
+      <h2 class="text-2xl font-semibold text-gray-700 mb-6">특징</h2>
+      <div class="max-w-3xl mx-auto text-left">
+        <ul class="space-y-3 text-gray-600">
+          <li class="flex items-start">
+            <span
+              class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"
+            ></span>
+            Vue 3 Composition API 기반 (최신 Vue 문법으로 구현)
+          </li>
+          <li class="flex items-start">
+            <span
+              class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"
+            ></span>
+            터치/드래그 지원 및 반응형 디자인
+          </li>
+          <li class="flex items-start">
+            <span
+              class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"
+            ></span>
+            자동재생, 무한루프, 커스텀 네비게이션 지원
+          </li>
+          <li class="flex items-start">
+            <span
+              class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"
+            ></span>
+            슬롯을 통한 완전한 UI 커스터마이징
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 사용 예시 -->
+    <div class="text-center mb-12 bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-6">사용 예시</h2>
+      <div class="bg-gray-100 rounded-lg p-6 text-left">
+        <pre class="text-sm text-gray-800 overflow-x-auto">
+          Swiper
+            :items="items"
+            :slides-per-view="3"
+            :space-between="20"
+            :autoplay="{ delay: 3000 }"
+            :show-navigation="true"
+            :show-pagination="true"
+            @slide-change="handleSlideChange"
+          
+            template #default="{ item, index, isActive }"
+              div class="slide-content"
+                <span> &#123;&#123; item.title &#125;&#125;</span>
+              /div
+            /template
+          /Swiper
+          </pre>
+      </div>
+    </div>
+
+    <!-- Props 테이블 -->
+    <div class="text-center mb-12 bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-6">Props</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-50">
+              <th
+                class="border border-gray-300 px-4 py-3 text-left font-medium text-gray-700"
+              >
+                Prop
+              </th>
+              <th
+                class="border border-gray-300 px-4 py-3 text-left font-medium text-gray-700"
+              >
+                Type
+              </th>
+              <th
+                class="border border-gray-300 px-4 py-3 text-left font-medium text-gray-700"
+              >
+                Default
+              </th>
+              <th
+                class="border border-gray-300 px-4 py-3 text-left font-medium text-gray-700"
+              >
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                items
+              </td>
+              <td class="border border-gray-300 px-4 py-3">Array</td>
+              <td class="border border-gray-300 px-4 py-3">[]</td>
+              <td class="border border-gray-300 px-4 py-3">
+                스와이퍼에 표시할 아이템 배열
+              </td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                slidesPerView
+              </td>
+              <td class="border border-gray-300 px-4 py-3">Number</td>
+              <td class="border border-gray-300 px-4 py-3">1</td>
+              <td class="border border-gray-300 px-4 py-3">
+                화면에 표시할 슬라이드 개수
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                spaceBetween
+              </td>
+              <td class="border border-gray-300 px-4 py-3">Number</td>
+              <td class="border border-gray-300 px-4 py-3">0</td>
+              <td class="border border-gray-300 px-4 py-3">
+                슬라이드 간 간격(px)
+              </td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                autoplay
+              </td>
+              <td class="border border-gray-300 px-4 py-3">Object | Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">false</td>
+              <td class="border border-gray-300 px-4 py-3">
+                자동재생 설정 ({ delay: 3000 })
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                loop
+              </td>
+              <td class="border border-gray-300 px-4 py-3">Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">false</td>
+              <td class="border border-gray-300 px-4 py-3">무한 루프 활성화</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                showNavigation
+              </td>
+              <td class="border border-gray-300 px-4 py-3">Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">false</td>
+              <td class="border border-gray-300 px-4 py-3">
+                네비게이션 버튼 표시
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                showPagination
+              </td>
+              <td class="border border-gray-300 px-4 py-3">Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">false</td>
+              <td class="border border-gray-300 px-4 py-3">
+                페이지네이션 표시
+              </td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                showScrollbar
+              </td>
+              <td class="border border-gray-300 px-4 py-3">Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">false</td>
+              <td class="border border-gray-300 px-4 py-3">스크롤바 표시</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Events 테이블 -->
+    <div class="text-center mb-12 bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-6">Events</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-50">
+              <th
+                class="border border-gray-300 px-4 py-3 text-left font-medium text-gray-700"
+              >
+                Event
+              </th>
+              <th
+                class="border border-gray-300 px-4 py-3 text-left font-medium text-gray-700"
+              >
+                Payload
+              </th>
+              <th
+                class="border border-gray-300 px-4 py-3 text-left font-medium text-gray-700"
+              >
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                @slide-change
+              </td>
+              <td class="border border-gray-300 px-4 py-3">{ index, item }</td>
+              <td class="border border-gray-300 px-4 py-3">
+                슬라이드 변경 시 발생
+              </td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                @swiper-init
+              </td>
+              <td class="border border-gray-300 px-4 py-3">swiper instance</td>
+              <td class="border border-gray-300 px-4 py-3">
+                스와이퍼 초기화 완료 시 발생
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                @transition-start
+              </td>
+              <td class="border border-gray-300 px-4 py-3">{ index }</td>
+              <td class="border border-gray-300 px-4 py-3">
+                슬라이드 전환 시작 시 발생
+              </td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
+                @transition-end
+              </td>
+              <td class="border border-gray-300 px-4 py-3">{ index }</td>
+              <td class="border border-gray-300 px-4 py-3">
+                슬라이드 전환 완료 시 발생
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

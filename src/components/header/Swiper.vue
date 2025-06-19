@@ -1,16 +1,16 @@
 <template>
   <div class="swiper-container" ref="swiperContainer">
     <!-- 이전 버튼 -->
-    <button v-if="showNavigation" @click="slideToPrev">
-      <IcArrowLeft
-        class="swiper-button-prev"
-        :class="{
-          'swiper-button-disabled': currentIndex === 0,
-          'swiper-button-hidden': !showPrevButton,
-        }"
-        :disabled="currentIndex === 0"
-      />
-    </button>
+    <IcArrowLeft
+      v-if="showNavigation"
+      @click="slideToPrev"
+      :disabled="currentIndex === 0"
+      class="swiper-button-prev"
+      :class="{
+        'swiper-button-disabled': currentIndex === 0,
+        'swiper-button-hidden': !showPrevButton,
+      }"
+    />
 
     <!-- 스와이퍼 래퍼 -->
     <div
@@ -43,16 +43,16 @@
     </div>
 
     <!-- 다음 버튼 -->
-    <button v-if="showNavigation" @click="slideToNext">
-      <IcArrowRight
-        class="swiper-button-next"
-        :class="{
-          'swiper-button-disabled': currentIndex === maxIndex,
-          'swiper-button-hidden': !showNextButton,
-        }"
-        :disabled="currentIndex === maxIndex"
-      />
-    </button>
+    <IcArrowRight
+      v-if="showNavigation"
+      @click="slideToNext"
+      :disabled="currentIndex === maxIndex"
+      class="swiper-button-next"
+      :class="{
+        'swiper-button-disabled': currentIndex === maxIndex,
+        'swiper-button-hidden': !showNextButton,
+      }"
+    />
 
     <!-- 페이지네이션 -->
     <div

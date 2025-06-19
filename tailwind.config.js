@@ -5,6 +5,13 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
     "./src/components/**/*.{vue,js,ts}", // 컴포넌트 경로 명시
   ],
+  // 전역 스타일 비활성화 (라이브러리용)
+  corePlugins: {
+    preflight: false, // Tailwind의 전역 리셋 스타일 비활성화
+    container: false, // container 클래스 비활성화 (전역 충돌 방지)
+  },
+  // 모든 클래스에 prefix 추가 (선택사항)
+  // prefix: 'mmc-',
   theme: {
     extend: {
       fontFamily: {

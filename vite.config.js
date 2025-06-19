@@ -14,8 +14,8 @@ export default defineConfig(({ mode }) => {
         vue(),
         dts({
           insertTypesEntry: true,
-          include: ["src/index.ts", "src/components/**/*.vue"],
-          exclude: ["src/main.js", "src/router/**/*", "src/views/**/*"],
+          include: ["src/index.ts"],
+          exclude: ["src/components/**/*"],
         }),
       ],
       css: {

@@ -1,26 +1,33 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 import IcArrowLeft from "../ElementIcons/IcArrowLeft.vue";
 import IcArrowRight from "../ElementIcons/IcArrowRight.vue";
+import type {
+  Shop,
+  Participant,
+  BadgeColor,
+  ScrollDirection,
+} from "../../types/index";
 
 // Props 정의
-const props = defineProps({
-  shops: {
-    type: Array,
-    default: () => [],
-  },
-  itemsPerRow: {
-    type: Number,
-    default: 3,
-  },
-  maxItems: {
-    type: Number,
-    default: 6,
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    shops?: Shop[];
+    itemsPerRow?: number;
+    maxItems?: number;
+  }>(),
+  {
+    shops: () => [],
+    itemsPerRow: 3,
+    maxItems: 6,
+  }
+);
 
 // Emits 정의
-const emit = defineEmits(["shop-click", "participant-click"]);
+const emit = defineEmits<{
+  "shop-click": [shop: Shop];
+  "participant-click": [participant: Participant];
+}>();
 
 // 이미지 에러 상태 관리
 const imageErrors = ref(new Set());

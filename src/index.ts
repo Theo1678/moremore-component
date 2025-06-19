@@ -5,6 +5,10 @@ import TabGroup from "./components/Tabs/TabGroup.vue";
 import Swiper from "./components/header/Swiper.vue";
 import type { App } from "vue";
 
+// 타입 imports & exports
+export type * from "./types/index";
+export type * from "./types/components";
+
 // 스타일 import
 import "./style.css";
 

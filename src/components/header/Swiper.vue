@@ -86,109 +86,95 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import IcArrowLeft from "../ElementIcons/IcArrowLeft.vue";
 import IcArrowRight from "../ElementIcons/IcArrowRight.vue";
+import type { SwiperItem, AutoplayOptions } from "../../types/index";
 
 // Props 정의
-const props = defineProps({
-  // 데이터
-  items: {
-    type: Array,
-    default: () => [],
-  },
+const props = withDefaults(
+  defineProps<{
+    // 데이터
+    items?: SwiperItem[];
 
-  // 슬라이드 설정
-  slidesPerView: {
-    type: [Number, String],
-    default: 1,
-  },
-  spaceBetween: {
-    type: Number,
-    default: 0,
-  },
-  centeredSlides: {
-    type: Boolean,
-    default: false,
-  },
-  loop: {
-    type: Boolean,
-    default: false,
-  },
+    // 슬라이드 설정
+    slidesPerView?: number;
+    spaceBetween?: number;
+    centeredSlides?: boolean;
+    loop?: boolean;
 
-  // 네비게이션
-  showNavigation: {
-    type: Boolean,
-    default: true,
-  },
-  showPagination: {
-    type: Boolean,
-    default: true,
-  },
-  showScrollbar: {
-    type: Boolean,
-    default: false,
-  },
+    // 네비게이션
+    showNavigation?: boolean;
+    showPagination?: boolean;
+    showScrollbar?: boolean;
 
-  // 자동재생
-  autoplay: {
-    type: [Boolean, Object],
-    default: false,
-  },
+    // 자동재생
+    autoplay?: AutoplayOptions | boolean;
 
-  // 터치/드래그
-  allowTouchMove: {
-    type: Boolean,
-    default: true,
-  },
-  touchRatio: {
-    type: Number,
-    default: 1,
-  },
-  threshold: {
-    type: Number,
-    default: 10,
-  },
+    // 터치/드래그
+    allowTouchMove?: boolean;
+    touchRatio?: number;
+    threshold?: number;
 
-  // 애니메이션
-  speed: {
-    type: Number,
-    default: 300,
-  },
-  easing: {
-    type: String,
-    default: "ease-out",
-  },
+    // 애니메이션
+    speed?: number;
+    easing?: string;
 
-  // 기타
-  initialSlide: {
-    type: Number,
-    default: 0,
-  },
-  keyName: {
-    type: String,
-    default: null,
-  },
+    // 기타
+    initialSlide?: number;
+    keyName?: string | null;
 
-  // 반응형
-  breakpoints: {
-    type: Object,
-    default: () => ({}),
-  },
-});
+    // 반응형
+    breakpoints?: Record<string, any>;
+  }>(),
+  {
+    // 데이터
+    items: () => [],
+
+    // 슬라이드 설정
+    slidesPerView: 1,
+    spaceBetween: 0,
+    centeredSlides: false,
+    loop: false,
+
+    // 네비게이션
+    showNavigation: true,
+    showPagination: true,
+    showScrollbar: false,
+
+    // 자동재생
+    autoplay: false,
+
+    // 터치/드래그
+    allowTouchMove: true,
+    touchRatio: 1,
+    threshold: 10,
+
+    // 애니메이션
+    speed: 300,
+    easing: "ease-out",
+
+    // 기타
+    initialSlide: 0,
+    keyName: null,
+
+    // 반응형
+    breakpoints: () => ({}),
+  }
+);
 
 // Emits 정의
-const emit = defineEmits([
-  "slideChange",
-  "reachBeginning",
-  "reachEnd",
-  "touchStart",
-  "touchMove",
-  "touchEnd",
-  "transitionStart",
-  "transitionEnd",
-]);
+const emit = defineEmits<{
+  slideChange: [payload: { index: number; item: SwiperItem }];
+  reachBeginning: [];
+  reachEnd: [];
+  touchStart: [event: TouchEvent | MouseEvent];
+  touchMove: [event: TouchEvent | MouseEvent];
+  touchEnd: [event: TouchEvent | MouseEvent];
+  transitionStart: [payload: { index: number }];
+  transitionEnd: [payload: { index: number }];
+}>();
 
 // Refs
 const swiperContainer = ref(null);
@@ -238,8 +224,8 @@ const slideWidth = computed(() => {
 });
 
 const swiperStyles = computed(() => ({
-  overflow: "hidden",
-  position: "relative",
+  overflow: "hidden" as const,
+  position: "relative" as const,
 }));
 
 const trackStyles = computed(() => {
@@ -305,14 +291,14 @@ const slideTo = (index, speed = props.speed) => {
   if (targetIndex === currentIndex.value) return;
 
   isTransitioning.value = true;
-  emit("transitionStart", targetIndex, currentIndex.value);
+  emit("transitionStart", { index: targetIndex });
 
   currentIndex.value = targetIndex;
 
   setTimeout(() => {
     isTransitioning.value = false;
-    emit("transitionEnd", targetIndex);
-    emit("slideChange", targetIndex);
+    emit("transitionEnd", { index: targetIndex });
+    emit("slideChange", { index: targetIndex, item: props.items[targetIndex] });
 
     if (targetIndex === 0) emit("reachBeginning");
     if (targetIndex === maxIndex.value) emit("reachEnd");

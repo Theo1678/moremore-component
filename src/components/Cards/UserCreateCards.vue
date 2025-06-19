@@ -1,24 +1,26 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
+import type { Shop, Participant, BadgeColor } from "../../types/index";
 
 // Props 정의
-const props = defineProps({
-  shops: {
-    type: Array,
-    default: () => [],
-  },
-  itemsPerRow: {
-    type: Number,
-    default: 4,
-  },
-  maxItems: {
-    type: Number,
-    default: 8,
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    shops?: Shop[];
+    itemsPerRow?: number;
+    maxItems?: number;
+  }>(),
+  {
+    shops: () => [],
+    itemsPerRow: 4,
+    maxItems: 8,
+  }
+);
 
 // Emits 정의
-const emit = defineEmits(["shop-click", "participant-click"]);
+const emit = defineEmits<{
+  "shop-click": [shop: Shop];
+  "participant-click": [participant: Participant];
+}>();
 
 // 모달 상태 관리
 const isModalOpen = ref(false);

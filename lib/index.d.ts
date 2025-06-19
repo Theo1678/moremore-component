@@ -3,6 +3,8 @@ import { default as UserCreateCards } from './components/Cards/UserCreateCards.v
 import { default as TabGroup } from './components/Tabs/TabGroup.vue';
 import { default as Swiper } from './components/header/Swiper.vue';
 import { App } from 'vue';
+export type * from './types/index';
+export type * from './types/components';
 export { AdminCreateCards, UserCreateCards, TabGroup, Swiper };
 export interface MoremoreComponentOptions {
     prefix?: string;

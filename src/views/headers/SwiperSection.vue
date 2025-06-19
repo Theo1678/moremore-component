@@ -1,3 +1,113 @@
+<script setup>
+import { ref } from "vue";
+import Swiper from "../../components/header/Swiper.vue";
+
+// 슬라이드 변경 추적
+const lastSlideIndex = ref(0);
+const lastSlideTime = ref(new Date().toLocaleTimeString());
+
+const onSlideChange = (index) => {
+  lastSlideIndex.value = index;
+  lastSlideTime.value = new Date().toLocaleTimeString();
+};
+
+// 기본 스와이퍼 데이터
+const basicItems = ref([
+  {
+    title: "첫 번째 슬라이드",
+    subtitle: "기본 스와이퍼 예제",
+    color: "#3B82F6",
+  },
+  {
+    title: "두 번째 슬라이드",
+    subtitle: "터치/드래그 지원",
+    color: "#10B981",
+  },
+  {
+    title: "세 번째 슬라이드",
+    subtitle: "반응형 디자인",
+    color: "#F59E0B",
+  },
+  {
+    title: "네 번째 슬라이드",
+    subtitle: "커스터마이징 가능",
+    color: "#EF4444",
+  },
+]);
+
+// 카드 아이템 데이터
+const cardItems = ref([
+  {
+    id: 1,
+    title: "Vue 3 컴포넌트",
+    description: "최신 Vue 3 Composition API를 사용한 현대적인 컴포넌트",
+    color: "#4ADE80",
+  },
+  {
+    id: 2,
+    title: "TypeScript 지원",
+    description: "완전한 타입 안전성과 개발자 경험 제공",
+    color: "#3B82F6",
+  },
+  {
+    id: 3,
+    title: "반응형 디자인",
+    description: "모든 디바이스에서 완벽하게 작동하는 반응형 레이아웃",
+    color: "#F59E0B",
+  },
+  {
+    id: 4,
+    title: "터치 지원",
+    description: "모바일 디바이스에서 자연스러운 터치 제스처 지원",
+    color: "#EF4444",
+  },
+  {
+    id: 5,
+    title: "커스터마이징",
+    description: "슬롯을 통한 완전한 UI 커스터마이징 가능",
+    color: "#8B5CF6",
+  },
+  {
+    id: 6,
+    title: "접근성",
+    description: "스크린 리더와 키보드 네비게이션 완전 지원",
+    color: "#06B6D4",
+  },
+]);
+
+// 자동재생 아이템 데이터
+const autoplayItems = ref([
+  {
+    title: "자동 재생",
+    description: "설정된 시간마다 자동으로 다음 슬라이드로 이동합니다",
+    tag: "자동화",
+    color1: "#667eea",
+    color2: "#764ba2",
+  },
+  {
+    title: "일시 정지",
+    description: "마우스 호버시 자동 재생이 일시 정지됩니다",
+    tag: "상호작용",
+    color1: "#f093fb",
+    color2: "#f5576c",
+  },
+  {
+    title: "루프 재생",
+    description: "마지막 슬라이드 후 첫 번째 슬라이드로 돌아갑니다",
+    tag: "무한반복",
+    color1: "#4facfe",
+    color2: "#00f2fe",
+  },
+  {
+    title: "진행 표시",
+    description: "스크롤바로 현재 진행 상황을 확인할 수 있습니다",
+    tag: "진행률",
+    color1: "#43e97b",
+    color2: "#38f9d7",
+  },
+]);
+</script>
+
 <template>
   <div class="swiper-section max-w-6xl mx-auto px-6 py-8">
     <!-- 실제 동작 예제 -->
@@ -345,147 +455,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import Swiper from "../../components/header/Swiper.vue";
-
-// 슬라이드 변경 추적
-const lastSlideIndex = ref(0);
-const lastSlideTime = ref(new Date().toLocaleTimeString());
-
-const onSlideChange = (index) => {
-  lastSlideIndex.value = index;
-  lastSlideTime.value = new Date().toLocaleTimeString();
-};
-
-// 기본 스와이퍼 데이터
-const basicItems = ref([
-  {
-    title: "첫 번째 슬라이드",
-    subtitle: "기본 스와이퍼 예제",
-    color: "#3B82F6",
-  },
-  {
-    title: "두 번째 슬라이드",
-    subtitle: "터치/드래그 지원",
-    color: "#10B981",
-  },
-  {
-    title: "세 번째 슬라이드",
-    subtitle: "반응형 디자인",
-    color: "#F59E0B",
-  },
-  {
-    title: "네 번째 슬라이드",
-    subtitle: "커스터마이징 가능",
-    color: "#EF4444",
-  },
-]);
-
-// 카드 아이템 데이터
-const cardItems = ref([
-  {
-    id: 1,
-    title: "Vue 3 컴포넌트",
-    description: "최신 Vue 3 Composition API를 사용한 현대적인 컴포넌트",
-    color: "#4ADE80",
-  },
-  {
-    id: 2,
-    title: "TypeScript 지원",
-    description: "완전한 타입 안전성과 개발자 경험 제공",
-    color: "#3B82F6",
-  },
-  {
-    id: 3,
-    title: "반응형 디자인",
-    description: "모든 디바이스에서 완벽하게 작동하는 반응형 레이아웃",
-    color: "#F59E0B",
-  },
-  {
-    id: 4,
-    title: "터치 지원",
-    description: "모바일 디바이스에서 자연스러운 터치 제스처 지원",
-    color: "#EF4444",
-  },
-  {
-    id: 5,
-    title: "커스터마이징",
-    description: "슬롯을 통한 완전한 UI 커스터마이징 가능",
-    color: "#8B5CF6",
-  },
-  {
-    id: 6,
-    title: "접근성",
-    description: "스크린 리더와 키보드 네비게이션 완전 지원",
-    color: "#06B6D4",
-  },
-]);
-
-// 자동재생 아이템 데이터
-const autoplayItems = ref([
-  {
-    title: "자동 재생",
-    description: "설정된 시간마다 자동으로 다음 슬라이드로 이동합니다",
-    tag: "자동화",
-    color1: "#667eea",
-    color2: "#764ba2",
-  },
-  {
-    title: "일시 정지",
-    description: "마우스 호버시 자동 재생이 일시 정지됩니다",
-    tag: "상호작용",
-    color1: "#f093fb",
-    color2: "#f5576c",
-  },
-  {
-    title: "루프 재생",
-    description: "마지막 슬라이드 후 첫 번째 슬라이드로 돌아갑니다",
-    tag: "무한반복",
-    color1: "#4facfe",
-    color2: "#00f2fe",
-  },
-  {
-    title: "진행 표시",
-    description: "스크롤바로 현재 진행 상황을 확인할 수 있습니다",
-    tag: "진행률",
-    color1: "#43e97b",
-    color2: "#38f9d7",
-  },
-]);
-
-// 루프 아이템 데이터
-const loopItems = ref([
-  { icon: "🏠", label: "홈", color: "#3B82F6" },
-  { icon: "📊", label: "대시보드", color: "#10B981" },
-  { icon: "👤", label: "프로필", color: "#F59E0B" },
-  { icon: "⚙️", label: "설정", color: "#EF4444" },
-  { icon: "📱", label: "앱", color: "#8B5CF6" },
-  { icon: "🔔", label: "알림", color: "#06B6D4" },
-  { icon: "💬", label: "메시지", color: "#84CC16" },
-  { icon: "📈", label: "분석", color: "#F97316" },
-]);
-
-// 커스텀 아이템 데이터
-const customItems = ref([
-  {
-    title: "커스텀 UI",
-    subtitle: "나만의 디자인으로 꾸며보세요",
-    bg: "#1a202c",
-  },
-  {
-    title: "다양한 스타일",
-    subtitle: "무궁무진한 커스터마이징 옵션",
-    bg: "#2d3748",
-  },
-  {
-    title: "완전한 제어",
-    subtitle: "모든 요소를 원하는 대로 변경 가능",
-    bg: "#4a5568",
-  },
-]);
-</script>
 
 <style scoped>
 .swiper-examples {

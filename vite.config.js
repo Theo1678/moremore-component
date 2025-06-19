@@ -3,13 +3,21 @@ import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
+import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   if (mode === "lib") {
     // 라이브러리 빌드 설정
     return {
-      plugins: [vue()],
+      plugins: [
+        vue(),
+        dts({
+          insertTypesEntry: true,
+          include: ["src/index.ts", "src/components/**/*.vue"],
+          exclude: ["src/main.js", "src/router/**/*", "src/views/**/*"],
+        }),
+      ],
       css: {
         postcss: {
           plugins: [tailwindcss, autoprefixer],
@@ -18,7 +26,7 @@ export default defineConfig(({ mode }) => {
       build: {
         outDir: "lib", // dist 대신 lib 폴더 사용
         lib: {
-          entry: resolve(__dirname, "src/index.js"),
+          entry: resolve(__dirname, "src/index.ts"),
           name: "MoremoreComponent",
           fileName: "moremore-component",
         },

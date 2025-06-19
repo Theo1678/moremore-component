@@ -54,6 +54,13 @@ const navigationItems = [
     hasSubItems: false,
     route: "/tabs",
   },
+  {
+    id: "swiper",
+    label: "Swiper",
+    description: "고급 스와이퍼 컴포넌트",
+    hasSubItems: false,
+    route: "/swiper",
+  },
 ];
 
 // 사이드바 토글 함수

@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import CardsSection from "../views/cards/CardsSection.vue";
 import TabsSection from "../views/tabs/TabsSection.vue";
+import SwiperSection from "../views/headers/SwiperSection.vue";
 
 const routes = [
   {
     path: "/",
-    redirect: "/cards/admin-cards",
+    redirect: "/swiper",
   },
   {
     path: "/cards",
@@ -27,6 +28,11 @@ const routes = [
     path: "/tabs",
     name: "Tabs",
     component: TabsSection,
+  },
+  {
+    path: "/swiper",
+    name: "Swiper",
+    component: SwiperSection,
   },
 ];
 

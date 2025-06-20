@@ -58,12 +58,12 @@ const getBadgeClasses = (badgeColor) => {
 
   switch (badgeColor) {
     case "blue":
-      return `${baseClasses} bg-blue-100 text-blue-800`;
+      return `${baseClasses} bg-blue-100`;
     case "yellow":
-      return `${baseClasses} bg-yellow-100 text-yellow-800`;
+      return `${baseClasses} bg-yellow-100`;
     case "gray":
     default:
-      return `${baseClasses} bg-gray-100 text-gray-800`;
+      return `${baseClasses} bg-gray-100`;
   }
 };
 
@@ -158,34 +158,37 @@ const gridColsClass = computed(() => {
         <div class="p-3 text-left">
           <!-- 배지 -->
           <div v-if="shop.badge" class="mb-2">
-            <div :class="getBadgeClasses(shop.badgeColor)">
+            <div
+              :class="getBadgeClasses(shop.badgeColor)"
+              class="text-[#303040]"
+            >
               <div :class="getBadgeDotClasses(shop.badgeColor)"></div>
               {{ shop.badge }}
             </div>
           </div>
 
           <!-- 제목 -->
-          <h3 class="text-sm font-bold text-gray-900 mb-2 line-clamp-1">
+          <h3 class="text-sm font-bold text-[#060608] mb-2 line-clamp-1">
             {{ shop.title }}
           </h3>
 
           <!-- 설명 -->
           <p
             v-if="shop.description"
-            class="text-xs text-gray-600 mb-3 line-clamp-3"
+            class="text-xs text-[#778196] mb-3 line-clamp-3"
           >
             {{ shop.description }}
           </p>
 
-          <!-- 기간 -->
-          <p v-if="shop.period" class="text-xs mb-3">
+          <!-- 모집기간 -->
+          <p v-if="shop.period" class="text-xs mb-3 text-[#778196]">
             {{ shop.period }}
           </p>
 
           <!-- 해시태그 -->
           <p
             v-if="shop.hashtags"
-            class="text-xs text-blue-500 mb-3 line-clamp-2"
+            class="text-xs text-[#3182F4] mb-3 line-clamp-2"
           >
             {{ shop.hashtags }}
           </p>
@@ -230,7 +233,7 @@ const gridColsClass = computed(() => {
               </div>
 
               <!-- 작가 이름 -->
-              <span class="text-xs text-black-700 truncate">
+              <span class="text-xs text-[#060608] truncate">
                 {{ participant.name }}
               </span>
             </div>

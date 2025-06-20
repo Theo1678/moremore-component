@@ -46,9 +46,9 @@ const handleTabClick = (tab) => {
 const getTabClasses = (tab) => {
   const isActive = activeTab.value === tab.id;
   const baseClasses =
-    "flex items-center justify-center focus:outline-none hover:border-gray-400 border bg-white border-gray-300 hover:bg-gray-50";
+    "flex items-center justify-center focus:outline-none hover:border-[#F66D96] border-2";
   if (isActive) {
-    return `${baseClasses} bg-[#FFE8F0] border-[#F66D96] border-2 hover:border-red-400 hover:bg-pink-600`;
+    return `${baseClasses} bg-[#FFE8F0] border-[#F66D96]`;
   } else {
     return `${baseClasses}`;
   }
@@ -71,7 +71,7 @@ watch(
   () => props.modelValue,
   (newValue) => {
     activeTab.value = newValue;
-  },
+  }
 );
 </script>
 
@@ -82,7 +82,6 @@ watch(
         v-for="tab in tabs"
         :key="tab.id"
         :class="getTabClasses(tab)"
-        class="button"
         @click="handleTabClick(tab)"
         type="button"
       >
@@ -96,10 +95,4 @@ watch(
 
 <style scoped>
 /* 기존 스크롤바 숨기기 스타일은 더 이상 필요하지 않으므로 제거 */
-.active-button:hover {
-  /* border-color:  @TODO 수정예정 */
-}
-.button:focus {
-  outline: none;
-}
 </style>

@@ -28,6 +28,8 @@
   />
   <IcLayer v-else-if="elementIcon === 'IcLayer'" :color="color" />
   <IcCta v-else-if="elementIcon === 'IcCta'" :color="color" />
+  <IcSearch v-else-if="elementIcon === 'IcSearch'" :color="color" />
+  <IcClose v-else-if="elementIcon === 'IcClose'" :color="color" />
 </template>
 
 <script setup lang="ts">
@@ -58,6 +60,8 @@ import {
   IcLoadingPrimary,
   IcLayer,
   IcCta,
+  IcSearch,
+  IcClose,
 } from ".";
 
 defineProps<{

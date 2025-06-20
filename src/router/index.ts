@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import CardsSection from "../views/cards/CardsSection.vue";
 import TabsSection from "../views/tabs/TabsSection.vue";
 import SwiperSection from "../views/headers/SwiperSection.vue";
+import ElementIconsSection from "../views/icons/ElementIconsSection.vue";
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
     path: "/swiper",
     name: "Swiper",
     component: SwiperSection,
+  },
+  {
+    path: "/icons",
+    name: "ElementIcons",
+    component: ElementIconsSection,
   },
 ];
 

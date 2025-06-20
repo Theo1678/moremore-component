@@ -23,6 +23,8 @@ export { default as IcCancleFill } from "./IcCancleFill.vue";
 export { default as IcChecked } from "./IcChecked.vue";
 export { default as IcSparkle } from "./IcSparkle.vue";
 export { default as IcPreview } from "./IcPreview.vue";
+export { default as IcSearch } from "./IcSearch.vue";
+export { default as IcClose } from "./IcClose.vue";
 export { default as IcLoadingPrimary } from "./IcLoadingPrimary.vue";
 export { default as IcLayer } from "./IcLayer.vue";
 export { default as IcCta } from "./IcCta.vue";

@@ -15,6 +15,8 @@ const selectedCategory = computed(() => {
   const path = route.path;
   if (path.startsWith("/cards")) return "cards";
   if (path.startsWith("/tabs")) return "tabs";
+  if (path.startsWith("/swiper")) return "swiper";
+  if (path.startsWith("/icons")) return "icons";
   return "";
 });
 
@@ -60,6 +62,13 @@ const navigationItems = [
     description: "고급 스와이퍼 컴포넌트",
     hasSubItems: false,
     route: "/swiper",
+  },
+  {
+    id: "icons",
+    label: "ElementIcons",
+    description: "SVG 아이콘 컴포넌트 모음",
+    hasSubItems: false,
+    route: "/icons",
   },
 ];
 

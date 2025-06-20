@@ -34,6 +34,8 @@ import {
   IcLoadingPrimary,
   IcLayer,
   IcCta,
+  IcSearch,
+  IcClose,
 } from "./components/ElementIcons/index";
 
 import type { App } from "vue";
@@ -77,6 +79,8 @@ export {
   IcPreview,
   IcLoadingPrimary,
   IcLayer,
+  IcSearch,
+  IcClose,
   IcCta,
 };
 
@@ -113,6 +117,8 @@ const components = [
   IcPreview,
   IcLoadingPrimary,
   IcLayer,
+  IcSearch,
+  IcClose,
   IcCta,
 ];
 

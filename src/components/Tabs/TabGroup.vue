@@ -49,7 +49,7 @@ const getTabClasses = (tab) => {
     "flex items-center justify-center px-3 py-3 rounded-xl border transition-all duration-200 cursor-pointer";
 
   if (isActive) {
-    return `${baseClasses} bg-pink-100 border-pink-400 border-2`;
+    return `${baseClasses} bg-[#FFE8F0] border-[#F66D96] border-2 active-button`;
   } else {
     return `${baseClasses} bg-white border-gray-300 border hover:border-gray-400 hover:bg-gray-50`;
   }
@@ -61,7 +61,7 @@ const getTabTextClasses = (tab) => {
   const baseClasses = "text-sm font-bold text-center whitespace-nowrap";
 
   if (isActive) {
-    return `${baseClasses} text-pink-500`;
+    return `${baseClasses} text-[#F66D96]`;
   } else {
     return `${baseClasses} text-gray-700`;
   }
@@ -83,6 +83,7 @@ watch(
         v-for="tab in tabs"
         :key="tab.id"
         :class="getTabClasses(tab)"
+        class="button"
         @click="handleTabClick(tab)"
         type="button"
       >
@@ -96,4 +97,10 @@ watch(
 
 <style scoped>
 /* 기존 스크롤바 숨기기 스타일은 더 이상 필요하지 않으므로 제거 */
+.active-button:hover {
+  /* border-color:  @TODO 수정예정 */
+}
+.button:focus {
+  outline: none;
+}
 </style>

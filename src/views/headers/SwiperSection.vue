@@ -258,22 +258,143 @@ const autoplayItems = ref([
       <h2 class="text-2xl font-semibold text-gray-700 mb-6">사용 예시</h2>
       <div class="bg-gray-100 rounded-lg p-6 text-left">
         <pre class="text-sm text-gray-800 overflow-x-auto">
-          Swiper
+          &lt;Swiper
             :items="items"
             :slides-per-view="3"
             :space-between="20"
             :autoplay="{ delay: 3000 }"
             :show-navigation="true"
             :show-pagination="true"
-            @slide-change="handleSlideChange"
+            @slide-change="handleSlideChange"&gt;
           
-            template #default="{ item, index, isActive }"
-              div class="slide-content"
+            &lt;template #default="{ item, index, isActive }"&gt;
+              &lt;div class="slide-content"&gt;
                 <span> &#123;&#123; item.title &#125;&#125;</span>
-              /div
-            /template
-          /Swiper
+                &lt;/div&gt;
+              &lt;/template&gt;
+            &lt;/Swiper&gt;
           </pre>
+      </div>
+    </div>
+
+    <!-- Mockup Data 예시 -->
+    <div class="text-center mb-12 bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-6">
+        Mockup Data 예시
+      </h2>
+
+      <!-- 기본 스와이퍼 데이터 -->
+      <div class="mb-6 bg-gray-100 rounded-lg p-6 text-left">
+        <h3 class="font-bold text-gray-800 mb-3">기본 스와이퍼 데이터:</h3>
+        <pre class="text-sm text-gray-800 overflow-x-auto">
+const basicItems = [
+  {
+    title: "첫 번째 슬라이드",
+    subtitle: "기본 스와이퍼 예제",
+    color: "#3B82F6",
+  },
+  {
+    title: "두 번째 슬라이드",
+    subtitle: "터치/드래그 지원",
+    color: "#10B981",
+  },
+  {
+    title: "세 번째 슬라이드",
+    subtitle: "반응형 디자인",
+    color: "#F59E0B",
+  },
+  {
+    title: "네 번째 슬라이드",
+    subtitle: "커스터마이징 가능",
+    color: "#EF4444",
+  },
+];</pre
+        >
+      </div>
+
+      <!-- 카드 아이템 데이터 -->
+      <div class="mb-6 bg-gray-100 rounded-lg p-6 text-left">
+        <h3 class="font-bold text-gray-800 mb-3">카드 아이템 데이터:</h3>
+        <pre class="text-sm text-gray-800 overflow-x-auto">
+const cardItems = [
+  {
+    id: 1,
+    title: "Vue 3 컴포넌트",
+    description: "최신 Vue 3 Composition API를 사용한 현대적인 컴포넌트",
+    color: "#4ADE80",
+  },
+  {
+    id: 2,
+    title: "TypeScript 지원",
+    description: "완전한 타입 안전성과 개발자 경험 제공",
+    color: "#3B82F6",
+  },
+  {
+    id: 3,
+    title: "반응형 디자인",
+    description: "모든 디바이스에서 완벽하게 작동하는 반응형 레이아웃",
+    color: "#F59E0B",
+  },
+];</pre
+        >
+      </div>
+
+      <!-- 자동재생 아이템 데이터 -->
+      <div class="mb-6 bg-gray-100 rounded-lg p-6 text-left">
+        <h3 class="font-bold text-gray-800 mb-3">자동재생 아이템 데이터:</h3>
+        <pre class="text-sm text-gray-800 overflow-x-auto">
+const autoplayItems = [
+  {
+    title: "자동 재생",
+    description: "설정된 시간마다 자동으로 다음 슬라이드로 이동합니다",
+    tag: "자동화",
+    color1: "#667eea",
+    color2: "#764ba2",
+  },
+  {
+    title: "일시 정지",
+    description: "마우스 호버시 자동 재생이 일시 정지됩니다",
+    tag: "상호작용",
+    color1: "#f093fb",
+    color2: "#f5576c",
+  },
+];</pre
+        >
+      </div>
+
+      <div class="mt-6 bg-blue-50 rounded-lg p-4 text-left">
+        <h3 class="font-bold text-blue-800 mb-2">TypeScript 인터페이스:</h3>
+        <pre class="text-sm text-blue-700">
+// 기본 스와이퍼 아이템
+interface BasicSwiperItem {
+  title: string;
+  subtitle: string;
+  color: string;
+}
+
+// 카드 아이템
+interface CardSwiperItem {
+  id: number;
+  title: string;
+  description: string;
+  color: string;
+}
+
+// 자동재생 아이템
+interface AutoplaySwiperItem {
+  title: string;
+  description: string;
+  tag: string;
+  color1: string;
+  color2: string;
+}
+
+// 자동재생 설정
+interface AutoplayConfig {
+  delay: number;
+  disableOnInteraction?: boolean;
+}</pre
+        >
       </div>
     </div>
 
@@ -311,7 +432,10 @@ const autoplayItems = ref([
               <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
                 items
               </td>
-              <td class="border border-gray-300 px-4 py-3">Array</td>
+              <td class="border border-gray-300 px-4 py-3">
+                Array&lt;BasicSwiperItem | CardSwiperItem |
+                AutoplaySwiperItem&gt;
+              </td>
               <td class="border border-gray-300 px-4 py-3">[]</td>
               <td class="border border-gray-300 px-4 py-3">
                 스와이퍼에 표시할 아이템 배열
@@ -321,7 +445,7 @@ const autoplayItems = ref([
               <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
                 slidesPerView
               </td>
-              <td class="border border-gray-300 px-4 py-3">Number</td>
+              <td class="border border-gray-300 px-4 py-3">number</td>
               <td class="border border-gray-300 px-4 py-3">1</td>
               <td class="border border-gray-300 px-4 py-3">
                 화면에 표시할 슬라이드 개수
@@ -331,7 +455,7 @@ const autoplayItems = ref([
               <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
                 spaceBetween
               </td>
-              <td class="border border-gray-300 px-4 py-3">Number</td>
+              <td class="border border-gray-300 px-4 py-3">number</td>
               <td class="border border-gray-300 px-4 py-3">0</td>
               <td class="border border-gray-300 px-4 py-3">
                 슬라이드 간 간격(px)
@@ -341,7 +465,9 @@ const autoplayItems = ref([
               <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
                 autoplay
               </td>
-              <td class="border border-gray-300 px-4 py-3">Object | Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">
+                { delay: number } | boolean
+              </td>
               <td class="border border-gray-300 px-4 py-3">false</td>
               <td class="border border-gray-300 px-4 py-3">
                 자동재생 설정 ({ delay: 3000 })
@@ -351,7 +477,7 @@ const autoplayItems = ref([
               <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
                 loop
               </td>
-              <td class="border border-gray-300 px-4 py-3">Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">boolean</td>
               <td class="border border-gray-300 px-4 py-3">false</td>
               <td class="border border-gray-300 px-4 py-3">무한 루프 활성화</td>
             </tr>
@@ -359,7 +485,7 @@ const autoplayItems = ref([
               <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
                 showNavigation
               </td>
-              <td class="border border-gray-300 px-4 py-3">Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">boolean</td>
               <td class="border border-gray-300 px-4 py-3">false</td>
               <td class="border border-gray-300 px-4 py-3">
                 네비게이션 버튼 표시
@@ -369,7 +495,7 @@ const autoplayItems = ref([
               <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
                 showPagination
               </td>
-              <td class="border border-gray-300 px-4 py-3">Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">boolean</td>
               <td class="border border-gray-300 px-4 py-3">false</td>
               <td class="border border-gray-300 px-4 py-3">
                 페이지네이션 표시
@@ -379,7 +505,7 @@ const autoplayItems = ref([
               <td class="border border-gray-300 px-4 py-3 font-mono text-sm">
                 showScrollbar
               </td>
-              <td class="border border-gray-300 px-4 py-3">Boolean</td>
+              <td class="border border-gray-300 px-4 py-3">boolean</td>
               <td class="border border-gray-300 px-4 py-3">false</td>
               <td class="border border-gray-300 px-4 py-3">스크롤바 표시</td>
             </tr>

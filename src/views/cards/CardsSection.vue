@@ -84,7 +84,7 @@ const handleParticipantClick = (participant) => {
 
         <h3 class="text-lg font-semibold mb-2">사용 예시</h3>
         <div class="bg-gray-100 p-3 rounded text-sm font-mono">
-          AdminCreateCards<br />
+          &lt;AdminCreateCards<br />
           :shops="adminCardsData"<br />
           @shop-click="handleShopClick"<br />
           @participant-click="handleParticipantClick"<br />
@@ -107,7 +107,7 @@ const handleParticipantClick = (participant) => {
 
         <h3 class="text-lg font-semibold mb-2">사용 예시</h3>
         <div class="bg-gray-100 p-3 rounded text-sm font-mono">
-          UserCreateCards<br />
+          &lt;UserCreateCards<br />
           :shops="userCardsData"<br />
           :itemsPerRow="4"<br />
           @shop-click="handleShopClick"<br />
@@ -138,7 +138,9 @@ const handleParticipantClick = (participant) => {
               <td class="border border-gray-300 px-4 py-2 font-mono text-sm">
                 shops
               </td>
-              <td class="border border-gray-300 px-4 py-2">Array</td>
+              <td class="border border-gray-300 px-4 py-2">
+                Array&lt;Shop&gt;
+              </td>
               <td class="border border-gray-300 px-4 py-2">[]</td>
               <td class="border border-gray-300 px-4 py-2">카드 데이터 배열</td>
             </tr>
@@ -146,7 +148,7 @@ const handleParticipantClick = (participant) => {
               <td class="border border-gray-300 px-4 py-2 font-mono text-sm">
                 itemsPerRow
               </td>
-              <td class="border border-gray-300 px-4 py-2">Number</td>
+              <td class="border border-gray-300 px-4 py-2">number</td>
               <td class="border border-gray-300 px-4 py-2">4</td>
               <td class="border border-gray-300 px-4 py-2">
                 한 행에 표시할 카드 수 (1-6)
@@ -154,6 +156,111 @@ const handleParticipantClick = (participant) => {
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- Mockup Data 예시 -->
+      <h3 class="text-lg font-semibold mb-2 mt-6">Mockup Data 예시</h3>
+
+      <!-- Admin Cards 데이터 -->
+      <div
+        v-if="selectedSubCategory === 'admin-cards'"
+        class="mb-6 bg-gray-100 rounded-lg p-4 text-left"
+      >
+        <h4 class="font-bold text-gray-800 mb-3">Admin Cards 데이터:</h4>
+        <pre class="text-sm text-gray-800 overflow-x-auto">
+const adminCardsData = [
+  {
+    id: 1,
+    title: "여름이었다 콜라보방은 두줄까지만보이게해.",
+    badge: "마켓종료",
+    badgeColor: "gray",
+    description: "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다.",
+    period: "모집기간: 2025.06.11~2025.07.01",
+    image: null,
+    participants: [
+      { id: 1, name: "나초", avatar: null },
+      { id: 2, name: "치즈", avatar: null },
+      { id: 3, name: "글로리아", avatar: null }
+    ]
+  },
+  {
+    id: 2,
+    title: "가을 컬렉션 특별전",
+    badge: "마켓오픈",
+    badgeColor: "yellow",
+    description: "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다.",
+    period: "모집기간:2025.07.01~2025.07.31",
+    image: null,
+    participants: [
+      { id: 1, name: "나초", avatar: null },
+      { id: 2, name: "치즈", avatar: null }
+    ]
+  }
+];</pre
+        >
+      </div>
+
+      <!-- User Cards 데이터 -->
+      <div
+        v-if="selectedSubCategory === 'user-cards'"
+        class="mb-6 bg-gray-100 rounded-lg p-4 text-left"
+      >
+        <h4 class="font-bold text-gray-800 mb-3">User Cards 데이터:</h4>
+        <pre class="text-sm text-gray-800 overflow-x-auto">
+const userCardsData = [
+  {
+    id: 1,
+    title: "서랍배 v.20 스팸프투어 하심 분",
+    description: "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
+    badge: "모집중",
+    badgeColor: "blue",
+    period: "모집기간: 2025.06.11~2025.07.01",
+    hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
+    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    participants: [
+      { id: 1, name: "하찌네(방장)", avatar: null },
+      { id: 2, name: "참여자 (5/10)", avatar: null }
+    ]
+  },
+  {
+    id: 2,
+    title: "서랍배 v.20 스팸프투어 하심 분",
+    description: "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
+    badge: "모집마감",
+    badgeColor: "gray",
+    period: "모집기간: 2025.06.11~2025.07.01",
+    hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
+    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    participants: [
+      { id: 1, name: "하찌네(방장)", avatar: null },
+      { id: 2, name: "참여자 (1/10)", avatar: null }
+    ]
+  }
+];</pre
+        >
+      </div>
+
+      <div class="mt-4 bg-blue-50 rounded-lg p-4 text-left">
+        <h4 class="font-bold text-blue-800 mb-2">TypeScript 인터페이스:</h4>
+        <pre class="text-sm text-blue-700">
+interface Participant {
+  id: number;
+  name: string;
+  avatar: string | null;
+}
+
+interface Shop {
+  id: number;
+  title: string;
+  badge: string;
+  badgeColor: 'blue' | 'green' | 'yellow' | 'gray';
+  description: string;
+  period: string;
+  image: string | null;
+  participants: Participant[];
+  hashtags?: string; // UserCards에만 존재
+}</pre
+        >
       </div>
 
       <h3 class="text-lg font-semibold mb-2 mt-6">Events</h3>

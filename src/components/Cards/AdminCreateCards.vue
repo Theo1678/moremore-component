@@ -146,11 +146,11 @@ const shouldShowImage = (shop) => {
               </template>
             </div>
 
-            <!-- 제목과 배지 -->
             <div class="flex-1 min-w-0 text-left flex flex-col justify-center">
+              <!-- 제목과 배지 -->
               <div class="flex items-center justify-between gap-3 mb-2">
                 <h2
-                  class="font-pretendard text-[17px] font-bold leading-[22px] line-clamp-2"
+                  class="font-pretendard text-[17px] font-bold leading-[22px] line-clamp-2 text-[#303040]"
                 >
                   {{ shop.title }}
                 </h2>
@@ -160,20 +160,24 @@ const shouldShowImage = (shop) => {
                   class="flex-shrink-0"
                 >
                   <div :class="getBadgeDotClasses(shop.badgeColor)"></div>
-                  <span class="text-xs font-medium text-gray-800">{{
+                  <span class="text-xs font-medium text-[#303040]">{{
                     shop.badge
                   }}</span>
                 </div>
               </div>
+
+              <!-- 마켓 설명 -->
               <p
                 v-if="shop.description"
-                class="font-pretendard text-[15px] font-normal leading-[22px] text-gray-500 my-2 line-clamp-2"
+                class="font-pretendard text-[15px] font-normal leading-[22px] my-2 line-clamp-2 text-[#778196]"
               >
                 {{ shop.description }}
               </p>
+
+              <!-- 모집기간 -->
               <p
                 v-if="shop.period"
-                class="break-words whitespace-normal font-pretendard text-[13px] font-normal leading-[20px] text-blue-500"
+                class="break-words whitespace-normal font-pretendard text-[13px] font-normal leading-[20px] text-[#3182F4]"
               >
                 {{ shop.period }}
               </p>
@@ -187,7 +191,7 @@ const shouldShowImage = (shop) => {
         <!-- 참여작가 섹션 -->
         <div class="w-full py-6 px-5 mt-auto">
           <h3
-            class="text-left font-pretendard text-[15px] font-bold leading-[22px] mb-2"
+            class="text-left font-pretendard text-[15px] font-bold leading-[22px] mb-2 text-[#303040]"
           >
             참여작가
           </h3>
@@ -243,7 +247,7 @@ const shouldShowImage = (shop) => {
 
                   <!-- 작가 이름 -->
                   <span
-                    class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center"
+                    class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center text-[#303040]"
                     >{{ participant.name }}</span
                   >
                 </div>

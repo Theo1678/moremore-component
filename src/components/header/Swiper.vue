@@ -580,6 +580,11 @@ defineExpose({
   border-radius: 50%;
   transition: all 0.3s ease;
 }
+.swiper-pagination-bullet:focus,
+.swiper-pagination-bullet:active {
+  border: none; /* 테두리 제거 */
+  outline: none; /* 아웃라인 제거 */
+}
 
 .swiper-bullet-dot {
   display: block;

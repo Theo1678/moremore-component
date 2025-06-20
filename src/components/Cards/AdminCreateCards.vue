@@ -185,7 +185,7 @@ const shouldShowImage = (shop) => {
         <div class="border-t border-gray-200"></div>
 
         <!-- 참여작가 섹션 -->
-        <div class="py-6 px-5 mt-auto">
+        <div class="w-full py-6 px-5 mt-auto">
           <h3
             class="text-left font-pretendard text-[15px] font-bold leading-[22px] mb-2"
           >

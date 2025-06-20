@@ -71,11 +71,7 @@
       </g>
       <defs>
         <clipPath id="clip0_3951_314363">
-          <rect
-            width="20"
-            height="20"
-            fill="white"
-          />
+          <rect width="20" height="20" fill="white" />
         </clipPath>
       </defs>
     </svg>
@@ -83,69 +79,69 @@
 </template>
 
 <script setup lang="ts">
-  withDefaults(
-    defineProps<{
-      color?: string
-    }>(),
-    {
-      color: () => '#6540DE'
-    }
-  )
+withDefaults(
+  defineProps<{
+    color?: string;
+  }>(),
+  {
+    color: () => "#6540DE",
+  },
+);
 </script>
 
 <style scoped>
-  .loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  /* 투명도가 순차적으로 변하는 애니메이션 */
-  .loading-path {
+/* 투명도가 순차적으로 변하는 애니메이션 */
+.loading-path {
+  opacity: 0.3;
+  animation: fadeInOut 0.4s ease-in-out infinite alternate;
+}
+
+/* 각 요소마다 애니메이션 딜레이 추가 */
+.path-1 {
+  opacity: 0.3;
+  animation-delay: 0s;
+}
+.path-2 {
+  opacity: 0.6;
+  animation-delay: 0.3s;
+}
+.path-3 {
+  opacity: 0.9;
+  animation-delay: 0.6s;
+}
+.path-4 {
+  opacity: 1;
+  animation-delay: 0.9s;
+}
+.path-5 {
+  opacity: 1;
+  animation-delay: 1.2s;
+}
+.path-6 {
+  opacity: 1;
+  animation-delay: 1.5s;
+}
+.path-7 {
+  opacity: 1;
+  animation-delay: 1.8s;
+}
+.path-8 {
+  opacity: 1;
+  animation-delay: 2.1s;
+}
+
+@keyframes fadeInOut {
+  0% {
     opacity: 0.3;
-    animation: fadeInOut 0.4s ease-in-out infinite alternate;
   }
-
-  /* 각 요소마다 애니메이션 딜레이 추가 */
-  .path-1 {
-    opacity: 0.3;
-    animation-delay: 0s;
-  }
-  .path-2 {
-    opacity: 0.6;
-    animation-delay: 0.3s;
-  }
-  .path-3 {
-    opacity: 0.9;
-    animation-delay: 0.6s;
-  }
-  .path-4 {
+  100% {
     opacity: 1;
-    animation-delay: 0.9s;
   }
-  .path-5 {
-    opacity: 1;
-    animation-delay: 1.2s;
-  }
-  .path-6 {
-    opacity: 1;
-    animation-delay: 1.5s;
-  }
-  .path-7 {
-    opacity: 1;
-    animation-delay: 1.8s;
-  }
-  .path-8 {
-    opacity: 1;
-    animation-delay: 2.1s;
-  }
-
-  @keyframes fadeInOut {
-    0% {
-      opacity: 0.3;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+}
 </style>

@@ -161,7 +161,7 @@ const props = withDefaults(
 
     // 반응형
     breakpoints: () => ({}),
-  }
+  },
 );
 
 // Emits 정의
@@ -453,7 +453,7 @@ watch(
     } else {
       stopAutoplay();
     }
-  }
+  },
 );
 
 // Public API
@@ -642,7 +642,9 @@ defineExpose({
 
 /* Animation utilities */
 .swiper-slide {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .swiper-slide:not(.swiper-slide-active) {

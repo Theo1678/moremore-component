@@ -246,9 +246,9 @@ const adminCardsData = [
       { id: 2, name: "치즈", avatar: null }
     ]
   }
-];</pre
-          >
-        </div>
+];
+        </pre>
+      </div>
 
         <!-- User Cards 데이터 -->
         <div
@@ -287,9 +287,8 @@ const userCardsData = [
     ]
   }
 ];
-</pre
-          >
-        </div>
+        </pre>
+      </div>
 
         <div class="mt-4 bg-blue-50 rounded-lg p-4 text-left">
           <h4 class="font-bold text-blue-800 mb-2">TypeScript 인터페이스:</h4>
@@ -310,9 +309,49 @@ interface Shop {
   image: string | null;
   participants: Participant[];
   hashtags?: string; // UserCards에만 존재
-}</pre
-          >
-        </div>
+}
+        </pre>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-2 mt-6">Events</h3>
+      <div class="overflow-x-auto">
+        <table
+          class="min-w-full table-auto border-collapse border border-gray-300"
+        >
+          <thead>
+            <tr class="bg-gray-50">
+              <th class="border border-gray-300 px-4 py-2 text-left">Event</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">
+                Payload
+              </th>
+              <th class="border border-gray-300 px-4 py-2 text-left">
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-300 px-4 py-2 font-mono text-sm">
+                @shop-click
+              </td>
+              <td class="border border-gray-300 px-4 py-2">shop object</td>
+              <td class="border border-gray-300 px-4 py-2">
+                카드 클릭 시 발생
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 px-4 py-2 font-mono text-sm">
+                @participant-click
+              </td>
+              <td class="border border-gray-300 px-4 py-2">
+                participant object
+              </td>
+              <td class="border border-gray-300 px-4 py-2">
+                참여작가 클릭 시 발생
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

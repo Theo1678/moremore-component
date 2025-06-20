@@ -73,12 +73,12 @@ const handleTabChange = (tab) => {
       <h2 class="text-2xl font-semibold text-gray-700 mb-6">사용 예시</h2>
       <div class="bg-gray-100 rounded-lg p-6 text-left">
         <pre class="text-sm text-gray-800 overflow-x-auto">
-          &lt;TabGroup
-            v-model="activeTab"
-            :tabs="tabsData"
-            @tab-change="handleTabChange"
-          /&gt;</pre
-        >
+  &lt;TabGroup
+    v-model="activeTab"
+    :tabs="tabsData"
+    @tab-change="handleTabChange"
+  /&gt;
+        </pre>
       </div>
     </div>
 
@@ -89,19 +89,19 @@ const handleTabChange = (tab) => {
       </h2>
       <div class="bg-gray-100 rounded-lg p-6 text-left">
         <pre class="text-sm text-gray-800 overflow-x-auto">
-const tabsData = [
-  { id: "all", label: "전체" },
-  { id: "person", label: "인물" },
-  { id: "animal", label: "동물" },
-  { id: "object", label: "사물" },
-  { id: "plant", label: "식물" },
-  { id: "food", label: "음식" },
-  { id: "background", label: "배경 모조지" },
-  { id: "cute", label: "귀여운" },
-  { id: "kitsch", label: "키치" },
-  { id: "emotional", label: "감성" },
-];</pre
-        >
+  const tabsData = [
+    { id: "all", label: "전체" },
+    { id: "person", label: "인물" },
+    { id: "animal", label: "동물" },
+    { id: "object", label: "사물" },
+    { id: "plant", label: "식물" },
+    { id: "food", label: "음식" },
+    { id: "background", label: "배경 모조지" },
+    { id: "cute", label: "귀여운" },
+    { id: "kitsch", label: "키치" },
+    { id: "emotional", label: "감성" },
+  ];
+        </pre>
       </div>
 
       <div class="mt-4 bg-blue-50 rounded-lg p-4 text-left">
@@ -112,8 +112,8 @@ interface TabItem {
   label: string;
 }
 
-const tabsData: TabItem[] = [...];</pre
-        >
+const tabsData: TabItem[] = [...];
+        </pre>
       </div>
     </div>
 

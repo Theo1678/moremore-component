@@ -19,7 +19,7 @@ const props = withDefaults(
     shops: () => [],
     itemsPerRow: 3,
     maxItems: 6,
-  }
+  },
 );
 
 // Emits 정의

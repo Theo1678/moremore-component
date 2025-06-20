@@ -12,6 +12,7 @@ export { default as IcUpdate } from "./IcUpdate.vue";
 export { default as IcSetting } from "./IcSetting.vue";
 export { default as IcMedia } from "./IcMedia.vue";
 export { default as IcLink } from "./IcLink.vue";
+export { default as IcArrowLeft } from "./IcArrowLeft.vue";
 export { default as IcArrowRight } from "./IcArrowRight.vue";
 export { default as IcDown } from "./IcDown.vue";
 export { default as IcCopy } from "./IcCopy.vue";

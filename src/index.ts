@@ -3,6 +3,39 @@ import AdminCreateCards from "./components/Cards/AdminCreateCards.vue";
 import UserCreateCards from "./components/Cards/UserCreateCards.vue";
 import TabGroup from "./components/Tabs/TabGroup.vue";
 import Swiper from "./components/header/Swiper.vue";
+
+// ElementIcons imports
+import {
+  ElementIcon,
+  IcApp,
+  IcChart,
+  IcHelp,
+  IcInfo,
+  IcNotification,
+  IcOption,
+  IcPayback,
+  IcPerson,
+  IcPlane,
+  IcUpdate,
+  IcSetting,
+  IcMedia,
+  IcLink,
+  IcArrowLeft,
+  IcArrowRight,
+  IcDown,
+  IcCopy,
+  IcDelete,
+  IcPlus,
+  IcMoreVertical,
+  IcCancleFill,
+  IcChecked,
+  IcSparkle,
+  IcPreview,
+  IcLoadingPrimary,
+  IcLayer,
+  IcCta,
+} from "./components/ElementIcons/index";
+
 import type { App } from "vue";
 
 // 타입 imports & exports
@@ -15,8 +48,73 @@ import "./style.css";
 // 개별 컴포넌트 export
 export { AdminCreateCards, UserCreateCards, TabGroup, Swiper };
 
+// ElementIcons export
+export {
+  ElementIcon,
+  IcApp,
+  IcChart,
+  IcHelp,
+  IcInfo,
+  IcNotification,
+  IcOption,
+  IcPayback,
+  IcPerson,
+  IcPlane,
+  IcUpdate,
+  IcSetting,
+  IcMedia,
+  IcLink,
+  IcArrowLeft,
+  IcArrowRight,
+  IcDown,
+  IcCopy,
+  IcDelete,
+  IcPlus,
+  IcMoreVertical,
+  IcCancleFill,
+  IcChecked,
+  IcSparkle,
+  IcPreview,
+  IcLoadingPrimary,
+  IcLayer,
+  IcCta,
+};
+
 // 컴포넌트 목록
-const components = [AdminCreateCards, UserCreateCards, TabGroup, Swiper];
+const components = [
+  AdminCreateCards,
+  UserCreateCards,
+  TabGroup,
+  Swiper,
+  ElementIcon,
+  IcApp,
+  IcChart,
+  IcHelp,
+  IcInfo,
+  IcNotification,
+  IcOption,
+  IcPayback,
+  IcPerson,
+  IcPlane,
+  IcUpdate,
+  IcSetting,
+  IcMedia,
+  IcLink,
+  IcArrowLeft,
+  IcArrowRight,
+  IcDown,
+  IcCopy,
+  IcDelete,
+  IcPlus,
+  IcMoreVertical,
+  IcCancleFill,
+  IcChecked,
+  IcSparkle,
+  IcPreview,
+  IcLoadingPrimary,
+  IcLayer,
+  IcCta,
+];
 
 // 플러그인 옵션 타입
 export interface MoremoreComponentOptions {

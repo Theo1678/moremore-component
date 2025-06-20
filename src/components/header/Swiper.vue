@@ -9,7 +9,7 @@
       :class="{
         'type-multiple': multiple,
         'swiper-button-disabled': currentIndex === 0,
-        'swiper-button-hidden': currentIndex === 0,
+        'swiper-button-hidden': !showPrevButton,
       }"
     />
 
@@ -52,7 +52,7 @@
       :class="{
         'type-multiple': multiple,
         'swiper-button-disabled': currentIndex === maxIndex,
-        'swiper-button-hidden': currentIndex <= maxIndex,
+        'swiper-button-hidden': !showNextButton,
       }"
     />
 
@@ -208,15 +208,15 @@ const paginationDots = computed(() => {
   return Array.from({ length: pages }, (_, i) => i);
 });
 
-// const showPrevButton = computed(() => {
-//   console.log("showPrevButton", props.loop, currentIndex.value, maxIndex.value);
-//   return props.loop || currentIndex.value > 0;
-// });
+const showPrevButton = computed(() => {
+  console.log("showPrevButton", props.loop, currentIndex.value, maxIndex.value);
+  return props.loop || currentIndex.value > 0;
+});
 
-// const showNextButton = computed(() => {
-//   console.log("showNextButton", props.loop, currentIndex.value, maxIndex.value);
-//   return props.loop || currentIndex.value < maxIndex.value;
-// });
+const showNextButton = computed(() => {
+  console.log("showNextButton", props.loop, currentIndex.value, maxIndex.value);
+  return props.loop || currentIndex.value < maxIndex.value;
+});
 
 const slideWidth = computed(() => {
   if (!swiperWrapper.value) return 0;

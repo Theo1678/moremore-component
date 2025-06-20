@@ -4,7 +4,6 @@
     <IcArrowLeft
       v-if="showNavigation"
       @click="slideToPrev"
-      :disabled="currentIndex === 0"
       class="swiper-button-prev"
       :class="{
         'type-multiple': multiple,
@@ -47,7 +46,6 @@
     <IcArrowRight
       v-if="showNavigation"
       @click="slideToNext"
-      :disabled="currentIndex === maxIndex"
       class="swiper-button-next"
       :class="{
         'type-multiple': multiple,

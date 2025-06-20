@@ -8,7 +8,7 @@ const activeTab = ref("all");
 // 이벤트 핸들러
 const handleTabChange = (tab) => {
   console.log("Tab changed:", tab);
-  alert(`${tab.label} 탭 선택됨!`);
+  // alert(`${tab.label} 탭 선택됨!`);
 };
 </script>
 

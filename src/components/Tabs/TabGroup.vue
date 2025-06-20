@@ -46,12 +46,11 @@ const handleTabClick = (tab) => {
 const getTabClasses = (tab) => {
   const isActive = activeTab.value === tab.id;
   const baseClasses =
-    "flex items-center justify-center px-3 py-3 rounded-xl border transition-all duration-200 cursor-pointer";
-
+    "flex items-center justify-center focus:outline-none hover:border-gray-100 border-2";
   if (isActive) {
-    return `${baseClasses} bg-pink-100 border-pink-400 border-2`;
+    return `${baseClasses} bg-pink-100 border-pink-400 `;
   } else {
-    return `${baseClasses} bg-white border-gray-300 border hover:border-gray-400 hover:bg-gray-50`;
+    return `${baseClasses}`;
   }
 };
 

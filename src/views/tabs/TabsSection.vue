@@ -16,7 +16,7 @@ const handleTabChange = (tab) => {
   <div class="space-y-8">
     <!-- TabGroup 컴포넌트 -->
     <div class="bg-white rounded-lg shadow-lg p-6">
-      <h2 class="text-xl font-bold mb-4">TabGroup 컴포넌트</h2>
+      <h2 class="text-xl font-bold mb-4 text-black">TabGroup 컴포넌트</h2>
       <p class="text-gray-600 mb-6">
         반응형 탭 네비게이션 - 자동 줄바꿈, v-model 지원
       </p>
@@ -28,7 +28,7 @@ const handleTabChange = (tab) => {
       />
 
       <div class="mt-6 p-4 bg-gray-100 rounded-lg">
-        <h3 class="font-bold mb-2">선택된 탭:</h3>
+        <h3 class="font-bold mb-2 text-black">선택된 탭:</h3>
         <pre class="text-sm text-gray-700">{{ activeTab }}</pre>
       </div>
     </div>
@@ -85,7 +85,7 @@ const handleTabChange = (tab) => {
     <!-- Props 테이블 -->
     <div class="text-center mb-8 bg-white rounded-lg shadow-lg p-6">
       <h2 class="text-2xl font-semibold text-gray-700 mb-6">Props</h2>
-      <div class="overflow-x-auto">
+      <div class="overflow-x-auto text-gray-800">
         <table class="w-full border-collapse border border-gray-300">
           <thead>
             <tr class="bg-gray-50">
@@ -141,7 +141,9 @@ const handleTabChange = (tab) => {
     <div class="text-center mb-8 bg-white rounded-lg shadow-lg p-6">
       <h2 class="text-2xl font-semibold text-gray-700 mb-6">Events</h2>
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse border border-gray-300">
+        <table
+          class="w-full border-collapse border border-gray-300 text-gray-800"
+        >
           <thead>
             <tr class="bg-gray-50">
               <th

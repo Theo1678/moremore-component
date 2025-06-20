@@ -281,7 +281,9 @@ const autoplayItems = ref([
     <div class="text-center mb-12 bg-white rounded-lg shadow-lg p-6">
       <h2 class="text-2xl font-semibold text-gray-700 mb-6">Props</h2>
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse border border-gray-300">
+        <table
+          class="w-full border-collapse border border-gray-300 text-gray-700"
+        >
           <thead>
             <tr class="bg-gray-50">
               <th
@@ -392,7 +394,9 @@ const autoplayItems = ref([
     <div class="text-center mb-12 bg-white rounded-lg shadow-lg p-6">
       <h2 class="text-2xl font-semibold text-gray-700 mb-6">Events</h2>
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse border border-gray-300">
+        <table
+          class="w-full border-collapse border border-gray-300 text-gray-700"
+        >
           <thead>
             <tr class="bg-gray-50">
               <th

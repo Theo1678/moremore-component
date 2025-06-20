@@ -19,7 +19,7 @@ const props = withDefaults(
     shops: () => [],
     itemsPerRow: 3,
     maxItems: 6,
-  },
+  }
 );
 
 // Emits 정의
@@ -91,7 +91,7 @@ const shouldShowImage = (shop) => {
 
 <template>
   <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 items-start"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !gap-8 mb-12 items-start"
   >
     <div
       v-for="shop in displayedShops"

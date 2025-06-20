@@ -71,7 +71,7 @@ watch(
   () => props.modelValue,
   (newValue) => {
     activeTab.value = newValue;
-  }
+  },
 );
 </script>
 

@@ -16,12 +16,12 @@
 </template>
 
 <script setup lang="ts">
-  withDefaults(
-    defineProps<{
-      color?: string
-    }>(),
-    {
-      color: () => '#716497'
-    }
-  )
+withDefaults(
+  defineProps<{
+    color?: string;
+  }>(),
+  {
+    color: () => "#716497",
+  },
+);
 </script>

@@ -22,6 +22,6 @@ withDefaults(
   }>(),
   {
     color: () => "#5C6476",
-  }
+  },
 );
 </script>

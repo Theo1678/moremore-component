@@ -14,12 +14,12 @@
 </template>
 
 <script setup lang="ts">
-  withDefaults(
-    defineProps<{
-      color?: string
-    }>(),
-    {
-      color: () => '#0080FF'
-    }
-  )
+withDefaults(
+  defineProps<{
+    color?: string;
+  }>(),
+  {
+    color: () => "#0080FF",
+  },
+);
 </script>

@@ -196,8 +196,8 @@ const adminCardsData = [
       { id: 2, name: "치즈", avatar: null }
     ]
   }
-];</pre
-        >
+];
+        </pre>
       </div>
 
       <!-- User Cards 데이터 -->
@@ -236,8 +236,8 @@ const userCardsData = [
       { id: 2, name: "참여자 (1/10)", avatar: null }
     ]
   }
-];</pre
-        >
+];
+        </pre>
       </div>
 
       <div class="mt-4 bg-blue-50 rounded-lg p-4 text-left">
@@ -259,8 +259,8 @@ interface Shop {
   image: string | null;
   participants: Participant[];
   hashtags?: string; // UserCards에만 존재
-}</pre
-        >
+}
+        </pre>
       </div>
 
       <h3 class="text-lg font-semibold mb-2 mt-6">Events</h3>

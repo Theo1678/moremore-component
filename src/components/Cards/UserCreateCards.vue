@@ -13,7 +13,7 @@ const props = withDefaults(
     shops: () => [],
     itemsPerRow: 4,
     maxItems: 8,
-  },
+  }
 );
 
 // Emits 정의
@@ -58,12 +58,16 @@ const getBadgeClasses = (badgeColor) => {
 
   switch (badgeColor) {
     case "blue":
-      return `${baseClasses} bg-blue-100`;
+      return `${baseClasses} bg-[#EBF5FF]`;
     case "yellow":
-      return `${baseClasses} bg-yellow-100`;
+      return `${baseClasses} bg-[#FFF5E2]`;
+    case "green":
+      return `${baseClasses} bg-[#EBF8F5]`;
+    case "purple":
+      return `${baseClasses} bg-[#EFEBFB]`;
     case "gray":
     default:
-      return `${baseClasses} bg-gray-100`;
+      return `${baseClasses} bg-[#F0F2F4]`;
   }
 };
 
@@ -73,12 +77,16 @@ const getBadgeDotClasses = (badgeColor) => {
 
   switch (badgeColor) {
     case "blue":
-      return `${baseClasses} bg-blue-400`;
+      return `${baseClasses} bg-[#0080FF]`;
     case "yellow":
-      return `${baseClasses} bg-yellow-400`;
+      return `${baseClasses} bg-[#FFC14D]`;
+    case "green":
+      return `${baseClasses} bg-[#00AC87]`;
+    case "purple":
+      return `${baseClasses} bg-[#6540DE]`;
     case "gray":
     default:
-      return `${baseClasses} bg-gray-400`;
+      return `${baseClasses} bg-[#ABAFB9]`;
   }
 };
 

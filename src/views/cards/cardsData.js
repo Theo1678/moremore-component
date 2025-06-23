@@ -178,7 +178,7 @@ export const userCardsData = [
     description:
       "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
     badge: "모집마감",
-    badgeColor: "gray",
+    badgeColor: "green",
     period: "모집기간: 2025.06.11~2025.07.01",
     hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
     image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
@@ -207,8 +207,8 @@ export const userCardsData = [
     title: "서랍배 v.20 스팸프투어 하심 분",
     description:
       "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
-    badge: "마켓오픈",
-    badgeColor: "yellow",
+    badge: "마켓종료",
+    badgeColor: "gray",
     period: "모집기간: 2025.06.11~2025.07.01",
     hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
     image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
@@ -237,8 +237,8 @@ export const userCardsData = [
     title: "추석 한정 이벤트",
     description:
       "추석을 맞이하여 특별한 한정 이벤트를 진행합니다. 많은 참여 부탁드려요!",
-    badge: "마켓오픈",
-    badgeColor: "yellow",
+    badge: "모집예정",
+    badgeColor: "purple",
     period: "모집기간: 2025.09.01~2025.09.30",
     hashtags: "#추석 #한정 #이벤트 #특별",
     image: null,

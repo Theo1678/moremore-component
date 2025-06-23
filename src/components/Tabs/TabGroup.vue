@@ -46,11 +46,11 @@ const handleTabClick = (tab) => {
 const getTabClasses = (tab) => {
   const isActive = activeTab.value === tab.id;
   const baseClasses =
-    "flex items-center justify-center focus:outline-none hover:border-[#F66D96] border-2";
+    "flex items-center justify-center focus:outline-none hover:border-[#F66D96] border-1";
   if (isActive) {
-    return `${baseClasses} bg-[#FFE8F0] border-[#F66D96]`;
+    return `${baseClasses} bg-[#FFE8F0] border-[#F66D96] border-2`;
   } else {
-    return `${baseClasses}`;
+    return `${baseClasses} bg-white border-[#CFD3DA]`;
   }
 };
 
@@ -62,7 +62,7 @@ const getTabTextClasses = (tab) => {
   if (isActive) {
     return `${baseClasses} text-[#F66D96]`;
   } else {
-    return `${baseClasses} text-gray-700`;
+    return `${baseClasses} text-[#424855]`;
   }
 };
 

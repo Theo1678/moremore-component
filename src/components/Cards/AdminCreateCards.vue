@@ -103,11 +103,11 @@ const shouldShowImage = (shop) => {
       >
         <!-- 상단 섹션 -->
         <div
-          class="p-3 cursor-pointer flex-grow"
+          class="px-3 py-[20px] md:py-[26px] cursor-pointer flex-grow"
           @click="handleShopClick(shop)"
         >
           <div class="flex items-center gap-4 h-full">
-            <!-- 원형 이미지 -->
+            <!-- 대표 이미지 -->
             <div
               class="w-24 h-24 rounded-full border border-gray-300 bg-gray-50 flex-shrink-0 overflow-hidden"
             >
@@ -146,11 +146,14 @@ const shouldShowImage = (shop) => {
               </template>
             </div>
 
+            <!-- content -->
             <div class="flex-1 min-w-0 text-left flex flex-col justify-center">
               <!-- 제목과 배지 -->
-              <div class="flex items-center justify-between gap-3 mb-2">
+              <div
+                class="flex flex-nowrap items-center justify-between gap-3 mb-2"
+              >
                 <h2
-                  class="font-pretendard text-[17px] font-bold leading-[22px] line-clamp-2 text-[#303040]"
+                  class="font-pretendard text-[17px] font-bold leading-[22px] line-clamp-2 text-[#060608]"
                 >
                   {{ shop.title }}
                 </h2>

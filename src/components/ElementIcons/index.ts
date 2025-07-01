@@ -28,3 +28,5 @@ export { default as IcClose } from "./IcClose.vue";
 export { default as IcLoadingPrimary } from "./IcLoadingPrimary.vue";
 export { default as IcLayer } from "./IcLayer.vue";
 export { default as IcCta } from "./IcCta.vue";
+export { default as IcCoreUser } from "./IcCoreUser.vue";
+export { default as IcCoreCart } from "./IcCoreCart.vue";

@@ -78,6 +78,16 @@ const iconList = [
   },
   { name: "IcLayer", component: Icons.IcLayer, description: "레이어 아이콘" },
   { name: "IcCta", component: Icons.IcCta, description: "CTA 아이콘" },
+  {
+    name: "IcCoreUser",
+    component: Icons.IcCoreUser,
+    description: "유저 아이콘",
+  },
+  {
+    name: "IcCoreCart",
+    component: Icons.IcCoreCart,
+    description: "카트 아이콘",
+  },
 ];
 
 // 선택된 아이콘

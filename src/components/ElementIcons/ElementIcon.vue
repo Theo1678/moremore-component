@@ -30,6 +30,8 @@
   <IcCta v-else-if="elementIcon === 'IcCta'" :color="color" />
   <IcSearch v-else-if="elementIcon === 'IcSearch'" :color="color" />
   <IcClose v-else-if="elementIcon === 'IcClose'" :color="color" />
+  <IcCoreUser v-else-if="elementIcon === 'IcCoreUser'" :color="color" />
+  <IcCoreCart v-else-if="elementIcon === 'IcCoreCart'" :color="color" />
 </template>
 
 <script setup lang="ts">
@@ -62,6 +64,8 @@ import {
   IcCta,
   IcSearch,
   IcClose,
+  IcCoreUser,
+  IcCoreCart,
 } from ".";
 
 defineProps<{

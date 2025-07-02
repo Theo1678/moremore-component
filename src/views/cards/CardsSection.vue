@@ -14,12 +14,12 @@ const props = defineProps({
 // 이벤트 핸들러
 const handleShopClick = (shop) => {
   console.log("Shop clicked:", shop);
-  alert(`${shop.title} 클릭됨!`);
+  alert(`${shop.marketName} 클릭됨!`);
 };
 
-const handleParticipantClick = (participant) => {
-  console.log("Participant clicked:", participant);
-  alert(`${participant.name} 작가 클릭됨!`);
+const handlePartnerUserClick = (partnerUser) => {
+  console.log("Partner user clicked:", partnerUser);
+  alert(`${partnerUser.nickName} 작가 클릭됨!`);
 };
 </script>
 
@@ -40,7 +40,7 @@ const handleParticipantClick = (participant) => {
       <AdminCreateCards
         :shops="adminCardsData"
         @shop-click="handleShopClick"
-        @participant-click="handleParticipantClick"
+        @partnerUser-click="handlePartnerUserClick"
       />
     </div>
 
@@ -57,7 +57,7 @@ const handleParticipantClick = (participant) => {
       <UserCreateCards
         :shops="userCardsData"
         @shop-click="handleShopClick"
-        @participant-click="handleParticipantClick"
+        @partnerUser-click="handlePartnerUserClick"
       />
     </div>
 
@@ -89,7 +89,7 @@ const handleParticipantClick = (participant) => {
           &lt;AdminCreateCards<br />
           :shops="adminCardsData"<br />
           @shop-click="handleShopClick"<br />
-          @participant-click="handleParticipantClick"<br />
+          @partnerUser-click="handlePartnerUserClick"<br />
           /&gt;
         </div>
       </div>
@@ -114,7 +114,7 @@ const handleParticipantClick = (participant) => {
           :shops="userCardsData"<br />
           :itemsPerRow="4"<br />
           @shop-click="handleShopClick"<br />
-          @participant-click="handleParticipantClick"<br />
+          @partnerUser-click="handlePartnerUserClick"<br />
           /&gt;
         </div>
       </div>
@@ -194,10 +194,10 @@ const handleParticipantClick = (participant) => {
                   <td
                     class="border border-gray-300 px-4 py-2 font-mono text-sm"
                   >
-                    @participant-click
+                    @partnerUser-click
                   </td>
                   <td class="border border-gray-300 px-4 py-2">
-                    participant object
+                    PartnerUserData object
                   </td>
                   <td class="border border-gray-300 px-4 py-2">
                     참여작가 클릭 시 발생
@@ -227,9 +227,9 @@ const adminCardsData = [
     period: "모집기간: 2025.06.11~2025.07.01",
     thumbImgUrl: null,
     partnerUsersData: [
-      { id: 1, name: "나초", avatar: null },
-      { id: 2, name: "치즈", avatar: null },
-      { id: 3, name: "글로리아", avatar: null }
+      { id: 1, nickName: "나초", avatar: null, profileImgUrl: null },
+      { id: 2, nickName: "치즈", avatar: null, profileImgUrl: null },
+      { id: 3, nickName: "글로리아", avatar: null, profileImgUrl: null }
     ]
   },
   {
@@ -240,8 +240,8 @@ const adminCardsData = [
     period: "모집기간:2025.07.01~2025.07.31",
     thumbImgUrl: null,
     partnerUsersData: [
-      { id: 1, name: "나초", avatar: null },
-      { id: 2, name: "치즈", avatar: null }
+      { id: 1, nickName: "나초", avatar: null, profileImgUrl: null },
+      { id: 2, nickName: "치즈", avatar: null, profileImgUrl: null }
     ]
   }
 ];
@@ -266,8 +266,8 @@ const userCardsData = [
     hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
     thumbImgUrl: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     partnerUsersData: [
-      { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "참여자 (5/10)", avatar: null }
+      { id: 1, nickName: "하찌네(방장)", avatar: null, profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", avatar: null, profileImgUrl: null }
     ]
   },
   {
@@ -279,8 +279,8 @@ const userCardsData = [
     hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
     thumbImgUrl: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     partnerUsersData: [
-      { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "참여자 (1/10)", avatar: null }
+      { id: 1, nickName: "하찌네(방장)", avatar: null, profileImgUrl: null },
+      { id: 2, nickName: "참여자 (1/10)", avatar: null, profileImgUrl: null }
     ]
   }
 ];
@@ -291,10 +291,12 @@ const userCardsData = [
         <div class="mt-4 bg-blue-50 rounded-lg p-4 text-left">
           <h4 class="font-bold text-blue-800 mb-2">TypeScript 인터페이스:</h4>
           <pre class="text-sm text-blue-700">
-interface Participant {
+interface PartnerUserData {
   id: string | number;
-  name: string;
+  nickName: string;
+  profileImgUrl?: string;
   avatar?: string;
+  description?: string;
 }
 
 type StatusMessage =
@@ -312,7 +314,7 @@ interface Shop {
   description?: string;
   period?: string;
   hashtags?: string;
-  partnerUsersData?: Participant[];
+  partnerUsersData?: PartnerUserData[];
 }
         </pre
           >
@@ -348,10 +350,10 @@ interface Shop {
               </tr>
               <tr>
                 <td class="border border-gray-300 px-4 py-2 font-mono text-sm">
-                  @participant-click
+                  @partnerUser-click
                 </td>
                 <td class="border border-gray-300 px-4 py-2">
-                  participant object
+                  PartnerUserData object
                 </td>
                 <td class="border border-gray-300 px-4 py-2">
                   참여작가 클릭 시 발생

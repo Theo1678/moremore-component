@@ -9,7 +9,7 @@ export type StatusMessage =
   | "마켓종료";
 
 // 참여작가 타입
-export interface Participant {
+export interface PartnerUserData {
   id: string | number;
   nickName: string;
   profileImgUrl?: string;
@@ -26,7 +26,7 @@ export interface Shop {
   marketName: string;
   thumbImgUrl?: string;
   statusMessage?: StatusMessage;
-  partnerUsersData?: Participant[];
+  partnerUsersData?: PartnerUserData[];
   description?: string;
   period?: string;
   hashtags?: string;

@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import Swiper from "../header/Swiper.vue";
-import type {
-  Shop,
-  Participant,
-  ScrollDirection,
-  StatusMessage,
-} from "../../types/index";
+import type { Shop, PartnerUserData, StatusMessage } from "../../types/index";
 
 // Props 정의
 const props = withDefaults(
@@ -25,7 +20,7 @@ const props = withDefaults(
 // Emits 정의
 const emit = defineEmits<{
   "shop-click": [shop: Shop];
-  "participant-click": [participant: Participant];
+  "partnerUser-click": [partnerUser: PartnerUserData];
 }>();
 
 // 이미지 에러 상태 관리
@@ -44,8 +39,8 @@ const handleShopClick = (shop) => {
   emit("shop-click", shop);
 };
 
-const handleParticipantClick = (partnerUser) => {
-  emit("participant-click", partnerUser);
+const handlePartnerUserClick = (partnerUser) => {
+  emit("partnerUser-click", partnerUser);
 };
 
 // 배지 점 색상 클래스 반환
@@ -202,7 +197,7 @@ const shouldShowImage = (shop) => {
               <template #default="{ item: partnerUsers }">
                 <div
                   class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-                  @click.stop="handleParticipantClick(partnerUsers)"
+                  @click.stop="handlePartnerUserClick(partnerUsers)"
                 >
                   <!-- 작가 아바타 -->
                   <div

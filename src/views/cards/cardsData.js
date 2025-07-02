@@ -11,58 +11,58 @@ export const adminCardsData = [
     partnerUsersData: [
       {
         id: 1,
-        name: "나초",
-        avatar: null,
+        nickName: "나초",
+        profileImgUrl: null,
       },
       {
         id: 2,
-        name: "치즈",
-        avatar: null,
+        nickName: "치즈",
+        profileImgUrl: null,
       },
       {
         id: 3,
-        name: "글로리아",
-        avatar: null,
+        nickName: "글로리아",
+        profileImgUrl: null,
       },
       {
         id: 4,
-        name: "루비 테스트 테스트",
-        avatar: null,
+        nickName: "루비 테스트 테스트",
+        profileImgUrl: null,
       },
       {
         id: 5,
-        name: "테오",
-        avatar: null,
+        nickName: "테오",
+        profileImgUrl: null,
       },
       {
         id: 6,
-        name: "오웬",
-        avatar: null,
+        nickName: "오웬",
+        profileImgUrl: null,
       },
       {
         id: 7,
-        name: "리아",
-        avatar: null,
+        nickName: "리아",
+        profileImgUrl: null,
       },
       {
         id: 8,
-        name: "해리",
-        avatar: null,
+        nickName: "해리",
+        profileImgUrl: null,
       },
       {
         id: 9,
-        name: "캐빈",
-        avatar: null,
+        nickName: "캐빈",
+        profileImgUrl: null,
       },
       {
         id: 10,
-        name: "제이슨",
-        avatar: null,
+        nickName: "제이슨",
+        profileImgUrl: null,
       },
       {
         id: 11,
-        name: "디오",
-        avatar: null,
+        nickName: "디오",
+        profileImgUrl: null,
       },
     ],
   },
@@ -77,13 +77,13 @@ export const adminCardsData = [
     partnerUsersData: [
       {
         id: 1,
-        name: "나초",
-        avatar: null,
+        nickName: "나초",
+        profileImgUrl: null,
       },
       {
         id: 2,
-        name: "치즈",
-        avatar: null,
+        nickName: "치즈",
+        profileImgUrl: null,
       },
     ],
   },
@@ -97,13 +97,13 @@ export const adminCardsData = [
     partnerUsersData: [
       {
         id: 1,
-        name: "나초",
-        avatar: null,
+        nickName: "나초",
+        profileImgUrl: null,
       },
       {
         id: 2,
-        name: "치즈",
-        avatar: null,
+        nickName: "치즈",
+        profileImgUrl: null,
       },
     ],
   },
@@ -118,13 +118,13 @@ export const adminCardsData = [
     partnerUsersData: [
       {
         id: 1,
-        name: "나초",
-        avatar: null,
+        nickName: "나초",
+        profileImgUrl: null,
       },
       {
         id: 2,
-        name: "치즈",
-        avatar: null,
+        nickName: "치즈",
+        profileImgUrl: null,
       },
     ],
   },
@@ -140,13 +140,13 @@ export const adminCardsData = [
     partnerUsersData: [
       {
         id: 1,
-        name: "나초",
-        avatar: null,
+        nickName: "나초",
+        profileImgUrl: null,
       },
       {
         id: 2,
-        name: "치즈",
-        avatar: null,
+        nickName: "치즈",
+        profileImgUrl: null,
       },
     ],
   },
@@ -165,8 +165,8 @@ export const userCardsData = [
     thumbImgUrl:
       "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     partnerUsersData: [
-      { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "참여자 (5/10)", avatar: null },
+      { id: 1, nickName: "하찌네(방장)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
     ],
   },
   {
@@ -180,8 +180,8 @@ export const userCardsData = [
     thumbImgUrl:
       "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     partnerUsersData: [
-      { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "참여자 (1/10)", avatar: null },
+      { id: 1, nickName: "하찌네(방장)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (1/10)", profileImgUrl: null },
     ],
   },
   {
@@ -195,8 +195,8 @@ export const userCardsData = [
     thumbImgUrl:
       "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     partnerUsersData: [
-      { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "참여자 (9/10)", avatar: null },
+      { id: 1, nickName: "하찌네(방장)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (9/10)", profileImgUrl: null },
     ],
   },
   {
@@ -210,8 +210,8 @@ export const userCardsData = [
     thumbImgUrl:
       "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     partnerUsersData: [
-      { id: 1, name: "하찌네(방장)", avatar: null },
-      { id: 2, name: "참여자 (3/10)", avatar: null },
+      { id: 1, nickName: "하찌네(방장)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (3/10)", profileImgUrl: null },
     ],
   },
   {
@@ -224,8 +224,8 @@ export const userCardsData = [
     hashtags: "#여름 #시원함 #콜라보 #특가 #이벤트",
     thumbImgUrl: null,
     partnerUsersData: [
-      { id: 1, name: "여름작가", avatar: null },
-      { id: 2, name: "시원한작가", avatar: null },
+      { id: 1, nickName: "여름작가", profileImgUrl: null },
+      { id: 2, nickName: "시원한작가", profileImgUrl: null },
     ],
   },
   {
@@ -238,8 +238,8 @@ export const userCardsData = [
     hashtags: "#추석 #한정 #이벤트 #특별",
     thumbImgUrl: null,
     partnerUsersData: [
-      { id: 1, name: "추석작가", avatar: null },
-      { id: 2, name: "이벤트작가", avatar: null },
+      { id: 1, nickName: "추석작가", profileImgUrl: null },
+      { id: 2, nickName: "이벤트작가", profileImgUrl: null },
     ],
   },
   {
@@ -252,8 +252,8 @@ export const userCardsData = [
     hashtags: "#겨울 #따뜻함 #컬렉션 #준비",
     thumbImgUrl: null,
     partnerUsersData: [
-      { id: 1, name: "겨울작가", avatar: null },
-      { id: 2, name: "따뜻한작가", avatar: null },
+      { id: 1, nickName: "겨울작가", profileImgUrl: null },
+      { id: 2, nickName: "따뜻한작가", profileImgUrl: null },
     ],
   },
   {
@@ -265,8 +265,8 @@ export const userCardsData = [
     hashtags: "#봄 #신상품 #새로움 #기대",
     thumbImgUrl: null,
     partnerUsersData: [
-      { id: 1, name: "봄작가", avatar: null },
-      { id: 2, name: "신상작가", avatar: null },
+      { id: 1, nickName: "봄작가", profileImgUrl: null },
+      { id: 2, nickName: "신상작가", profileImgUrl: null },
     ],
   },
 ];

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import type { Shop, Participant, StatusMessage } from "../../types/index";
+import type { Shop, PartnerUserData, StatusMessage } from "../../types/index";
 
 // Props 정의
 const props = withDefaults(
@@ -19,7 +19,7 @@ const props = withDefaults(
 // Emits 정의
 const emit = defineEmits<{
   "shop-click": [shop: Shop];
-  "participant-click": [participant: Participant];
+  "partnerUser-click": [partnerUser: PartnerUserData];
 }>();
 
 // 모달 상태 관리
@@ -42,8 +42,8 @@ const handleShopClick = (shop) => {
   emit("shop-click", shop);
 };
 
-const handleParticipantClick = (partnerUser) => {
-  emit("participant-click", partnerUser);
+const handlePartnerUserClick = (partnerUser) => {
+  emit("partnerUser-click", partnerUser);
 };
 
 const closeModal = () => {
@@ -210,7 +210,7 @@ const gridColsClass = computed(() => {
               v-for="partnerUser in shop.partnerUsersData"
               :key="partnerUser.id"
               class="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity border border-gray-200 rounded-full p-1.5"
-              @click.stop="handleParticipantClick(partnerUser)"
+              @click.stop="handlePartnerUserClick(partnerUser)"
             >
               <!-- 작가 아바타 -->
               <div

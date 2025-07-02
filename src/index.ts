@@ -38,6 +38,7 @@ import {
   IcClose,
 } from "./components/ElementIcons/index";
 
+import { withMoremoreWrapper } from "./components/withMoremoreWrapper";
 import type { App } from "vue";
 
 // 타입 imports & exports
@@ -47,79 +48,116 @@ export type * from "./types/components";
 // 스타일 import
 import "./style.css";
 
-// 개별 컴포넌트 export
-export { AdminCreateCards, UserCreateCards, TabGroup, Swiper };
+// wrapped 컴포넌트 생성
+const WrappedAdminCreateCards = withMoremoreWrapper(AdminCreateCards);
+const WrappedUserCreateCards = withMoremoreWrapper(UserCreateCards);
+const WrappedTabGroup = withMoremoreWrapper(TabGroup);
+const WrappedSwiper = withMoremoreWrapper(Swiper);
+const WrappedElementIcon = withMoremoreWrapper(ElementIcon);
+const WrappedIcApp = withMoremoreWrapper(IcApp);
+const WrappedIcChart = withMoremoreWrapper(IcChart);
+const WrappedIcHelp = withMoremoreWrapper(IcHelp);
+const WrappedIcInfo = withMoremoreWrapper(IcInfo);
+const WrappedIcNotification = withMoremoreWrapper(IcNotification);
+const WrappedIcOption = withMoremoreWrapper(IcOption);
+const WrappedIcPayback = withMoremoreWrapper(IcPayback);
+const WrappedIcPerson = withMoremoreWrapper(IcPerson);
+const WrappedIcPlane = withMoremoreWrapper(IcPlane);
+const WrappedIcUpdate = withMoremoreWrapper(IcUpdate);
+const WrappedIcSetting = withMoremoreWrapper(IcSetting);
+const WrappedIcMedia = withMoremoreWrapper(IcMedia);
+const WrappedIcLink = withMoremoreWrapper(IcLink);
+const WrappedIcArrowLeft = withMoremoreWrapper(IcArrowLeft);
+const WrappedIcArrowRight = withMoremoreWrapper(IcArrowRight);
+const WrappedIcDown = withMoremoreWrapper(IcDown);
+const WrappedIcCopy = withMoremoreWrapper(IcCopy);
+const WrappedIcDelete = withMoremoreWrapper(IcDelete);
+const WrappedIcPlus = withMoremoreWrapper(IcPlus);
+const WrappedIcMoreVertical = withMoremoreWrapper(IcMoreVertical);
+const WrappedIcCancleFill = withMoremoreWrapper(IcCancleFill);
+const WrappedIcChecked = withMoremoreWrapper(IcChecked);
+const WrappedIcSparkle = withMoremoreWrapper(IcSparkle);
+const WrappedIcPreview = withMoremoreWrapper(IcPreview);
+const WrappedIcLoadingPrimary = withMoremoreWrapper(IcLoadingPrimary);
+const WrappedIcLayer = withMoremoreWrapper(IcLayer);
+const WrappedIcCta = withMoremoreWrapper(IcCta);
+const WrappedIcSearch = withMoremoreWrapper(IcSearch);
+const WrappedIcClose = withMoremoreWrapper(IcClose);
 
-// ElementIcons export
+// 개별 컴포넌트 export
 export {
-  ElementIcon,
-  IcApp,
-  IcChart,
-  IcHelp,
-  IcInfo,
-  IcNotification,
-  IcOption,
-  IcPayback,
-  IcPerson,
-  IcPlane,
-  IcUpdate,
-  IcSetting,
-  IcMedia,
-  IcLink,
-  IcArrowLeft,
-  IcArrowRight,
-  IcDown,
-  IcCopy,
-  IcDelete,
-  IcPlus,
-  IcMoreVertical,
-  IcCancleFill,
-  IcChecked,
-  IcSparkle,
-  IcPreview,
-  IcLoadingPrimary,
-  IcLayer,
-  IcSearch,
-  IcClose,
-  IcCta,
+  WrappedAdminCreateCards as AdminCreateCards,
+  WrappedUserCreateCards as UserCreateCards,
+  WrappedTabGroup as TabGroup,
+  WrappedSwiper as Swiper,
+  WrappedElementIcon as ElementIcon,
+  WrappedIcApp as IcApp,
+  WrappedIcChart as IcChart,
+  WrappedIcHelp as IcHelp,
+  WrappedIcInfo as IcInfo,
+  WrappedIcNotification as IcNotification,
+  WrappedIcOption as IcOption,
+  WrappedIcPayback as IcPayback,
+  WrappedIcPerson as IcPerson,
+  WrappedIcPlane as IcPlane,
+  WrappedIcUpdate as IcUpdate,
+  WrappedIcSetting as IcSetting,
+  WrappedIcMedia as IcMedia,
+  WrappedIcLink as IcLink,
+  WrappedIcArrowLeft as IcArrowLeft,
+  WrappedIcArrowRight as IcArrowRight,
+  WrappedIcDown as IcDown,
+  WrappedIcCopy as IcCopy,
+  WrappedIcDelete as IcDelete,
+  WrappedIcPlus as IcPlus,
+  WrappedIcMoreVertical as IcMoreVertical,
+  WrappedIcCancleFill as IcCancleFill,
+  WrappedIcChecked as IcChecked,
+  WrappedIcSparkle as IcSparkle,
+  WrappedIcPreview as IcPreview,
+  WrappedIcLoadingPrimary as IcLoadingPrimary,
+  WrappedIcLayer as IcLayer,
+  WrappedIcCta as IcCta,
+  WrappedIcSearch as IcSearch,
+  WrappedIcClose as IcClose,
 };
 
 // 컴포넌트 목록
 const components = [
-  AdminCreateCards,
-  UserCreateCards,
-  TabGroup,
-  Swiper,
-  ElementIcon,
-  IcApp,
-  IcChart,
-  IcHelp,
-  IcInfo,
-  IcNotification,
-  IcOption,
-  IcPayback,
-  IcPerson,
-  IcPlane,
-  IcUpdate,
-  IcSetting,
-  IcMedia,
-  IcLink,
-  IcArrowLeft,
-  IcArrowRight,
-  IcDown,
-  IcCopy,
-  IcDelete,
-  IcPlus,
-  IcMoreVertical,
-  IcCancleFill,
-  IcChecked,
-  IcSparkle,
-  IcPreview,
-  IcLoadingPrimary,
-  IcLayer,
-  IcSearch,
-  IcClose,
-  IcCta,
+  WrappedAdminCreateCards,
+  WrappedUserCreateCards,
+  WrappedTabGroup,
+  WrappedSwiper,
+  WrappedElementIcon,
+  WrappedIcApp,
+  WrappedIcChart,
+  WrappedIcHelp,
+  WrappedIcInfo,
+  WrappedIcNotification,
+  WrappedIcOption,
+  WrappedIcPayback,
+  WrappedIcPerson,
+  WrappedIcPlane,
+  WrappedIcUpdate,
+  WrappedIcSetting,
+  WrappedIcMedia,
+  WrappedIcLink,
+  WrappedIcArrowLeft,
+  WrappedIcArrowRight,
+  WrappedIcDown,
+  WrappedIcCopy,
+  WrappedIcDelete,
+  WrappedIcPlus,
+  WrappedIcMoreVertical,
+  WrappedIcCancleFill,
+  WrappedIcChecked,
+  WrappedIcSparkle,
+  WrappedIcPreview,
+  WrappedIcLoadingPrimary,
+  WrappedIcLayer,
+  WrappedIcSearch,
+  WrappedIcClose,
+  WrappedIcCta,
 ];
 
 // 플러그인 옵션 타입

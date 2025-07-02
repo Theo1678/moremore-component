@@ -113,7 +113,7 @@ const isSubCategorySelected = (categoryId, subCategoryId) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 flex moremore-component">
+  <div class="min-h-screen bg-gray-50 flex">
     <!-- 좌측 사이드바 네비게이션 (모든 화면 크기에서 고정) -->
     <aside
       :class="[

@@ -8,9 +8,9 @@ export default {
   // 전역 스타일 비활성화 (라이브러리용)
   corePlugins: {
     container: false, // container 클래스 비활성화 (전역 충돌 방지)
+    // preflight: false, // Tailwind의 기본 리셋 스타일 비활성화
   },
-  // 모든 클래스에 prefix 추가 (선택사항)
-  // prefix: 'mmc-',
+  important: ".moremore-component", // 모든 Tailwind 클래스에 .moremore-component 스코프 적용
   theme: {
     extend: {
       fontFamily: {

@@ -3,10 +3,12 @@ import MainLayout from "./views/MainLayout.vue";
 </script>
 
 <template>
-  <MainLayout />
+  <div class="moremore-component">
+    <MainLayout />
+  </div>
 </template>
 
-<style scoped>
+<style>
 /* App.vue 기본 스타일 */
 /* 테스트 */
 </style>

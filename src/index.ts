@@ -1,10 +1,10 @@
 // 컴포넌트 imports
-import AdminCreateCards from "./components/Cards/AdminCreateCards.vue";
-import UserCreateCards from "./components/Cards/UserCreateCards.vue";
-import TabGroup from "./components/Tabs/TabGroup.vue";
-import Swiper from "./components/header/Swiper.vue";
+import OriginalAdminCreateCards from "./components/Cards/AdminCreateCards.vue";
+import OriginalUserCreateCards from "./components/Cards/UserCreateCards.vue";
+import OriginalTabGroup from "./components/Tabs/TabGroup.vue";
+import OriginalSwiper from "./components/header/Swiper.vue";
 
-// ElementIcons imports
+// ElementIcons imports (CSS가 필요없는 아이콘 컴포넌트들)
 import {
   ElementIcon,
   IcApp,
@@ -38,126 +38,129 @@ import {
   IcClose,
 } from "./components/ElementIcons/index";
 
-import { withMoremoreWrapper } from "./components/withMoremoreWrapper";
-import type { App } from "vue";
+import type { App, Component } from "vue";
+import { h, defineComponent } from "vue";
 
 // 타입 imports & exports
 export type * from "./types/index";
-export type * from "./types/components";
 
 // 스타일 import
 import "./style.css";
 
-// wrapped 컴포넌트 생성
-const WrappedAdminCreateCards = withMoremoreWrapper(AdminCreateCards);
-const WrappedUserCreateCards = withMoremoreWrapper(UserCreateCards);
-const WrappedTabGroup = withMoremoreWrapper(TabGroup);
-const WrappedSwiper = withMoremoreWrapper(Swiper);
-const WrappedElementIcon = withMoremoreWrapper(ElementIcon);
-const WrappedIcApp = withMoremoreWrapper(IcApp);
-const WrappedIcChart = withMoremoreWrapper(IcChart);
-const WrappedIcHelp = withMoremoreWrapper(IcHelp);
-const WrappedIcInfo = withMoremoreWrapper(IcInfo);
-const WrappedIcNotification = withMoremoreWrapper(IcNotification);
-const WrappedIcOption = withMoremoreWrapper(IcOption);
-const WrappedIcPayback = withMoremoreWrapper(IcPayback);
-const WrappedIcPerson = withMoremoreWrapper(IcPerson);
-const WrappedIcPlane = withMoremoreWrapper(IcPlane);
-const WrappedIcUpdate = withMoremoreWrapper(IcUpdate);
-const WrappedIcSetting = withMoremoreWrapper(IcSetting);
-const WrappedIcMedia = withMoremoreWrapper(IcMedia);
-const WrappedIcLink = withMoremoreWrapper(IcLink);
-const WrappedIcArrowLeft = withMoremoreWrapper(IcArrowLeft);
-const WrappedIcArrowRight = withMoremoreWrapper(IcArrowRight);
-const WrappedIcDown = withMoremoreWrapper(IcDown);
-const WrappedIcCopy = withMoremoreWrapper(IcCopy);
-const WrappedIcDelete = withMoremoreWrapper(IcDelete);
-const WrappedIcPlus = withMoremoreWrapper(IcPlus);
-const WrappedIcMoreVertical = withMoremoreWrapper(IcMoreVertical);
-const WrappedIcCancleFill = withMoremoreWrapper(IcCancleFill);
-const WrappedIcChecked = withMoremoreWrapper(IcChecked);
-const WrappedIcSparkle = withMoremoreWrapper(IcSparkle);
-const WrappedIcPreview = withMoremoreWrapper(IcPreview);
-const WrappedIcLoadingPrimary = withMoremoreWrapper(IcLoadingPrimary);
-const WrappedIcLayer = withMoremoreWrapper(IcLayer);
-const WrappedIcCta = withMoremoreWrapper(IcCta);
-const WrappedIcSearch = withMoremoreWrapper(IcSearch);
-const WrappedIcClose = withMoremoreWrapper(IcClose);
+// Wrapper 함수 - CSS가 필요한 컴포넌트만 .moremore-component로 감싸기
+function wrapWithMoremore(components: Record<string, Component>) {
+  const wrapped: Record<string, Component> = {};
 
-// 개별 컴포넌트 export
-export {
-  WrappedAdminCreateCards as AdminCreateCards,
-  WrappedUserCreateCards as UserCreateCards,
-  WrappedTabGroup as TabGroup,
-  WrappedSwiper as Swiper,
-  WrappedElementIcon as ElementIcon,
-  WrappedIcApp as IcApp,
-  WrappedIcChart as IcChart,
-  WrappedIcHelp as IcHelp,
-  WrappedIcInfo as IcInfo,
-  WrappedIcNotification as IcNotification,
-  WrappedIcOption as IcOption,
-  WrappedIcPayback as IcPayback,
-  WrappedIcPerson as IcPerson,
-  WrappedIcPlane as IcPlane,
-  WrappedIcUpdate as IcUpdate,
-  WrappedIcSetting as IcSetting,
-  WrappedIcMedia as IcMedia,
-  WrappedIcLink as IcLink,
-  WrappedIcArrowLeft as IcArrowLeft,
-  WrappedIcArrowRight as IcArrowRight,
-  WrappedIcDown as IcDown,
-  WrappedIcCopy as IcCopy,
-  WrappedIcDelete as IcDelete,
-  WrappedIcPlus as IcPlus,
-  WrappedIcMoreVertical as IcMoreVertical,
-  WrappedIcCancleFill as IcCancleFill,
-  WrappedIcChecked as IcChecked,
-  WrappedIcSparkle as IcSparkle,
-  WrappedIcPreview as IcPreview,
-  WrappedIcLoadingPrimary as IcLoadingPrimary,
-  WrappedIcLayer as IcLayer,
-  WrappedIcCta as IcCta,
-  WrappedIcSearch as IcSearch,
-  WrappedIcClose as IcClose,
+  Object.entries(components).forEach(([name, component]) => {
+    wrapped[name] = defineComponent({
+      name: `Wrapped${name}`,
+      setup(props, { attrs, slots }) {
+        return () =>
+          h(
+            "div",
+            {
+              class: "moremore-component",
+            },
+            [
+              h(
+                component,
+                {
+                  ...props,
+                  ...attrs,
+                },
+                slots
+              ),
+            ]
+          );
+      },
+    });
+  });
+
+  return wrapped;
+}
+
+// CSS가 필요한 컴포넌트들만 모아서 wrapping
+const componentsNeedingCSS = {
+  AdminCreateCards: OriginalAdminCreateCards,
+  UserCreateCards: OriginalUserCreateCards,
+  TabGroup: OriginalTabGroup,
+  Swiper: OriginalSwiper,
 };
 
-// 컴포넌트 목록
+// CSS가 필요한 컴포넌트들만 wrapping
+const wrappedComponents = wrapWithMoremore(componentsNeedingCSS);
+
+// 개별 컴포넌트 export - CSS가 필요한 컴포넌트는 wrapped 버전으로, 아이콘은 그대로
+export const { AdminCreateCards, UserCreateCards, TabGroup, Swiper } =
+  wrappedComponents;
+
+// ElementIcons는 그대로 export
+export {
+  ElementIcon,
+  IcApp,
+  IcChart,
+  IcHelp,
+  IcInfo,
+  IcNotification,
+  IcOption,
+  IcPayback,
+  IcPerson,
+  IcPlane,
+  IcUpdate,
+  IcSetting,
+  IcMedia,
+  IcLink,
+  IcArrowLeft,
+  IcArrowRight,
+  IcDown,
+  IcCopy,
+  IcDelete,
+  IcPlus,
+  IcMoreVertical,
+  IcCancleFill,
+  IcChecked,
+  IcSparkle,
+  IcPreview,
+  IcLoadingPrimary,
+  IcLayer,
+  IcCta,
+  IcSearch,
+  IcClose,
+};
+
+// 모든 컴포넌트 목록 (wrapped + 아이콘)
 const components = [
-  WrappedAdminCreateCards,
-  WrappedUserCreateCards,
-  WrappedTabGroup,
-  WrappedSwiper,
-  WrappedElementIcon,
-  WrappedIcApp,
-  WrappedIcChart,
-  WrappedIcHelp,
-  WrappedIcInfo,
-  WrappedIcNotification,
-  WrappedIcOption,
-  WrappedIcPayback,
-  WrappedIcPerson,
-  WrappedIcPlane,
-  WrappedIcUpdate,
-  WrappedIcSetting,
-  WrappedIcMedia,
-  WrappedIcLink,
-  WrappedIcArrowLeft,
-  WrappedIcArrowRight,
-  WrappedIcDown,
-  WrappedIcCopy,
-  WrappedIcDelete,
-  WrappedIcPlus,
-  WrappedIcMoreVertical,
-  WrappedIcCancleFill,
-  WrappedIcChecked,
-  WrappedIcSparkle,
-  WrappedIcPreview,
-  WrappedIcLoadingPrimary,
-  WrappedIcLayer,
-  WrappedIcSearch,
-  WrappedIcClose,
-  WrappedIcCta,
+  ...Object.values(wrappedComponents),
+  ElementIcon,
+  IcApp,
+  IcChart,
+  IcHelp,
+  IcInfo,
+  IcNotification,
+  IcOption,
+  IcPayback,
+  IcPerson,
+  IcPlane,
+  IcUpdate,
+  IcSetting,
+  IcMedia,
+  IcLink,
+  IcArrowLeft,
+  IcArrowRight,
+  IcDown,
+  IcCopy,
+  IcDelete,
+  IcPlus,
+  IcMoreVertical,
+  IcCancleFill,
+  IcChecked,
+  IcSparkle,
+  IcPreview,
+  IcLoadingPrimary,
+  IcLayer,
+  IcCta,
+  IcSearch,
+  IcClose,
 ];
 
 // 플러그인 옵션 타입
@@ -170,16 +173,14 @@ const MoremoreComponent = {
   install(app: App, options: MoremoreComponentOptions = {}) {
     // 전역 컴포넌트 등록
     components.forEach((component) => {
-      const componentName =
-        component.__name || component.name || "UnnamedComponent";
+      const componentName = component.name || "UnnamedComponent";
       app.component(componentName, component);
     });
 
     // 전역 옵션 설정 (필요시)
     if (options.prefix) {
       components.forEach((component) => {
-        const componentName =
-          component.__name || component.name || "UnnamedComponent";
+        const componentName = component.name || "UnnamedComponent";
         app.component(`${options.prefix}${componentName}`, component);
       });
     }

@@ -46,11 +46,6 @@ const handlePartnerUserClick = (partnerUser) => {
   emit("partnerUser-click", partnerUser);
 };
 
-const closeModal = () => {
-  isModalOpen.value = false;
-  selectedShop.value = null;
-};
-
 // 배지 색상 클래스 반환
 const getBadgeClasses = (statusMessage: StatusMessage) => {
   const baseClasses =
@@ -91,13 +86,13 @@ const getBadgeDotClasses = (statusMessage: StatusMessage) => {
 };
 
 // 이미지 에러 핸들러
-const handleImageError = (shopId) => {
-  imageErrors.value.add(shopId);
+const handleImageError = (collaborationId) => {
+  imageErrors.value.add(collaborationId);
 };
 
 // 이미지 표시 여부 확인
 const shouldShowImage = (shop) => {
-  return shop.image && !imageErrors.value.has(shop.id);
+  return shop.thumbImgUrl && !imageErrors.value.has(shop.collaborationId);
 };
 
 // 그리드 컬럼 클래스 계산

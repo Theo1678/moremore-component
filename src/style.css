@@ -1,8 +1,8 @@
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
+@tailwind components;
 
 .moremore-component {
+  @tailwind base;
   /* 변수 정의 */
   --moremore-primary: #3b82f6;
   --moremore-primary-dark: #1d4ed8;

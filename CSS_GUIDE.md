@@ -39,7 +39,7 @@ const shops = [
     description: "카드 설명",
     period: "모집기간: 2025.01.01~2025.01.31",
     image: "https://example.com/image.jpg",
-    participants: [],
+    PartnerUserData: [],
   },
 ];
 </script>

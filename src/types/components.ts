@@ -1,7 +1,7 @@
 import type { Component } from "vue";
 import type {
   Shop,
-  Participant,
+  PartnerUserData,
   Tab,
   SwiperItem,
   AutoplayOptions,
@@ -10,7 +10,7 @@ import type {
 // AdminCreateCards 컴포넌트 타입
 export interface AdminCreateCardsEmits {
   "shop-click": (shop: Shop) => void;
-  "participant-click": (participant: Participant) => void;
+  "partnerUser-click": (partnerUserData: PartnerUserData) => void;
 }
 
 // UserCreateCards 컴포넌트 타입
@@ -61,11 +61,6 @@ export interface SwiperPropsWithDefaults {
   showNavigation?: boolean;
   showPagination?: boolean;
   showScrollbar?: boolean;
-}
-
-// 내부 상태 타입들
-export interface ParticipantScrollState {
-  [shopId: string]: HTMLElement;
 }
 
 export interface ImageErrorState {

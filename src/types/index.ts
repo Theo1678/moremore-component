@@ -88,11 +88,6 @@ export interface SwiperProps {
 export interface ShopClickEvent {
   shop: Shop;
 }
-
-export interface ParticipantClickEvent {
-  participant: Participant;
-}
-
 export interface TabChangeEvent {
   tab: Tab;
 }

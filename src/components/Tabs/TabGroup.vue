@@ -50,7 +50,7 @@ const getTabClasses = (tab) => {
   if (isActive) {
     return `${baseClasses} bg-[#FFE8F0] border-[#F66D96] border-2`;
   } else {
-    return `${baseClasses} bg-white border-[#CFD3DA]`;
+    return `${baseClasses} bg-white border-[#CFD3DA] border-2`;
   }
 };
 

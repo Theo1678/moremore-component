@@ -44,8 +44,8 @@ const handleShopClick = (shop) => {
   emit("shop-click", shop);
 };
 
-const handleParticipantClick = (participant) => {
-  emit("participant-click", participant);
+const handleParticipantClick = (partnerUser) => {
+  emit("participant-click", partnerUser);
 };
 
 // 배지 점 색상 클래스 반환
@@ -103,7 +103,7 @@ const shouldShowImage = (shop) => {
                 <img
                   :src="shop.thumbImgUrl"
                   :alt="shop.marketName"
-                  @error="handleImageError(shop.id)"
+                  @error="handleImageError(shop.collaborationId)"
                   class="w-full h-full object-cover"
                 />
               </template>
@@ -208,10 +208,10 @@ const shouldShowImage = (shop) => {
                   <div
                     class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
                   >
-                    <template v-if="partnerUsers.avatar">
+                    <template v-if="partnerUsers.profileImgUrl">
                       <img
-                        :src="partnerUsers.avatar"
-                        :alt="partnerUsers.name"
+                        :src="partnerUsers.profileImgUrl"
+                        :alt="partnerUsers.nickName"
                         class="w-full h-full object-cover"
                       />
                     </template>
@@ -238,7 +238,7 @@ const shouldShowImage = (shop) => {
                   <!-- 작가 이름 -->
                   <span
                     class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center text-[#303040]"
-                    >{{ partnerUsers.name }}</span
+                    >{{ partnerUsers.nickName }}</span
                   >
                 </div>
               </template>

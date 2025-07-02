@@ -11,10 +11,10 @@ export type StatusMessage =
 // 참여작가 타입
 export interface Participant {
   id: string | number;
-  name: string;
-  image?: string;
+  nickName: string;
+  profileImgUrl?: string;
   avatar?: string;
-  role?: string;
+  description?: string;
 }
 
 // 스크롤 방향 타입

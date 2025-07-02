@@ -220,28 +220,26 @@ const handleParticipantClick = (participant) => {
           <pre class="text-sm text-gray-800 overflow-x-auto">
 const adminCardsData = [
   {
-    id: 1,
-    title: "여름이었다 콜라보방은 두줄까지만보이게해.",
-    badge: "마켓종료",
-    badgeColor: "gray",
+    collaborationId: 1,
+    marketName: "여름이었다 콜라보방은 두줄까지만보이게해.",
+    statusMessage: "마켓종료",
     description: "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다.",
     period: "모집기간: 2025.06.11~2025.07.01",
-    image: null,
-    participants: [
+    thumbImgUrl: null,
+    partnerUsersData: [
       { id: 1, name: "나초", avatar: null },
       { id: 2, name: "치즈", avatar: null },
       { id: 3, name: "글로리아", avatar: null }
     ]
   },
   {
-    id: 2,
-    title: "가을 컬렉션 특별전",
-    badge: "마켓오픈",
-    badgeColor: "yellow",
+    collaborationId: 2,
+    marketName: "가을 컬렉션 특별전",
+    statusMessage: "마켓오픈",
     description: "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다.",
     period: "모집기간:2025.07.01~2025.07.31",
-    image: null,
-    participants: [
+    thumbImgUrl: null,
+    partnerUsersData: [
       { id: 1, name: "나초", avatar: null },
       { id: 2, name: "치즈", avatar: null }
     ]
@@ -260,29 +258,27 @@ const adminCardsData = [
           <pre class="text-sm text-gray-800 overflow-x-auto">
 const userCardsData = [
   {
-    id: 1,
-    title: "서랍배 v.20 스팸프투어 하심 분",
+    collaborationId: 1,
+    marketName: "서랍배 v.20 스팸프투어 하심 분",
     description: "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
-    badge: "모집중",
-    badgeColor: "blue",
+    statusMessage: "모집중",
     period: "모집기간: 2025.06.11~2025.07.01",
     hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
-    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
-    participants: [
+    thumbImgUrl: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    partnerUsersData: [
       { id: 1, name: "하찌네(방장)", avatar: null },
       { id: 2, name: "참여자 (5/10)", avatar: null }
     ]
   },
   {
-    id: 2,
-    title: "서랍배 v.20 스팸프투어 하심 분",
+    collaborationId: 2,
+    marketName: "서랍배 v.20 스팸프투어 하심 분",
     description: "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
-    badge: "모집마감",
-    badgeColor: "gray",
+    statusMessage: "모집마감",
     period: "모집기간: 2025.06.11~2025.07.01",
     hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
-    image: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
-    participants: [
+    thumbImgUrl: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
+    partnerUsersData: [
       { id: 1, name: "하찌네(방장)", avatar: null },
       { id: 2, name: "참여자 (1/10)", avatar: null }
     ]
@@ -296,21 +292,27 @@ const userCardsData = [
           <h4 class="font-bold text-blue-800 mb-2">TypeScript 인터페이스:</h4>
           <pre class="text-sm text-blue-700">
 interface Participant {
-  id: number;
+  id: string | number;
   name: string;
-  avatar: string | null;
+  avatar?: string;
 }
 
+type StatusMessage =
+  | "모집예정"
+  | "모집중"
+  | "모집마감"
+  | "마켓오픈"
+  | "마켓종료";
+
 interface Shop {
-  id: number;
-  title: string;
-  badge: string;
-  badgeColor: 'blue' | 'green' | 'yellow' | 'gray';
-  description: string;
-  period: string;
-  image: string | null;
-  participants: Participant[];
-  hashtags?: string; // UserCards에만 존재
+  collaborationId: string | number;
+  marketName: string;
+  thumbImgUrl?: string;
+  statusMessage?: StatusMessage;
+  description?: string;
+  period?: string;
+  hashtags?: string;
+  partnerUsersData?: Participant[];
 }
         </pre
           >

@@ -42,8 +42,8 @@ const handleShopClick = (shop) => {
   emit("shop-click", shop);
 };
 
-const handleParticipantClick = (participant) => {
-  emit("participant-click", participant);
+const handleParticipantClick = (partnerUser) => {
+  emit("participant-click", partnerUser);
 };
 
 const closeModal = () => {
@@ -216,10 +216,10 @@ const gridColsClass = computed(() => {
               <div
                 class="w-5 h-5 rounded-full border border-gray-300 bg-white overflow-hidden flex-shrink-0"
               >
-                <template v-if="partnerUser.avatar">
+                <template v-if="partnerUser.profileImgUrl">
                   <img
-                    :src="partnerUser.avatar"
-                    :alt="partnerUser.name"
+                    :src="partnerUser.profileImgUrl"
+                    :alt="partnerUser.nickName"
                     class="w-full h-full object-cover"
                   />
                 </template>
@@ -242,7 +242,7 @@ const gridColsClass = computed(() => {
 
               <!-- 작가 이름 -->
               <span class="text-xs text-[#060608] truncate">
-                {{ partnerUser.name }}
+                {{ partnerUser.nickName }}
               </span>
             </div>
           </div>

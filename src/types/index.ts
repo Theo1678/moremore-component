@@ -30,7 +30,6 @@ export interface Shop {
   description?: string;
   period?: string;
   hashtags?: string;
-  [key: string]: any; // 추가 속성 허용
 }
 // AdminCreateCards Props 타입
 export interface AdminCreateCardsProps {

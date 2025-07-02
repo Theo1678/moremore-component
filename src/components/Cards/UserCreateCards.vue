@@ -122,7 +122,7 @@ const gridColsClass = computed(() => {
     <div :class="gridColsClass">
       <div
         v-for="shop in displayedShops"
-        :key="shop.id"
+        :key="shop.collaborationId"
         class="bg-white rounded-lg overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-md hover:scale-[1.02]"
         @click="handleShopClick(shop)"
       >
@@ -130,9 +130,9 @@ const gridColsClass = computed(() => {
         <div class="relative aspect-[4/3] rounded-lg border border-gray-200">
           <template v-if="shouldShowImage(shop)">
             <img
-              :src="shop.image"
-              :alt="shop.title"
-              @error="handleImageError(shop.id)"
+              :src="shop.thumbImgUrl"
+              :alt="shop.marketName"
+              @error="handleImageError(shop.collaborationId)"
               class="w-full h-full object-cover"
             />
           </template>

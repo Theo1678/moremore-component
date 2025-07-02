@@ -1,7 +1,12 @@
 // 공통 타입 정의
 
 // 배지 색상 타입
-export type BadgeColor = "blue" | "green" | "yellow" | "gray";
+export type StatusMessage =
+  | "모집예정"
+  | "모집중"
+  | "모집마감"
+  | "마켓오픈"
+  | "마켓종료";
 
 // 참여작가 타입
 export interface Participant {
@@ -17,18 +22,16 @@ export type ScrollDirection = "left" | "right";
 
 // 상점 타입
 export interface Shop {
-  id: string | number;
-  title: string;
-  image?: string;
-  badge?: string;
-  badgeColor?: BadgeColor;
-  participants?: Participant[];
+  collaborationId: string | number;
+  marketName: string;
+  thumbImgUrl?: string;
+  statusMessage?: StatusMessage;
+  partnerUsersData?: Participant[];
   description?: string;
   period?: string;
   hashtags?: string;
   [key: string]: any; // 추가 속성 허용
 }
-
 // AdminCreateCards Props 타입
 export interface AdminCreateCardsProps {
   shops: Shop[];

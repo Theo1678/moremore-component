@@ -4,8 +4,8 @@ import Swiper from "../header/Swiper.vue";
 import type {
   Shop,
   Participant,
-  BadgeColor,
   ScrollDirection,
+  StatusMessage,
 } from "../../types/index";
 
 // Props 정의
@@ -48,33 +48,21 @@ const handleParticipantClick = (participant) => {
   emit("participant-click", participant);
 };
 
-// 배지 색상 클래스 반환
-const getBadgeClasses = (badgeColor) => {
-  const baseClasses = "flex items-center gap-2 px-2 py-1 rounded-md";
-
-  switch (badgeColor) {
-    case "blue":
-      return `${baseClasses}`;
-    case "green":
-      return `${baseClasses}`;
-    case "yellow":
-      return `${baseClasses}`;
-    case "gray":
-    default:
-      return `${baseClasses}`;
-  }
-};
-
 // 배지 점 색상 클래스 반환
-const getBadgeDotClasses = (badgeColor) => {
+const getBadgeDotClasses = (statusMessage: StatusMessage) => {
   const baseClasses = "w-2 h-2 rounded-full";
 
-  switch (badgeColor) {
-    case "yellow":
-      return `${baseClasses} bg-yellow-400`;
-    case "gray":
+  switch (statusMessage) {
+    case "모집중":
+      return `${baseClasses} bg-[#0E6CF5]`;
+    case "모집마감":
+      return `${baseClasses} bg-[#00AC87]`;
+    case "마켓오픈":
+      return `${baseClasses} bg-[#FFC14D]`;
+    case "마켓종료":
+      return `${baseClasses} bg-[#ABAFB9]`;
     default:
-      return `${baseClasses} bg-gray-400`;
+      return `${baseClasses} bg-[#ABAFB9]`;
   }
 };
 
@@ -95,7 +83,7 @@ const shouldShowImage = (shop) => {
   >
     <div
       v-for="shop in displayedShops"
-      :key="shop.id"
+      :key="shop.collaborationId"
       class="cursor-pointer transition-transform hover:scale-105 h-full max-w-[380px]"
     >
       <div
@@ -113,8 +101,8 @@ const shouldShowImage = (shop) => {
             >
               <template v-if="shouldShowImage(shop)">
                 <img
-                  :src="shop.image"
-                  :alt="shop.title"
+                  :src="shop.thumbImgUrl"
+                  :alt="shop.marketName"
                   @error="handleImageError(shop.id)"
                   class="w-full h-full object-cover"
                 />
@@ -155,16 +143,15 @@ const shouldShowImage = (shop) => {
                 <h2
                   class="font-pretendard text-[17px] font-bold leading-[22px] line-clamp-2 text-[#060608]"
                 >
-                  {{ shop.title }}
+                  {{ shop.marketName }}
                 </h2>
                 <div
-                  v-if="shop.badge"
-                  :class="getBadgeClasses(shop.badgeColor)"
-                  class="flex-shrink-0"
+                  v-if="shop.statusMessage"
+                  class="flex items-center gap-2 px-2 py-1 rounded-md flex-shrink-0"
                 >
-                  <div :class="getBadgeDotClasses(shop.badgeColor)"></div>
+                  <div :class="getBadgeDotClasses(shop.statusMessage)"></div>
                   <span class="text-xs font-medium text-[#303040]">{{
-                    shop.badge
+                    shop.statusMessage
                   }}</span>
                 </div>
               </div>
@@ -201,30 +188,30 @@ const shouldShowImage = (shop) => {
 
           <!-- Swiper를 사용한 참여작가 목록 -->
           <div
-            v-if="shop.participants && shop.participants.length > 0"
-            :class="shop.participants.length > 4 ? 'px-8' : ''"
+            v-if="shop.partnerUsersData && shop.partnerUsersData.length > 0"
+            :class="shop.partnerUsersData.length > 4 ? 'px-8' : ''"
           >
             <Swiper
-              :items="shop.participants"
+              :items="shop.partnerUsersData"
               :multiple="true"
               :slidesPerView="4"
               :spaceBetween="8"
               :show-pagination="false"
-              :showNavigation="shop.participants.length > 4"
+              :showNavigation="shop.partnerUsersData.length > 4"
             >
-              <template #default="{ item: participant }">
+              <template #default="{ item: partnerUsers }">
                 <div
                   class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-                  @click.stop="handleParticipantClick(participant)"
+                  @click.stop="handleParticipantClick(partnerUsers)"
                 >
                   <!-- 작가 아바타 -->
                   <div
                     class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
                   >
-                    <template v-if="participant.avatar">
+                    <template v-if="partnerUsers.avatar">
                       <img
-                        :src="participant.avatar"
-                        :alt="participant.name"
+                        :src="partnerUsers.avatar"
+                        :alt="partnerUsers.name"
                         class="w-full h-full object-cover"
                       />
                     </template>
@@ -251,7 +238,7 @@ const shouldShowImage = (shop) => {
                   <!-- 작가 이름 -->
                   <span
                     class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center text-[#303040]"
-                    >{{ participant.name }}</span
+                    >{{ partnerUsers.name }}</span
                   >
                 </div>
               </template>

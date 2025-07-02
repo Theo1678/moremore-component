@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import type { Shop, Participant, BadgeColor } from "../../types/index";
+import type { Shop, Participant, StatusMessage } from "../../types/index";
 
 // Props 정의
 const props = withDefaults(
@@ -52,39 +52,39 @@ const closeModal = () => {
 };
 
 // 배지 색상 클래스 반환
-const getBadgeClasses = (badgeColor) => {
+const getBadgeClasses = (statusMessage: StatusMessage) => {
   const baseClasses =
     "inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium";
 
-  switch (badgeColor) {
-    case "blue":
-      return `${baseClasses} bg-[#EBF5FF]`;
-    case "yellow":
-      return `${baseClasses} bg-[#FFF5E2]`;
-    case "green":
-      return `${baseClasses} bg-[#EBF8F5]`;
-    case "purple":
+  switch (statusMessage) {
+    case "모집예정":
       return `${baseClasses} bg-[#EFEBFB]`;
-    case "gray":
+    case "모집중":
+      return `${baseClasses} bg-[#EBF5FF]`;
+    case "모집마감":
+      return `${baseClasses} bg-[#EBF8F5]`;
+    case "마켓오픈":
+      return `${baseClasses} bg-[#FFF5E2]`;
+    case "마켓종료":
     default:
       return `${baseClasses} bg-[#F0F2F4]`;
   }
 };
 
 // 배지 점 색상 클래스 반환
-const getBadgeDotClasses = (badgeColor) => {
+const getBadgeDotClasses = (statusMessage: StatusMessage) => {
   const baseClasses = "w-1.5 h-1.5 rounded-full";
 
-  switch (badgeColor) {
-    case "blue":
-      return `${baseClasses} bg-[#0080FF]`;
-    case "yellow":
-      return `${baseClasses} bg-[#FFC14D]`;
-    case "green":
-      return `${baseClasses} bg-[#00AC87]`;
-    case "purple":
+  switch (statusMessage) {
+    case "모집예정":
       return `${baseClasses} bg-[#6540DE]`;
-    case "gray":
+    case "모집중":
+      return `${baseClasses} bg-[#0080FF]`;
+    case "모집마감":
+      return `${baseClasses} bg-[#00AC87]`;
+    case "마켓오픈":
+      return `${baseClasses} bg-[#FFC14D]`;
+    case "마켓종료":
     default:
       return `${baseClasses} bg-[#ABAFB9]`;
   }
@@ -165,19 +165,19 @@ const gridColsClass = computed(() => {
         <!-- 하단 정보 -->
         <div class="p-3 text-left">
           <!-- 배지 -->
-          <div v-if="shop.badge" class="mb-2">
+          <div v-if="shop.statusMessage" class="mb-2">
             <div
-              :class="getBadgeClasses(shop.badgeColor)"
+              :class="getBadgeClasses(shop.statusMessage)"
               class="text-[#303040]"
             >
-              <div :class="getBadgeDotClasses(shop.badgeColor)"></div>
-              {{ shop.badge }}
+              <div :class="getBadgeDotClasses(shop.statusMessage)"></div>
+              {{ shop.statusMessage }}
             </div>
           </div>
 
           <!-- 제목 -->
           <h3 class="text-sm font-bold text-[#060608] mb-2 line-clamp-1">
-            {{ shop.title }}
+            {{ shop.marketName }}
           </h3>
 
           <!-- 설명 -->
@@ -203,23 +203,23 @@ const gridColsClass = computed(() => {
 
           <!-- 참여작가 -->
           <div
-            v-if="shop.participants && shop.participants.length > 0"
+            v-if="shop.partnerUsersData && shop.partnerUsersData.length > 0"
             class="flex items-center justify-center gap-2"
           >
             <div
-              v-for="participant in shop.participants"
-              :key="participant.id"
+              v-for="partnerUser in shop.partnerUsersData"
+              :key="partnerUser.id"
               class="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity border border-gray-200 rounded-full p-1.5"
-              @click.stop="handleParticipantClick(participant)"
+              @click.stop="handleParticipantClick(partnerUser)"
             >
               <!-- 작가 아바타 -->
               <div
                 class="w-5 h-5 rounded-full border border-gray-300 bg-white overflow-hidden flex-shrink-0"
               >
-                <template v-if="participant.avatar">
+                <template v-if="partnerUser.avatar">
                   <img
-                    :src="participant.avatar"
-                    :alt="participant.name"
+                    :src="partnerUser.avatar"
+                    :alt="partnerUser.name"
                     class="w-full h-full object-cover"
                   />
                 </template>
@@ -242,7 +242,7 @@ const gridColsClass = computed(() => {
 
               <!-- 작가 이름 -->
               <span class="text-xs text-[#060608] truncate">
-                {{ participant.name }}
+                {{ partnerUser.name }}
               </span>
             </div>
           </div>

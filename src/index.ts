@@ -60,6 +60,10 @@ function wrapWithMoremore(components: Record<string, Component>) {
             "div",
             {
               class: "moremore-component",
+              style: {
+                width: "100%",
+                height: "100%",
+              },
             },
             [
               h(

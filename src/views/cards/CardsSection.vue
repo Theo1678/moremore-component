@@ -247,7 +247,7 @@ const adminCardsData = [
   {
     collaborationId: 1,
     marketName: "여름이었다 콜라보방은 두줄까지만보이게해.",
-    statusMessage: "마켓종료",
+    statusCode: "MARKET_END",
     description: "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다.",
     period: "모집기간: 2025.06.11~2025.07.01",
     thumbImgUrl: null,
@@ -260,7 +260,7 @@ const adminCardsData = [
   {
     collaborationId: 2,
     marketName: "가을 컬렉션 특별전",
-    statusMessage: "마켓오픈",
+    statusCode: "MARKET_ONGOING",
     description: "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다.",
     period: "모집기간:2025.07.01~2025.07.31",
     thumbImgUrl: null,
@@ -286,7 +286,7 @@ const userCardsData = [
     collaborationId: 1,
     marketName: "서랍배 v.20 스팸프투어 하심 분",
     description: "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
-    statusMessage: "모집중",
+    statusCode: "RECRUITING_ONGOING",
     period: "모집기간: 2025.06.11~2025.07.01",
     hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
     thumbImgUrl: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
@@ -299,7 +299,7 @@ const userCardsData = [
     collaborationId: 2,
     marketName: "서랍배 v.20 스팸프투어 하심 분",
     description: "귀여운 그림체에 정말 작업 하시는 분, 다구 스티커, 파티콘이나 대표 가능, 부드러운 색감 쓰시는 분 구해요",
-    statusMessage: "모집마감",
+    statusCode: "RECRUITING_END",
     period: "모집기간: 2025.06.11~2025.07.01",
     hashtags: "#가을 #시원함 #가을맘 #스팸프투어 #리얼 #파티콘 #스토리 #부들",
     thumbImgUrl: "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
@@ -324,18 +324,18 @@ interface PartnerUserData {
   description?: string;
 }
 
-type StatusMessage =
-  | "모집예정"
-  | "모집중"
-  | "모집마감"
-  | "마켓오픈"
-  | "마켓종료";
+type StatusCode =
+  | "RECRUITING_PENDING"
+  | "RECRUITING_ONGOING"
+  | "RECRUITING_END"
+  | "MARKET_ONGOING"
+  | "MARKET_END";
 
 interface Shop {
   collaborationId: string | number;
   marketName: string;
   thumbImgUrl?: string;
-  statusMessage?: StatusMessage;
+  statusCode?: StatusCode;
   description?: string;
   period?: string;
   hashtags?: string;

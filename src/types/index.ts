@@ -1,12 +1,12 @@
 // 공통 타입 정의
 
 // 배지 색상 타입
-export type StatusMessage =
-  | "모집예정"
-  | "모집중"
-  | "모집마감"
-  | "마켓오픈"
-  | "마켓종료";
+export type StatusCode =
+  | "RECRUITING_PENDING"
+  | "RECRUITING_ONGOING"
+  | "RECRUITING_END"
+  | "MARKET_ONGOING"
+  | "MARKET_END";
 
 // 참여작가 타입
 export interface PartnerUserData {
@@ -25,7 +25,7 @@ export interface Shop {
   collaborationId: string | number;
   marketName: string;
   thumbImgUrl?: string;
-  statusMessage?: StatusMessage;
+  statusCode?: StatusCode;
   partnerUsersData?: PartnerUserData[];
   description?: string;
   period?: string;

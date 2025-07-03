@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import type { Shop, PartnerUserData, StatusMessage } from "../../types/index";
+import type { Shop, PartnerUserData, StatusCode } from "../../types/index";
 import CardSkeleton from "./CardSkeleton.vue";
 
 // Props 정의
@@ -56,41 +56,58 @@ const handlePartnerUserClick = (partnerUser) => {
 };
 
 // 배지 색상 클래스 반환
-const getBadgeClasses = (statusMessage: StatusMessage) => {
+const getBadgeClasses = (statusCode: StatusCode) => {
   const baseClasses =
     "inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium";
 
-  switch (statusMessage) {
-    case "모집예정":
+  switch (statusCode) {
+    case "RECRUITING_PENDING":
       return `${baseClasses} bg-[#EFEBFB]`;
-    case "모집중":
+    case "RECRUITING_ONGOING":
       return `${baseClasses} bg-[#EBF5FF]`;
-    case "모집마감":
+    case "RECRUITING_END":
       return `${baseClasses} bg-[#EBF8F5]`;
-    case "마켓오픈":
+    case "MARKET_ONGOING":
       return `${baseClasses} bg-[#FFF5E2]`;
-    case "마켓종료":
+    case "MARKET_END":
     default:
       return `${baseClasses} bg-[#F0F2F4]`;
   }
 };
 
 // 배지 점 색상 클래스 반환
-const getBadgeDotClasses = (statusMessage: StatusMessage) => {
+const getBadgeDotClasses = (statusCode: StatusCode) => {
   const baseClasses = "w-1.5 h-1.5 rounded-full";
 
-  switch (statusMessage) {
-    case "모집예정":
+  switch (statusCode) {
+    case "RECRUITING_PENDING":
       return `${baseClasses} bg-[#6540DE]`;
-    case "모집중":
+    case "RECRUITING_ONGOING":
       return `${baseClasses} bg-[#0080FF]`;
-    case "모집마감":
+    case "RECRUITING_END":
       return `${baseClasses} bg-[#00AC87]`;
-    case "마켓오픈":
+    case "MARKET_ONGOING":
       return `${baseClasses} bg-[#FFC14D]`;
-    case "마켓종료":
+    case "MARKET_END":
     default:
       return `${baseClasses} bg-[#ABAFB9]`;
+  }
+};
+
+const getBadgeText = (statusCode: StatusCode) => {
+  switch (statusCode) {
+    case "RECRUITING_PENDING":
+      return "모집예정";
+    case "RECRUITING_ONGOING":
+      return "모집중";
+    case "RECRUITING_END":
+      return "모집마감";
+    case "MARKET_ONGOING":
+      return "마켓오픈";
+    case "MARKET_END":
+      return "마켓종료";
+    default:
+      return "모집예정";
   }
 };
 
@@ -173,13 +190,13 @@ const gridColsClass = computed(() => {
           <!-- 하단 정보 -->
           <div class="p-3 text-left">
             <!-- 배지 -->
-            <div v-if="shop.statusMessage" class="mb-2">
+            <div v-if="shop.statusCode" class="mb-2">
               <div
-                :class="getBadgeClasses(shop.statusMessage)"
+                :class="getBadgeClasses(shop.statusCode)"
                 class="text-[#303040]"
               >
-                <div :class="getBadgeDotClasses(shop.statusMessage)"></div>
-                {{ shop.statusMessage }}
+                <div :class="getBadgeDotClasses(shop.statusCode)"></div>
+                {{ getBadgeText(shop.statusCode) }}
               </div>
             </div>
 

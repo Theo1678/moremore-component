@@ -205,7 +205,7 @@ const shops = [
   {
     id: 1,
     title: "샘플 카드",
-    badge: "마켓오픈",
+    badge: "MARKET_ONGOING",
     badgeColor: "yellow",
     description: "카드 설명입니다.",
     period: "모집기간: 2025.01.01~2025.01.31",

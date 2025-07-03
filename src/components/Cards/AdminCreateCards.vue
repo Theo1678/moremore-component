@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 import Swiper from "../header/Swiper.vue";
-import type { Shop, PartnerUserData, StatusMessage } from "../../types/index";
+import type { Shop, PartnerUserData, StatusCode } from "../../types/index";
 import CardSkeleton from "./CardSkeleton.vue";
 
 // Props 정의
@@ -54,23 +54,40 @@ const handlePartnerUserClick = (partnerUser) => {
 };
 
 // 배지 점 색상 클래스 반환
-const getBadgeDotClasses = (statusMessage: StatusMessage) => {
+const getBadgeDotClasses = (statusCode: StatusCode) => {
   const baseClasses = "w-2 h-2 rounded-full";
-
-  switch (statusMessage) {
-    case "모집중":
+  switch (statusCode) {
+    case "RECRUITING_PENDING":
+      return `${baseClasses} bg-[#6540DE]`;
+    case "RECRUITING_ONGOING":
       return `${baseClasses} bg-[#0E6CF5]`;
-    case "모집마감":
+    case "RECRUITING_END":
       return `${baseClasses} bg-[#00AC87]`;
-    case "마켓오픈":
+    case "MARKET_ONGOING":
       return `${baseClasses} bg-[#FFC14D]`;
-    case "마켓종료":
+    case "MARKET_END":
       return `${baseClasses} bg-[#ABAFB9]`;
     default:
       return `${baseClasses} bg-[#ABAFB9]`;
   }
 };
 
+const getBadgeText = (statusCode: StatusCode) => {
+  switch (statusCode) {
+    case "RECRUITING_PENDING":
+      return "모집예정";
+    case "RECRUITING_ONGOING":
+      return "모집중";
+    case "RECRUITING_END":
+      return "모집마감";
+    case "MARKET_ONGOING":
+      return "마켓오픈";
+    case "MARKET_END":
+      return "마켓종료";
+    default:
+      return "모집예정";
+  }
+};
 // 이미지 에러 핸들러
 const handleImageError = (collaborationId) => {
   imageErrors.value.add(collaborationId);
@@ -159,12 +176,12 @@ const shouldShowImage = (shop) => {
                     {{ shop.marketName }}
                   </h2>
                   <div
-                    v-if="shop.statusMessage"
+                    v-if="shop.statusCode"
                     class="flex items-center gap-2 px-2 py-1 rounded-md flex-shrink-0"
                   >
-                    <div :class="getBadgeDotClasses(shop.statusMessage)"></div>
+                    <div :class="getBadgeDotClasses(shop.statusCode)"></div>
                     <span class="text-xs font-medium text-[#303040]">{{
-                      shop.statusMessage
+                      getBadgeText(shop.statusCode)
                     }}</span>
                   </div>
                 </div>

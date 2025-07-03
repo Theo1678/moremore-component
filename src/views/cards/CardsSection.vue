@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 import AdminCreateCards from "../../components/Cards/AdminCreateCards.vue";
 import UserCreateCards from "../../components/Cards/UserCreateCards.vue";
 import { adminCardsData, userCardsData } from "./cardsData.js";
@@ -10,6 +11,14 @@ const props = defineProps({
     default: "admin-cards",
   },
 });
+
+// 로딩 상태 관리
+const isLoading = ref(true);
+
+// 데이터 로딩 시뮬레이션
+setTimeout(() => {
+  isLoading.value = false;
+}, 1500);
 
 // 이벤트 핸들러
 const handleShopClick = (shop) => {
@@ -39,6 +48,7 @@ const handlePartnerUserClick = (partnerUser) => {
 
       <AdminCreateCards
         :shops="adminCardsData"
+        :loading="isLoading"
         @shop-click="handleShopClick"
         @partnerUser-click="handlePartnerUserClick"
       />
@@ -56,6 +66,7 @@ const handlePartnerUserClick = (partnerUser) => {
 
       <UserCreateCards
         :shops="userCardsData"
+        :loading="isLoading"
         @shop-click="handleShopClick"
         @partnerUser-click="handlePartnerUserClick"
       />
@@ -82,12 +93,14 @@ const handlePartnerUserClick = (partnerUser) => {
           <li>참여작가 5명 이상일 때 스크롤 네비게이션 지원</li>
           <li>좌우 스크롤 버튼으로 부드러운 스크롤 기능</li>
           <li>관리자 전용 UI/UX 최적화</li>
+          <li>스켈레톤 UI로 로딩 상태 표시</li>
         </ul>
 
         <h3 class="text-lg font-semibold mb-2">사용 예시</h3>
         <div class="bg-gray-100 p-3 rounded text-sm font-mono text-gray-700">
           &lt;AdminCreateCards<br />
           :shops="adminCardsData"<br />
+          :loading="isLoading"<br />
           @shop-click="handleShopClick"<br />
           @partnerUser-click="handlePartnerUserClick"<br />
           /&gt;
@@ -106,12 +119,14 @@ const handlePartnerUserClick = (partnerUser) => {
           <li>4열 그리드 기본 설정</li>
           <li>모바일 친화적 반응형 디자인</li>
           <li>사용자 친화적 인터페이스</li>
+          <li>스켈레톤 UI로 로딩 상태 표시</li>
         </ul>
 
         <h3 class="text-lg font-semibold mb-2">사용 예시</h3>
         <div class="bg-gray-100 p-3 rounded text-sm font-mono text-gray-700">
           &lt;UserCreateCards<br />
           :shops="userCardsData"<br />
+          :loading="isLoading"<br />
           :itemsPerRow="4"<br />
           @shop-click="handleShopClick"<br />
           @partnerUser-click="handlePartnerUserClick"<br />
@@ -146,6 +161,16 @@ const handlePartnerUserClick = (partnerUser) => {
                 <td class="border border-gray-300 px-4 py-2">[]</td>
                 <td class="border border-gray-300 px-4 py-2">
                   카드 데이터 배열
+                </td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 px-4 py-2 font-mono text-sm">
+                  loading
+                </td>
+                <td class="border border-gray-300 px-4 py-2">Boolean</td>
+                <td class="border border-gray-300 px-4 py-2">false</td>
+                <td class="border border-gray-300 px-4 py-2">
+                  로딩 상태 표시 여부
                 </td>
               </tr>
               <tr v-if="selectedSubCategory === 'user-cards'">

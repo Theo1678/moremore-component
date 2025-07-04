@@ -22,6 +22,7 @@ export { default as IcMoreVertical } from "./IcMoreVertical.vue";
 export { default as IcCancleFill } from "./IcCancleFill.vue";
 export { default as IcChecked } from "./IcChecked.vue";
 export { default as IcSparkle } from "./IcSparkle.vue";
+export { default as IcStock } from "./IcStock.vue";
 export { default as IcPreview } from "./IcPreview.vue";
 export { default as IcSearch } from "./IcSearch.vue";
 export { default as IcClose } from "./IcClose.vue";

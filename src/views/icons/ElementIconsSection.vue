@@ -67,6 +67,11 @@ const iconList = [
     description: "반짝이 아이콘",
   },
   {
+    name: "IcStock",
+    component: Icons.IcStock,
+    description: "저장 아이콘",
+  },
+  {
     name: "IcPreview",
     component: Icons.IcPreview,
     description: "미리보기 아이콘",

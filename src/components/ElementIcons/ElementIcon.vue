@@ -21,6 +21,7 @@
   <IcCancleFill v-else-if="elementIcon === 'IcCancleFill'" :color="color" />
   <IcChecked v-else-if="elementIcon === 'IcChecked'" :color="color" />
   <IcSparkle v-else-if="elementIcon === 'IcSparkle'" :color="color" />
+  <IcStock v-else-if="elementIcon === 'IcStock'" :color="color" />
   <IcPreview v-else-if="elementIcon === 'IcPreview'" :color="color" />
   <IcLoadingPrimary
     v-else-if="elementIcon === 'IcLoadingPrimary'"
@@ -67,6 +68,7 @@ import {
   IcCoreUser,
   IcCoreCart,
 } from ".";
+import IcStock from "./IcStock.vue";
 
 defineProps<{
   elementIcon: string;

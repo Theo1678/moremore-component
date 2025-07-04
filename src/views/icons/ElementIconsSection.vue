@@ -45,6 +45,11 @@ const iconList = [
     description: "오른쪽 화살표",
   },
   { name: "IcDown", component: Icons.IcDown, description: "아래 화살표" },
+  {
+    name: "IcGraphicEmpty",
+    component: Icons.IcGraphicEmpty,
+    description: "빈 그래픽 아이콘",
+  },
   { name: "IcCopy", component: Icons.IcCopy, description: "복사 아이콘" },
   { name: "IcDelete", component: Icons.IcDelete, description: "삭제 아이콘" },
   { name: "IcPlus", component: Icons.IcPlus, description: "추가 아이콘" },

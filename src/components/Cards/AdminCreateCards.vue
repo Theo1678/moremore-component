@@ -110,7 +110,7 @@ const shouldShowImage = (shop) => {
       <div
         v-for="shop in displayedShops"
         :key="shop.collaborationId"
-        class="cursor-pointer transition-transform hover:scale-105 h-full max-w-[380px]"
+        class="cursor-pointer transition-transform hover:scale-105 h-full"
       >
         <div
           class="w-full max-w-2xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden h-full flex flex-col"

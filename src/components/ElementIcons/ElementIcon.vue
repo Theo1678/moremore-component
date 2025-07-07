@@ -68,8 +68,9 @@ import {
   IcClose,
   IcCoreUser,
   IcCoreCart,
+  IcGraphicEmpty,
+  IcStock,
 } from ".";
-import IcStock from "./IcStock.vue";
 
 defineProps<{
   elementIcon: string;

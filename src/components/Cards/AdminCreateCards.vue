@@ -10,6 +10,7 @@ const props = withDefaults(
     shops?: Shop[];
     itemsPerRow?: number;
     maxItems?: number;
+    isMobile?: boolean;
     loading?: boolean;
   }>(),
   {
@@ -17,6 +18,7 @@ const props = withDefaults(
     itemsPerRow: 3,
     maxItems: 6,
     loading: false,
+    isMobile: false,
   }
 );
 
@@ -168,7 +170,12 @@ const shouldShowImage = (shop) => {
               >
                 <!-- 제목과 배지 -->
                 <div
-                  class="flex flex-nowrap items-center justify-between gap-3 mb-2"
+                  class="flex flex-nowrap justify-between mb-2"
+                  :class="
+                    isMobile
+                      ? 'flex-col items-start gap-2'
+                      : 'flex-row items-center gap-3'
+                  "
                 >
                   <h2
                     class="font-pretendard text-[17px] font-bold leading-[22px] line-clamp-2 text-[#060608]"
@@ -221,13 +228,65 @@ const shouldShowImage = (shop) => {
               v-if="shop.partnerUsersData && shop.partnerUsersData.length > 0"
               :class="shop.partnerUsersData.length > 4 ? 'px-8' : ''"
             >
+              <!-- 4개 이하일 때: 가운데 정렬된 flex 컨테이너 -->
+              <div
+                v-if="shop.partnerUsersData.length <= 4"
+                class="flex items-center justify-center gap-2"
+              >
+                <div
+                  v-for="partnerUsers in shop.partnerUsersData"
+                  :key="partnerUsers.id || partnerUsers.nickName"
+                  class="w-16 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+                  @click.stop="handlePartnerUserClick(partnerUsers)"
+                >
+                  <!-- 작가 아바타 -->
+                  <div
+                    class="w-8 h-8 rounded-full border border-gray-300 bg-gray-50 overflow-hidden"
+                  >
+                    <template v-if="partnerUsers.profileImgUrl">
+                      <img
+                        :src="partnerUsers.profileImgUrl"
+                        :alt="partnerUsers.nickName"
+                        class="w-full h-full object-cover"
+                      />
+                    </template>
+                    <template v-else>
+                      <div
+                        class="w-full h-full flex items-center justify-center"
+                      >
+                        <!-- 기본 아바타 아이콘 -->
+                        <svg
+                          class="w-8 h-8 text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </template>
+                  </div>
+
+                  <!-- 작가 이름 -->
+                  <span
+                    class="font-pretendard text-[13px] font-normal leading-[20px] line-clamp-1 text-center text-[#303040]"
+                    >{{ partnerUsers.nickName }}</span
+                  >
+                </div>
+              </div>
+
+              <!-- 4개 초과일 때: Swiper 사용 -->
               <Swiper
+                v-else
                 :items="shop.partnerUsersData"
                 :multiple="true"
                 :slidesPerView="4"
                 :spaceBetween="8"
                 :show-pagination="false"
-                :showNavigation="shop.partnerUsersData.length > 4"
+                :showNavigation="true"
               >
                 <template #default="{ item: partnerUsers }">
                   <div

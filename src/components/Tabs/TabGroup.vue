@@ -1,11 +1,23 @@
-<script setup>
-import { ref, watch } from "vue";
+<script setup lang="ts">
+import { ref, watch, computed } from "vue";
+import Swiper from "../header/Swiper.vue";
+
+// 타입 정의
+interface Tab {
+  id: string;
+  label: string;
+}
 
 // Props 정의
-const props = defineProps({
-  tabs: {
-    type: Array,
-    default: () => [
+const props = withDefaults(
+  defineProps<{
+    tabs?: Tab[];
+    modelValue?: string | number;
+    variant?: "default" | "compact";
+    isMobile?: boolean;
+  }>(),
+  {
+    tabs: () => [
       { id: "all", label: "전체" },
       { id: "person", label: "인물" },
       { id: "animal", label: "동물" },
@@ -17,17 +29,11 @@ const props = defineProps({
       { id: "kitsch", label: "키치" },
       { id: "emotional", label: "감성" },
     ],
-  },
-  modelValue: {
-    type: [String, Number],
-    default: "all",
-  },
-  variant: {
-    type: String,
-    default: "default", // 'default' | 'compact'
-    validator: (value) => ["default", "compact"].includes(value),
-  },
-});
+    modelValue: "all",
+    variant: "default",
+    isMobile: false,
+  }
+);
 
 // Emits 정의
 const emit = defineEmits(["update:modelValue", "tab-change"]);
@@ -45,8 +51,8 @@ const handleTabClick = (tab) => {
 // 탭 스타일 클래스 반환
 const getTabClasses = (tab) => {
   const isActive = activeTab.value === tab.id;
-  const baseClasses =
-    "flex items-center justify-center focus:outline-none hover:border-[#F66D96] border-1";
+  const radiusClass = props.isMobile ? "rounded-lg" : "rounded-xl";
+  const baseClasses = `flex items-center justify-center focus:outline-none hover:border-[#F66D96] border-1 ${radiusClass}`;
   if (isActive) {
     return `${baseClasses} bg-[#FFE8F0] border-[#F66D96] border-2`;
   } else {
@@ -57,7 +63,8 @@ const getTabClasses = (tab) => {
 // 탭 텍스트 스타일 클래스 반환
 const getTabTextClasses = (tab) => {
   const isActive = activeTab.value === tab.id;
-  const baseClasses = "text-sm font-bold text-center whitespace-nowrap";
+  const sizeClass = props.isMobile ? "text-xs" : "text-sm";
+  const baseClasses = `${sizeClass} font-bold text-center whitespace-nowrap`;
 
   if (isActive) {
     return `${baseClasses} text-[#F66D96]`;
@@ -65,6 +72,18 @@ const getTabTextClasses = (tab) => {
     return `${baseClasses} text-[#424855]`;
   }
 };
+
+// 탭 그룹핑 (각 슬라이드에 6개씩, 2줄로 배치)
+const tabGroups = computed(() => {
+  const itemsPerSlide = 6; // 한 슬라이드에 6개 (2줄 x 3개)
+  const groups = [];
+
+  for (let i = 0; i < props.tabs.length; i += itemsPerSlide) {
+    groups.push(props.tabs.slice(i, i + itemsPerSlide));
+  }
+
+  return groups;
+});
 
 // modelValue 변경 감지
 watch(
@@ -77,11 +96,40 @@ watch(
 
 <template>
   <div class="w-full">
-    <div class="flex items-stretch gap-4 px-5 flex-wrap">
+    <!-- 모바일: Swiper로 2줄 그리드 -->
+    <div v-if="isMobile" class="px-5">
+      <Swiper
+        :items="tabGroups"
+        :slidesPerView="1"
+        :spaceBetween="0"
+        :showNavigation="false"
+        :showPagination="false"
+        :allowTouchMove="true"
+      >
+        <template #default="{ item: tabGroup }">
+          <div class="grid grid-cols-3 gap-2 auto-rows-fr">
+            <button
+              v-for="tab in tabGroup"
+              :key="tab.id"
+              :class="[getTabClasses(tab), 'px-3 py-2']"
+              @click="handleTabClick(tab)"
+              type="button"
+            >
+              <span :class="getTabTextClasses(tab)">
+                {{ tab.label }}
+              </span>
+            </button>
+          </div>
+        </template>
+      </Swiper>
+    </div>
+
+    <!-- 데스크탑: 기존 flex 방식 -->
+    <div v-else class="flex items-stretch px-5 flex-wrap gap-4">
       <button
         v-for="tab in tabs"
         :key="tab.id"
-        :class="getTabClasses(tab)"
+        :class="[getTabClasses(tab), 'px-4 py-3']"
         @click="handleTabClick(tab)"
         type="button"
       >

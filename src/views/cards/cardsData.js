@@ -167,6 +167,17 @@ export const userCardsData = [
     partnerUsersData: [
       { id: 1, nickName: "하찌네(방장)", profileImgUrl: null },
       { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
+      { id: 2, nickName: "참여자 (5/10)", profileImgUrl: null },
     ],
   },
   {

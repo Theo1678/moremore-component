@@ -128,7 +128,7 @@ watch(
         <Swiper
           :items="tabGroups"
           :slidesPerView="1"
-          :spaceBetween="0"
+          :spaceBetween="8"
           :showNavigation="false"
           :showPagination="false"
           :allowTouchMove="true"

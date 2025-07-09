@@ -2,7 +2,6 @@
 import { ref, computed, watch } from "vue";
 import type { Shop, PartnerUserData, StatusCode } from "../../types/index";
 import CardSkeleton from "./CardSkeleton.vue";
-import Swiper from "../header/Swiper.vue";
 
 // Props 정의
 const props = withDefaults(
@@ -11,14 +10,12 @@ const props = withDefaults(
     itemsPerRow?: number;
     maxItems?: number;
     loading?: boolean;
-    isMobile?: boolean;
   }>(),
   {
     shops: () => [],
     itemsPerRow: 4,
     maxItems: 8,
     loading: false,
-    isMobile: true,
   }
 );
 
@@ -232,111 +229,46 @@ const gridColsClass = computed(() => {
             <!-- 참여작가 -->
             <div
               v-if="shop.partnerUsersData && shop.partnerUsersData.length > 0"
+              class="flex flex-wrap gap-2 justify-center"
             >
-              <!-- 모바일: Swiper 사용 -->
-              <div v-if="isMobile" class="w-full">
-                <Swiper
-                  :items="shop.partnerUsersData"
-                  :slidesPerView="
-                    shop.partnerUsersData.length > 2
-                      ? 2.5
-                      : shop.partnerUsersData.length
-                  "
-                  :spaceBetween="8"
-                  :showNavigation="false"
-                  :showPagination="false"
-                  :allowTouchMove="true"
+              <div
+                v-for="partnerUser in shop.partnerUsersData"
+                :key="partnerUser.id"
+                class="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity border border-gray-200 rounded-full p-1.5"
+                @click.stop="handlePartnerUserClick(partnerUser)"
+              >
+                <!-- 작가 아바타 -->
+                <div
+                  class="w-5 h-5 rounded-full border border-gray-300 bg-white overflow-hidden flex-shrink-0"
                 >
-                  <template #default="{ item: partnerUser }">
-                    <div
-                      class="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity border border-gray-200 rounded-full p-1.5 w-full"
-                      @click.stop="handlePartnerUserClick(partnerUser)"
-                    >
-                      <!-- 작가 아바타 -->
-                      <div
-                        class="w-5 h-5 rounded-full border border-gray-300 bg-white overflow-hidden flex-shrink-0"
+                  <template v-if="partnerUser.profileImgUrl">
+                    <img
+                      :src="partnerUser.profileImgUrl"
+                      :alt="partnerUser.nickName"
+                      class="w-full h-full object-cover"
+                    />
+                  </template>
+                  <template v-else>
+                    <div class="w-full h-full flex items-center justify-center">
+                      <svg
+                        class="w-2.5 h-2.5 text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
                       >
-                        <template v-if="partnerUser.profileImgUrl">
-                          <img
-                            :src="partnerUser.profileImgUrl"
-                            :alt="partnerUser.nickName"
-                            class="w-full h-full object-cover"
-                          />
-                        </template>
-                        <template v-else>
-                          <div
-                            class="w-full h-full flex items-center justify-center"
-                          >
-                            <svg
-                              class="w-2.5 h-2.5 text-gray-400"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                          </div>
-                        </template>
-                      </div>
-
-                      <!-- 작가 이름 -->
-                      <span class="text-xs text-[#060608] truncate">
-                        {{ partnerUser.nickName }}
-                      </span>
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
                     </div>
                   </template>
-                </Swiper>
-              </div>
-
-              <!-- 데스크탑: 기존 flex 방식 -->
-              <div
-                v-else
-                class="flex items-center justify-center gap-2 flex-wrap"
-              >
-                <div
-                  v-for="partnerUser in shop.partnerUsersData"
-                  :key="partnerUser.id"
-                  class="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity border border-gray-200 rounded-full p-1.5"
-                  @click.stop="handlePartnerUserClick(partnerUser)"
-                >
-                  <!-- 작가 아바타 -->
-                  <div
-                    class="w-5 h-5 rounded-full border border-gray-300 bg-white overflow-hidden flex-shrink-0"
-                  >
-                    <template v-if="partnerUser.profileImgUrl">
-                      <img
-                        :src="partnerUser.profileImgUrl"
-                        :alt="partnerUser.nickName"
-                        class="w-full h-full object-cover"
-                      />
-                    </template>
-                    <template v-else>
-                      <div
-                        class="w-full h-full flex items-center justify-center"
-                      >
-                        <svg
-                          class="w-2.5 h-2.5 text-gray-400"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                    </template>
-                  </div>
-
-                  <!-- 작가 이름 -->
-                  <span class="text-xs text-[#060608] truncate">
-                    {{ partnerUser.nickName }}
-                  </span>
                 </div>
+
+                <!-- 작가 이름 -->
+                <span class="text-xs text-[#060608] whitespace-nowrap">
+                  {{ partnerUser.nickName }}
+                </span>
               </div>
             </div>
           </div>
@@ -366,15 +298,5 @@ const gridColsClass = computed(() => {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-/* 스크롤바 숨기기 */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
 }
 </style>

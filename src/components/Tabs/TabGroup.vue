@@ -26,8 +26,10 @@ const props = withDefaults(
       { id: "food", label: "음식" },
       { id: "background", label: "배경 모조지" },
       { id: "cute", label: "귀여운" },
+      { id: "baby", label: "아기" },
       { id: "kitsch", label: "키치" },
       { id: "emotional", label: "감성" },
+      { id: "etc", label: "기타" },
     ],
     modelValue: "all",
     variant: "default",
@@ -73,17 +75,41 @@ const getTabTextClasses = (tab) => {
   }
 };
 
-// 탭 그룹핑 (각 슬라이드에 6개씩, 2줄로 배치)
+// 탭 그룹핑 로직 개선
 const tabGroups = computed(() => {
-  const itemsPerSlide = 6; // 한 슬라이드에 6개 (2줄 x 3개)
-  const groups = [];
+  const totalTabs = props.tabs.length;
 
-  for (let i = 0; i < props.tabs.length; i += itemsPerSlide) {
-    groups.push(props.tabs.slice(i, i + itemsPerSlide));
+  // 10개 이하면 1줄로, 10개 넘으면 2줄로
+  if (totalTabs <= 10) {
+    // 1줄로 배치 (한 슬라이드에 최대 5개)
+    const itemsPerSlide = 5;
+    const groups = [];
+
+    for (let i = 0; i < props.tabs.length; i += itemsPerSlide) {
+      groups.push(props.tabs.slice(i, i + itemsPerSlide));
+    }
+
+    return groups;
+  } else {
+    // 2줄로 배치 (한 슬라이드에 6개씩 - 2줄 x 3개)
+    const itemsPerSlide = 6;
+    const groups = [];
+
+    for (let i = 0; i < props.tabs.length; i += itemsPerSlide) {
+      groups.push(props.tabs.slice(i, i + itemsPerSlide));
+    }
+
+    return groups;
   }
-
-  return groups;
 });
+
+// 2줄 레이아웃 여부 확인
+const isTwoRowLayout = computed(() => props.tabs.length > 10);
+
+// Swiper 사용 여부 확인
+const shouldUseSwiper = computed(
+  () => props.isMobile && props.tabs.length > (isTwoRowLayout.value ? 6 : 5)
+);
 
 // modelValue 변경 감지
 watch(
@@ -96,32 +122,68 @@ watch(
 
 <template>
   <div class="w-full">
-    <!-- 모바일: Swiper로 2줄 그리드 -->
-    <div v-if="isMobile" class="px-5">
-      <Swiper
-        :items="tabGroups"
-        :slidesPerView="1"
-        :spaceBetween="0"
-        :showNavigation="false"
-        :showPagination="false"
-        :allowTouchMove="true"
-      >
-        <template #default="{ item: tabGroup }">
-          <div class="grid grid-cols-3 gap-2 auto-rows-fr">
-            <button
-              v-for="tab in tabGroup"
-              :key="tab.id"
-              :class="[getTabClasses(tab), 'px-3 py-2']"
-              @click="handleTabClick(tab)"
-              type="button"
+    <!-- 모바일: Swiper 사용 -->
+    <div v-if="isMobile && shouldUseSwiper" class="relative">
+      <div class="px-5">
+        <Swiper
+          :items="tabGroups"
+          :slidesPerView="1"
+          :spaceBetween="0"
+          :showNavigation="false"
+          :showPagination="false"
+          :allowTouchMove="true"
+        >
+          <template #default="{ item: tabGroup }">
+            <div
+              :class="[
+                'grid gap-2 auto-rows-fr',
+                isTwoRowLayout ? 'grid-cols-3' : 'grid-cols-5',
+              ]"
             >
-              <span :class="getTabTextClasses(tab)">
-                {{ tab.label }}
-              </span>
-            </button>
-          </div>
-        </template>
-      </Swiper>
+              <button
+                v-for="tab in tabGroup"
+                :key="tab.id"
+                :class="[getTabClasses(tab), 'px-3 py-2']"
+                @click="handleTabClick(tab)"
+                type="button"
+              >
+                <span :class="getTabTextClasses(tab)">
+                  {{ tab.label }}
+                </span>
+              </button>
+            </div>
+          </template>
+        </Swiper>
+      </div>
+
+      <!-- 우측 그라데이션 효과 (더 많은 탭이 있음을 표시) -->
+      <div class="absolute top-0 right-0 w-8 h-full pointer-events-none">
+        <div
+          class="w-full h-full bg-gradient-to-l from-white via-white/60 to-transparent"
+        ></div>
+      </div>
+    </div>
+
+    <!-- 모바일: Swiper 불필요한 경우 (탭이 적을 때) -->
+    <div v-else-if="isMobile" class="px-5">
+      <div
+        :class="[
+          'grid gap-2 auto-rows-fr',
+          isTwoRowLayout ? 'grid-cols-3' : 'grid-cols-5',
+        ]"
+      >
+        <button
+          v-for="tab in tabs"
+          :key="tab.id"
+          :class="[getTabClasses(tab), 'px-3 py-2']"
+          @click="handleTabClick(tab)"
+          type="button"
+        >
+          <span :class="getTabTextClasses(tab)">
+            {{ tab.label }}
+          </span>
+        </button>
+      </div>
     </div>
 
     <!-- 데스크탑: 기존 flex 방식 -->
@@ -134,6 +196,7 @@ watch(
         type="button"
       >
         <span :class="getTabTextClasses(tab)">
+          asd
           {{ tab.label }}
         </span>
       </button>

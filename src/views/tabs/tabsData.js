@@ -8,6 +8,7 @@ export const tabsData = [
   { id: "food", label: "음식" },
   { id: "background", label: "배경 모조지" },
   { id: "cute", label: "귀여운" },
+  { id: "baby", label: "아기" },
   { id: "kitsch", label: "키치" },
   { id: "emotional", label: "감성" },
 ];

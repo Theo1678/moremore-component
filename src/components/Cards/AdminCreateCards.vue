@@ -18,7 +18,7 @@ const props = withDefaults(
     itemsPerRow: 3,
     maxItems: 6,
     loading: false,
-    isMobile: false,
+    isMobile: true,
   }
 );
 
@@ -125,7 +125,8 @@ const shouldShowImage = (shop) => {
             <div class="flex items-center gap-4 h-full">
               <!-- 대표 이미지 -->
               <div
-                class="w-24 h-24 rounded-full border border-gray-300 bg-gray-50 flex-shrink-0 overflow-hidden"
+                class="rounded-full border border-gray-300 bg-gray-50 flex-shrink-0 overflow-hidden"
+                :class="isMobile ? 'w-20 h-20' : 'w-24 h-24'"
               >
                 <template v-if="shouldShowImage(shop)">
                   <img

@@ -17,23 +17,10 @@ const props = withDefaults(
     isMobile?: boolean;
   }>(),
   {
-    tabs: () => [
-      { id: "all", label: "전체" },
-      { id: "person", label: "인물" },
-      { id: "animal", label: "동물" },
-      { id: "object", label: "사물" },
-      { id: "plant", label: "식물" },
-      { id: "food", label: "음식" },
-      { id: "background", label: "배경 모조지" },
-      { id: "cute", label: "귀여운" },
-      { id: "baby", label: "아기" },
-      { id: "kitsch", label: "키치" },
-      { id: "emotional", label: "감성" },
-      { id: "etc", label: "기타" },
-    ],
+    tabs: () => [],
     modelValue: "all",
     variant: "default",
-    isMobile: false,
+    isMobile: true,
   }
 );
 
@@ -92,7 +79,7 @@ const tabGroups = computed(() => {
     return groups;
   } else {
     // 2줄로 배치 (한 슬라이드에 6개씩 - 2줄 x 3개)
-    const itemsPerSlide = 6;
+    const itemsPerSlide = 8;
     const groups = [];
 
     for (let i = 0; i < props.tabs.length; i += itemsPerSlide) {
@@ -137,7 +124,7 @@ watch(
             <div
               :class="[
                 'grid gap-2 auto-rows-fr',
-                isTwoRowLayout ? 'grid-cols-3' : 'grid-cols-5',
+                isTwoRowLayout ? 'grid-cols-4' : 'grid-cols-5',
               ]"
             >
               <button
@@ -196,7 +183,6 @@ watch(
         type="button"
       >
         <span :class="getTabTextClasses(tab)">
-          asd
           {{ tab.label }}
         </span>
       </button>
@@ -204,6 +190,4 @@ watch(
   </div>
 </template>
 
-<style scoped>
-/* 기존 스크롤바 숨기기 스타일은 더 이상 필요하지 않으므로 제거 */
-</style>
+<style scoped></style>

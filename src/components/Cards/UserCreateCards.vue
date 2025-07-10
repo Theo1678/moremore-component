@@ -214,7 +214,7 @@ const gridColsClass = computed(() => {
             </p>
 
             <!-- 모집기간 -->
-            <p v-if="shop.period" class="text-xs mb-3 text-[#778196]">
+            <p v-if="shop.period" class="text-xs mb-3 text-[#3182F4]">
               {{ shop.period }}
             </p>
 

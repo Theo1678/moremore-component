@@ -124,7 +124,7 @@ watch(
   <div class="w-full">
     <!-- 모바일: Swiper 사용 -->
     <div v-if="isMobile && shouldUseSwiper" class="relative">
-      <div class="px-5">
+      <div>
         <Swiper
           :items="tabGroups"
           :slidesPerView="1"

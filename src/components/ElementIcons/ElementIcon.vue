@@ -15,6 +15,7 @@
   <IcArrowRight v-else-if="elementIcon === 'IcArrowRight'" :color="color" />
   <IcDown v-else-if="elementIcon === 'IcDown'" :color="color" />
   <IcEdit v-else-if="elementIcon === 'IcEdit'" :color="color" />
+  <IcFill v-else-if="elementIcon === 'IcFill'" :color="color" />
   <IcGraphicEmpty v-else-if="elementIcon === 'IcGraphicEmpty'" :color="color" />
   <IcCopy v-else-if="elementIcon === 'IcCopy'" :color="color" />
   <IcDelete v-else-if="elementIcon === 'IcDelete'" :color="color" />
@@ -70,6 +71,7 @@ import {
   IcClose,
   IcCoreUser,
   IcCoreCart,
+  IcFill,
   IcGraphicEmpty,
   IcStock,
 } from ".";

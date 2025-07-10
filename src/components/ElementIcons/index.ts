@@ -16,6 +16,7 @@ export { default as IcArrowLeft } from "./IcArrowLeft.vue";
 export { default as IcArrowRight } from "./IcArrowRight.vue";
 export { default as IcDown } from "./IcDown.vue";
 export { default as IcEdit } from "./IcEdit.vue";
+export { default as IcFill } from "./IcFill.vue";
 export { default as IcGraphicEmpty } from "./IcGraphicEmpty.vue";
 export { default as IcCopy } from "./IcCopy.vue";
 export { default as IcDelete } from "./IcDelete.vue";

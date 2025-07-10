@@ -51,6 +51,11 @@ const iconList = [
     description: "수정 아이콘",
   },
   {
+    name: "IcFill",
+    component: Icons.IcFill,
+    description: "채우기 아이콘",
+  },
+  {
     name: "IcGraphicEmpty",
     component: Icons.IcGraphicEmpty,
     description: "빈 그래픽 아이콘",

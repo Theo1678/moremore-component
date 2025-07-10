@@ -18,7 +18,7 @@ const props = withDefaults(
     itemsPerRow: 3,
     maxItems: 6,
     loading: false,
-    isMobile: true,
+    isMobile: false,
   }
 );
 

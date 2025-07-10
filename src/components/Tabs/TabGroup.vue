@@ -20,7 +20,7 @@ const props = withDefaults(
     tabs: () => [],
     modelValue: "all",
     variant: "default",
-    isMobile: true,
+    isMobile: false,
   }
 );
 
@@ -40,8 +40,7 @@ const handleTabClick = (tab) => {
 // 탭 스타일 클래스 반환
 const getTabClasses = (tab) => {
   const isActive = activeTab.value === tab.id;
-  const radiusClass = props.isMobile ? "rounded-lg" : "rounded-xl";
-  const baseClasses = `flex items-center justify-center focus:outline-none hover:border-[#F66D96] border-1 ${radiusClass}`;
+  const baseClasses = `flex items-center justify-center focus:outline-none hover:border-[#F66D96] border-1 rounded-xl`;
   if (isActive) {
     return `${baseClasses} bg-[#FFE8F0] border-[#F66D96] border-2`;
   } else {
@@ -174,7 +173,7 @@ watch(
     </div>
 
     <!-- 데스크탑: 기존 flex 방식 -->
-    <div v-else class="flex items-stretch px-5 flex-wrap gap-4">
+    <div v-else class="flex items-stretch px-5 flex-wrap gap-2">
       <button
         v-for="tab in tabs"
         :key="tab.id"

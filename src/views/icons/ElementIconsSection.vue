@@ -46,6 +46,11 @@ const iconList = [
   },
   { name: "IcDown", component: Icons.IcDown, description: "아래 화살표" },
   {
+    name: "IcEdit",
+    component: Icons.IcEdit,
+    description: "수정 아이콘",
+  },
+  {
     name: "IcGraphicEmpty",
     component: Icons.IcGraphicEmpty,
     description: "빈 그래픽 아이콘",

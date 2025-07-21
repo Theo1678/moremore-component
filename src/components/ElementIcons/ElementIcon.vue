@@ -11,6 +11,7 @@
   <IcSetting v-else-if="elementIcon === 'IcSetting'" :color="color" />
   <IcUpdate v-else-if="elementIcon === 'IcUpdate'" :color="color" />
   <IcMedia v-else-if="elementIcon === 'IcMedia'" :color="color" />
+  <IcMinus v-else-if="elementIcon === 'IcMinus'" :color="color" />
   <IcLink v-else-if="elementIcon === 'IcLink'" :color="color" />
   <IcArrowRight v-else-if="elementIcon === 'IcArrowRight'" :color="color" />
   <IcDown v-else-if="elementIcon === 'IcDown'" :color="color" />
@@ -52,6 +53,7 @@ import {
   IcSetting,
   IcUpdate,
   IcMedia,
+  IcMinus,
   IcLink,
   IcArrowRight,
   IcDown,

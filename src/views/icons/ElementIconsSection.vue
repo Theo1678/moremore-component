@@ -33,6 +33,7 @@ const iconList = [
   },
   { name: "IcSetting", component: Icons.IcSetting, description: "설정 아이콘" },
   { name: "IcMedia", component: Icons.IcMedia, description: "미디어 아이콘" },
+  { name: "IcMinus", component: Icons.IcMinus, description: "마이너스 아이콘" },
   { name: "IcLink", component: Icons.IcLink, description: "링크 아이콘" },
   {
     name: "IcArrowLeft",

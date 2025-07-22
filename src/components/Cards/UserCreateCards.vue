@@ -39,9 +39,12 @@ watch(
     displayedItems.value = newVal;
   }
 );
+const isDisplayShops = computed(() => {
+  return props.shops.filter((shop) => !shop.isHide);
+});
 // 표시할 shops 계산
 const displayedShops = computed(() => {
-  return props.shops.slice(0, displayedItems.value);
+  return isDisplayShops.value.slice(0, displayedItems.value);
 });
 
 // 클릭 핸들러
@@ -266,7 +269,10 @@ const gridColsClass = computed(() => {
                 </div>
 
                 <!-- 작가 이름 -->
-                <span class="text-xs text-[#060608] whitespace-nowrap">
+                <span
+                  class="text-xs text-[#060608] whitespace-nowrap overflow-hidden text-ellipsis"
+                  style="max-width: 120px"
+                >
                   {{ partnerUser.nickName }}
                 </span>
               </div>

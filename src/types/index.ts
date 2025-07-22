@@ -30,6 +30,7 @@ export interface Shop {
   description?: string;
   period?: string;
   hashtags?: string;
+  isHide?: boolean;
 }
 // AdminCreateCards Props 타입
 export interface AdminCreateCardsProps {

@@ -206,7 +206,11 @@ export const userCardsData = [
     thumbImgUrl:
       "https://via.placeholder.com/280x200/f0f8ff/4a90e2?text=6월통판",
     partnerUsersData: [
-      { id: 1, nickName: "하찌네(방장)", profileImgUrl: null },
+      {
+        id: 1,
+        nickName: "asdasdasdwefwefewfwefwefewfasds(방장)",
+        profileImgUrl: null,
+      },
       { id: 2, nickName: "참여자 (9/10)", profileImgUrl: null },
     ],
   },

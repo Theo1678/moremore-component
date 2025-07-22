@@ -31,6 +31,7 @@
             'swiper-slide-active': index === currentIndex,
             'swiper-slide-prev': index === currentIndex - 1,
             'swiper-slide-next': index === currentIndex + 1,
+            'swiper-width-100': slidesPerView === 1,
             ...getSlideClasses(index),
           }"
           :style="getSlideStyles(index)"
@@ -161,7 +162,7 @@ const props = withDefaults(
 
     // 반응형
     breakpoints: () => ({}),
-  },
+  }
 );
 
 // Emits 정의
@@ -453,7 +454,7 @@ watch(
     } else {
       stopAutoplay();
     }
-  },
+  }
 );
 
 // Public API
@@ -491,6 +492,10 @@ defineExpose({
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+.swiper-slide.swiper-width-100 {
+  width: 100% !important;
 }
 
 /* Navigation Buttons */
@@ -642,9 +647,7 @@ defineExpose({
 
 /* Animation utilities */
 .swiper-slide {
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .swiper-slide:not(.swiper-slide-active) {

@@ -24,7 +24,7 @@
     >
       <div class="swiper-track" ref="swiperTrack" :style="trackStyles">
         <div
-          v-for="(item, index) in items"
+          v-for="(item, index) in safeItems"
           :key="getItemKey(item, index)"
           class="swiper-slide"
           :class="{
@@ -36,9 +36,11 @@
           }"
           :style="getSlideStyles(index)"
         >
-          <slot :item="item" :index="index" :isActive="index === currentIndex">
-            {{ item }}
-          </slot>
+          <slot
+            :item="item"
+            :index="index"
+            :isActive="index === currentIndex"
+          />
         </div>
       </div>
     </div>
@@ -165,6 +167,8 @@ const props = withDefaults(
   }
 );
 
+const safeItems = computed(() => props.items?.filter(Boolean) || []);
+
 // Emits 정의
 const emit = defineEmits<{
   slideChange: [payload: { index: number; item: SwiperItem }];
@@ -194,8 +198,8 @@ const autoplayTimer = ref(null);
 
 // Computed 속성들
 const maxIndex = computed(() => {
-  if (props.loop) return props.items.length - 1;
-  return Math.max(0, props.items.length - props.slidesPerView);
+  if (props.loop) return safeItems.value?.length - 1;
+  return Math.max(0, safeItems.value?.length - props.slidesPerView);
 });
 
 const currentPage = computed(() => {
@@ -203,7 +207,7 @@ const currentPage = computed(() => {
 });
 
 const paginationDots = computed(() => {
-  const pages = Math.ceil(props.items.length / props.slidesPerView);
+  const pages = Math.ceil(safeItems.value?.length / props.slidesPerView);
   return Array.from({ length: pages }, (_, i) => i);
 });
 
@@ -248,10 +252,10 @@ const trackStyles = computed(() => {
 });
 
 const scrollbarStyles = computed(() => {
-  if (!props.items.length) return { width: "0%", left: "0%" };
+  if (!safeItems.value?.length) return { width: "0%", left: "0%" };
 
   const progress = currentIndex.value / maxIndex.value;
-  const width = (props.slidesPerView / props.items.length) * 100;
+  const width = (props.slidesPerView / safeItems.value?.length) * 100;
   const left = progress * (100 - width);
 
   return {
@@ -287,148 +291,195 @@ const getSlideStyles = (index) => {
 };
 
 const slideTo = (index, speed = props.speed) => {
-  if (isTransitioning.value && !isDragging.value) return;
+  try {
+    if (isTransitioning.value && !isDragging.value) return;
 
-  const targetIndex = Math.max(0, Math.min(index, maxIndex.value));
+    const targetIndex = Math.max(0, Math.min(index, maxIndex.value));
 
-  if (targetIndex === currentIndex.value) return;
+    if (targetIndex === currentIndex.value) return;
 
-  isTransitioning.value = true;
-  emit("transitionStart", { index: targetIndex });
+    isTransitioning.value = true;
+    emit("transitionStart", { index: targetIndex });
 
-  currentIndex.value = targetIndex;
+    currentIndex.value = targetIndex;
 
-  setTimeout(() => {
-    isTransitioning.value = false;
-    emit("transitionEnd", { index: targetIndex });
-    emit("slideChange", { index: targetIndex, item: props.items[targetIndex] });
+    setTimeout(() => {
+      isTransitioning.value = false;
+      emit("transitionEnd", { index: targetIndex });
+      emit("slideChange", {
+        index: targetIndex,
+        item: safeItems.value[targetIndex],
+      });
 
-    if (targetIndex === 0) emit("reachBeginning");
-    if (targetIndex === maxIndex.value) emit("reachEnd");
-  }, speed);
+      if (targetIndex === 0) emit("reachBeginning");
+      if (targetIndex === maxIndex.value) emit("reachEnd");
+    }, speed);
+  } catch (error) {
+    console.error("Error in slideTo method:", error);
+  }
 };
 
 const slideToNext = () => {
-  if (props.loop && currentIndex.value === maxIndex.value) {
-    slideTo(0);
-  } else {
-    slideTo(currentIndex.value + 1);
+  try {
+    if (props.loop && currentIndex.value === maxIndex.value) {
+      slideTo(0);
+    } else {
+      slideTo(currentIndex.value + 1);
+    }
+  } catch (error) {
+    console.error("Error in slideToNext method:", error);
   }
 };
 
 const slideToPrev = () => {
-  if (props.loop && currentIndex.value === 0) {
-    slideTo(maxIndex.value);
-  } else {
-    slideTo(currentIndex.value - 1);
+  try {
+    if (props.loop && currentIndex.value === 0) {
+      slideTo(maxIndex.value);
+    } else {
+      slideTo(currentIndex.value - 1);
+    }
+  } catch (error) {
+    console.error("Error in slideToPrev method:", error);
   }
 };
 
 // 터치/마우스 이벤트 핸들러
 const handleMouseDown = (e) => {
-  if (!props.allowTouchMove) return;
+  try {
+    if (!props.allowTouchMove) return;
 
-  isDragging.value = true;
-  startPos.value = { x: e.clientX, y: e.clientY };
-  currentPos.value = { x: e.clientX, y: e.clientY };
+    isDragging.value = true;
+    startPos.value = { x: e.clientX, y: e.clientY };
+    currentPos.value = { x: e.clientX, y: e.clientY };
 
-  document.addEventListener("mousemove", handleMouseMove);
-  document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
 
-  emit("touchStart", e);
+    emit("touchStart", e);
+  } catch (error) {
+    console.error("Error in handleMouseDown method:", error);
+  }
 };
 
 const handleMouseMove = (e) => {
-  if (!isDragging.value) return;
+  try {
+    if (!isDragging.value) return;
 
-  currentPos.value = { x: e.clientX, y: e.clientY };
-  const deltaX = (currentPos.value.x - startPos.value.x) * props.touchRatio;
+    currentPos.value = { x: e.clientX, y: e.clientY };
+    const deltaX = (currentPos.value.x - startPos.value.x) * props.touchRatio;
 
-  dragOffset.value = deltaX;
-  emit("touchMove", e);
+    dragOffset.value = deltaX;
+    emit("touchMove", e);
+  } catch (error) {
+    console.error("Error in handleMouseMove method:", error);
+  }
 };
 
 const handleMouseUp = (e) => {
-  if (!isDragging.value) return;
+  try {
+    if (!isDragging.value) return;
 
-  const deltaX = currentPos.value.x - startPos.value.x;
-  const shouldSlide = Math.abs(deltaX) > props.threshold;
+    const deltaX = currentPos.value.x - startPos.value.x;
+    const shouldSlide = Math.abs(deltaX) > props.threshold;
 
-  if (shouldSlide) {
-    if (deltaX > 0) {
-      slideToPrev();
-    } else {
-      slideToNext();
+    if (shouldSlide) {
+      if (deltaX > 0) {
+        slideToPrev();
+      } else {
+        slideToNext();
+      }
     }
+
+    isDragging.value = false;
+    dragOffset.value = 0;
+
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+
+    emit("touchEnd", e);
+  } catch (error) {
+    console.error("Error in handleMouseUp method:", error);
   }
-
-  isDragging.value = false;
-  dragOffset.value = 0;
-
-  document.removeEventListener("mousemove", handleMouseMove);
-  document.removeEventListener("mouseup", handleMouseUp);
-
-  emit("touchEnd", e);
 };
 
 const handleTouchStart = (e) => {
-  if (!props.allowTouchMove) return;
+  try {
+    if (!props.allowTouchMove) return;
 
-  isDragging.value = true;
-  const touch = e.touches[0];
-  startPos.value = { x: touch.clientX, y: touch.clientY };
-  currentPos.value = { x: touch.clientX, y: touch.clientY };
+    isDragging.value = true;
+    const touch = e.touches[0];
+    startPos.value = { x: touch.clientX, y: touch.clientY };
+    currentPos.value = { x: touch.clientX, y: touch.clientY };
 
-  emit("touchStart", e);
+    emit("touchStart", e);
+  } catch (error) {
+    console.error("Error in handleTouchStart method:", error);
+  }
 };
 
 const handleTouchMove = (e) => {
-  if (!isDragging.value) return;
+  try {
+    if (!isDragging.value) return;
 
-  const touch = e.touches[0];
-  currentPos.value = { x: touch.clientX, y: touch.clientY };
-  const deltaX = (currentPos.value.x - startPos.value.x) * props.touchRatio;
+    const touch = e.touches[0];
+    currentPos.value = { x: touch.clientX, y: touch.clientY };
+    const deltaX = (currentPos.value.x - startPos.value.x) * props.touchRatio;
 
-  dragOffset.value = deltaX;
-  emit("touchMove", e);
+    dragOffset.value = deltaX;
+    emit("touchMove", e);
+  } catch (error) {
+    console.error("Error in handleTouchMove method:", error);
+  }
 };
 
 const handleTouchEnd = (e) => {
-  if (!isDragging.value) return;
+  try {
+    if (!isDragging.value) return;
 
-  const deltaX = currentPos.value.x - startPos.value.x;
-  const shouldSlide = Math.abs(deltaX) > props.threshold;
+    const deltaX = currentPos.value.x - startPos.value.x;
+    const shouldSlide = Math.abs(deltaX) > props.threshold;
 
-  if (shouldSlide) {
-    if (deltaX > 0) {
-      slideToPrev();
-    } else {
-      slideToNext();
+    if (shouldSlide) {
+      if (deltaX > 0) {
+        slideToPrev();
+      } else {
+        slideToNext();
+      }
     }
+
+    isDragging.value = false;
+    dragOffset.value = 0;
+
+    emit("touchEnd", e);
+  } catch (error) {
+    console.error("Error in handleTouchEnd method:", error);
   }
-
-  isDragging.value = false;
-  dragOffset.value = 0;
-
-  emit("touchEnd", e);
 };
 
 // 자동재생
 const startAutoplay = () => {
-  if (!props.autoplay) return;
+  try {
+    if (!props.autoplay) return;
 
-  const delay =
-    typeof props.autoplay === "object" ? props.autoplay.delay || 3000 : 3000;
+    const delay =
+      typeof props.autoplay === "object" ? props.autoplay.delay || 3000 : 3000;
 
-  autoplayTimer.value = setInterval(() => {
-    slideToNext();
-  }, delay);
+    autoplayTimer.value = setInterval(() => {
+      slideToNext();
+    }, delay);
+  } catch (error) {
+    console.error("Error in startAutoplay method:", error);
+  }
 };
 
 const stopAutoplay = () => {
-  if (autoplayTimer.value) {
-    clearInterval(autoplayTimer.value);
-    autoplayTimer.value = null;
+  try {
+    if (autoplayTimer.value) {
+      clearInterval(autoplayTimer.value);
+      autoplayTimer.value = null;
+    }
+  } catch (error) {
+    console.error("Error in stopAutoplay method:", error);
   }
 };
 

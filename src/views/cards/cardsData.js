@@ -74,18 +74,7 @@ export const adminCardsData = [
       "일본 고등학생의 여름방학 같은 분위기로 콜라보 썸머팩을 준비할 예정입니다 그렇습니다.",
     period: "모집기간:2025.07.01~2025.07.31",
     thumbImgUrl: null,
-    partnerUsersData: [
-      {
-        id: 1,
-        nickName: "나초",
-        profileImgUrl: null,
-      },
-      {
-        id: 2,
-        nickName: "치즈",
-        profileImgUrl: null,
-      },
-    ],
+    partnerUsersData: [],
   },
   {
     collaborationId: 3,

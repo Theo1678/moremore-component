@@ -103,7 +103,7 @@ const shouldShowImage = (shop) => {
 
 <template>
   <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !gap-8 mb-12 items-start"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !gap-8 mb-12 items-stretch"
   >
     <template v-if="loading">
       <CardSkeleton v-for="n in 6" :key="n" type="admin" />
@@ -224,7 +224,7 @@ const shouldShowImage = (shop) => {
               참여작가
             </h3>
 
-            <!-- Swiper를 사용한 참여작가 목록 -->
+            <!-- 참여작가가 있을 때 -->
             <div
               v-if="shop.partnerUsersData && shop.partnerUsersData.length > 0"
               :class="shop.partnerUsersData.length > 4 ? 'px-8' : ''"
@@ -333,6 +333,11 @@ const shouldShowImage = (shop) => {
                   </div>
                 </template>
               </Swiper>
+            </div>
+
+            <!-- 참여작가가 없을 때 -->
+            <div v-else class="flex items-center justify-center h-[60px]">
+              <span class="text-gray-400 text-sm">참여작가가 없습니다</span>
             </div>
           </div>
         </div>
